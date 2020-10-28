@@ -134,38 +134,26 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="..\Deps\glad\src\glad.c" />
-    <ClCompile Include="Cube.cpp" />
     <ClCompile Include="Entity.cpp" />
     <ClCompile Include="Game.cpp" />
     <ClCompile Include="GameObject.cpp" />
     <ClCompile Include="Main.cpp" />
     <ClCompile Include="Mesh.cpp" />
     <ClCompile Include="Model.cpp" />
-    <ClCompile Include="Plane.cpp" />
     <ClCompile Include="Player.cpp" />
-    <ClCompile Include="Pyramid.cpp" />
     <ClCompile Include="Shader.cpp" />
-    <ClCompile Include="Shape.cpp" />
-    <ClCompile Include="Sphere.cpp" />
     <ClCompile Include="stb_image.cpp" />
-    <ClCompile Include="Torous.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Camera.h" />
-    <ClInclude Include="Cube.h" />
     <ClInclude Include="Entity.h" />
     <ClInclude Include="Game.h" />
     <ClInclude Include="GameObject.h" />
     <ClInclude Include="Mesh.h" />
     <ClInclude Include="Model.h" />
-    <ClInclude Include="Plane.h" />
     <ClInclude Include="Player.h" />
-    <ClInclude Include="Pyramid.h" />
     <ClInclude Include="Shader.h" />
-    <ClInclude Include="Shape.h" />
-    <ClInclude Include="Sphere.h" />
     <ClInclude Include="stb_image.h" />
-    <ClInclude Include="Torous.h" />
   </ItemGroup>
   <ItemGroup>
     <Text Include="FS-DepthTest.txt" />
