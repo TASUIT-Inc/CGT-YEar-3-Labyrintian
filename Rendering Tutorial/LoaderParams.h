@@ -8,6 +8,7 @@
 #include <cmath>
 class LoaderParams
 {
+
 public:
 	LoaderParams(glm::vec3 Pos, glm::vec3 Extents, char Tag) : m_Pos(Pos), m_Extents(Extents), m_InterLeavedStride(32) {
 		std::cout << "in Loader" << std::endl;
