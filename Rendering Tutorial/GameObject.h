@@ -1,34 +1,40 @@
 #pragma once
-#include "Entity.h"
-#include "Shape.h"
+#include "stb_image.h"
+#include "Object.h"
+#include "Shader.h"
+#include <string.h>
+#include "Model.h"
+#include "Camera.h"
 
-
-
-class GameObject : public Entity
+class GameObject : public Object
 {
 public:
-	GameObject(glm::vec3 Pos, glm::vec3 Scale, Model* model, const char* Vertexshader = nullptr, const char* FragmentShader = nullptr, const char* GeometryShader = nullptr, const char* texture = nullptr);
-
+	GameObject(LoaderParams* Params, Shader* shader, char const* TexturePath, Camera* camera);
+	GameObject(LoaderParams* Params, Model* model, Shader* shader, Camera* camera);
 
 	void Draw();
+	void Update();
 
-	glm::vec3 GetPos() { return m_Pos; }
-	glm::vec3 GetScalse() { return m_Scale; }
+	void SetPos(glm::vec3 NewPos) { m_Pos = NewPos; }
+	void SetPos(float Posx, float Posy, float Posz) { m_Pos.x = Posx; m_Pos.y = Posy; m_Pos.z = Posz; }
+
+	void SetWidth(int width) { Width = width; }
+	void SetHeight(int height) { Height = height; }
+
+	virtual ~GameObject() {}
+private:
 
 	unsigned int loadTexture(char const* path);
 
-private:
 
+	bool isModel;
+	int Width, Height;
 	glm::vec3 m_Pos;
-	glm::vec3 m_Scale;
-
-	glm::mat4 m_ModelMat = glm::mat4(1.0f);
-
+	unsigned int m_Texture;
+	Shader* m_Shader;
 	Model* m_Model;
+	Camera* m_Camera;
+	LoaderParams* m_Params;
 
-	Shader m_Shader;
-
-protected:
 
 };
-

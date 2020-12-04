@@ -1,29 +1,40 @@
+#include "stb_image.h"
 #include "GameObject.h"
 
-GameObject::GameObject(glm::vec3 Pos, glm::vec3 Scale, Model* model , const char* Vertexshader = nullptr, const char* FragmentShader = nullptr, const char* GeometryShader = nullptr, const char* texture =nullptr) {
-	m_Pos = Pos;
-	m_Scale = Scale;
-	m_Model = model;
 
-	if (Vertexshader == nullptr && FragmentShader == nullptr) {
-		m_Shader = Shader("StandardVS.txt", "StandardFS.txt", GeometryShader);
-	}
-	else if (Vertexshader != nullptr && FragmentShader == nullptr) {
-		m_Shader = Shader(Vertexshader, "StandardFS.txt", GeometryShader);
-	}
-	else if (Vertexshader == nullptr && FragmentShader != nullptr) {
-		m_Shader = Shader("StandardVS.txt", FragmentShader, GeometryShader);
-	}
-
-	if (texture != nullptr) {
-		loadTexture(texture);
-	}
+GameObject::GameObject(LoaderParams* Params, Shader* shader, char const* TexturePath, Camera* camera) : Object(*Params), m_Params(Params), m_Pos(Params->GetPos()), m_Shader(shader), m_Camera(camera) {
+	m_Texture = loadTexture(TexturePath);
+	isModel = false;
 }
 
-
+GameObject::GameObject(LoaderParams* Params, Model* model, Shader* shader, Camera* camera) : Object(*Params), m_Params(Params), m_Pos(Params->GetPos()), m_Shader(shader), m_Model(model), m_Camera(camera) {
+	isModel = true;
+}
 
 void GameObject::Draw() {
-	m_Model->Draw(m_Shader);
+	m_Shader->Use();
+	glm::mat4 view = m_Camera->GetViewMatrix();
+	glm::mat4 Projection = glm::perspective(glm::radians(m_Camera->Zoom), (float)Width / (float)Height, 0.1f, 100.0f);
+	m_Shader->SetMat4("view", view);
+	m_Shader->SetMat4("projection", Projection);
+
+	glm::mat4 modelMatrix = glm::mat4(1.0);
+	modelMatrix = glm::translate(modelMatrix, m_Params->GetPos());
+	modelMatrix = glm::scale(modelMatrix, m_Params->GetExtents());
+	m_Shader->SetMat4("model", modelMatrix);
+
+	/*if (isModel) {
+		m_Model->Draw(m_Shader);
+	}
+	else {
+		m_Params->Draw(m_Shader, m_Texture);
+	}
+*/
+	m_Params->Draw(m_Shader, m_Texture);
+}
+
+void GameObject::Update() {
+	std::cout << "Update" << std::endl;
 }
 
 unsigned int GameObject::loadTexture(char const* path)
