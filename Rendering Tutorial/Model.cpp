@@ -1,13 +1,7 @@
 #include "Model.h"
 
 
-void Model::Draw(Shader shader)		// draws the model, and thus all its meshes
-{
-	for (unsigned int i = 0; i < meshes.size(); i++)
-	{
-		meshes[i].Draw(shader);
-	}
-}
+
 
 
 
