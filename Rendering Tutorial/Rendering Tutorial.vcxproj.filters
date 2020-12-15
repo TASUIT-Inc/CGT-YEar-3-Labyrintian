@@ -70,5 +70,11 @@
     <Text Include="VS-Default.txt">
       <Filter>Resource Files</Filter>
     </Text>
+    <Text Include="FS-Model.txt">
+      <Filter>Resource Files</Filter>
+    </Text>
+    <Text Include="VS-Model.txt">
+      <Filter>Resource Files</Filter>
+    </Text>
   </ItemGroup>
 </Project>

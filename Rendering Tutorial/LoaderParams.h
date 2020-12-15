@@ -39,10 +39,7 @@ public:
 
 	}
 
-	LoaderParams(glm::vec3 Pos, glm::vec2 Extents) : m_Pos(Pos), m_InterLeavedStride(32) {
-		m_Extents.x = Extents.x;
-		m_Extents.y = 0;
-		m_Extents.z = Extents.y;
+	LoaderParams(glm::vec3 Pos, glm::vec3 Extents) : m_Pos(Pos), m_Extents(Extents), m_InterLeavedStride(32) {
 
 		m_Segments = glm::vec2(0, 0);
 

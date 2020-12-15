@@ -84,19 +84,24 @@ int main()
 	// -----------------------------
 	glEnable(GL_DEPTH_TEST);
 
-
+	//Load Models
+	//-----------
+	Model model = Model("E1M1/E1M1a.obj");
+	Model DavidM = Model("Models/Tutorial.obj");
 	// build and compile shaders
 	// -------------------------
 	std::cout << "Before Shader" << std::endl;
 	Shader Default("VS-Default.txt", "FS-Default.txt");
+	Shader Modelshader("VS-Model.txt", "FS-Model.txt");
 
 	//Create Basic Shapes
 	//-------------------
 	std::cout << "Before Cube" << std::endl;
 	LoaderParams Cube = LoaderParams(glm::vec3(0.0f, 0.0f, 0.0f), glm::vec3(1.5f), 'C');
 	LoaderParams Pyramid = LoaderParams(glm::vec3(1.0f, 0.0f, 1.0f), glm::vec3(1.5f), 'P');
-	LoaderParams Circle = LoaderParams(glm::vec3(5.0f, 1.5f, -5.0f), glm::vec3(1.5f), glm::vec2(25));
+	LoaderParams Circle = LoaderParams(glm::vec3(5.0f, 0.0f, -5.0f), glm::vec3(1.5f), glm::vec2(25));
 	LoaderParams Plane = LoaderParams(glm::vec3(0.0f, -1.0f, 0.0f), glm::vec3(1.5f));
+	LoaderParams modelParams = LoaderParams(glm::vec3(2.0f, 0.0f, 2.0f), glm::vec3(3.0f));
 
 
 	//Create GameObjects
@@ -106,18 +111,28 @@ int main()
 	GameObject* CircleObj = new GameObject(&Circle, &Default, "Textures/Dev.png", &camera);
 	GameObject* PlaneObj = new GameObject(&Plane, &Default, "Textures/MetalFloor.jpg", &camera);
 
+
+	//GameObjects w/ Models
+	//---------------------
+	GameObject* ModelObject = new GameObject(&modelParams, &model, &Modelshader, &camera);
+	GameObject* DavidModelObject = new GameObject(&modelParams, &DavidM, &Modelshader, &camera);
+
 	//Fill Object Vector
 	//------------------
 	m_Objects.push_back(CubeObj);
 	m_Objects.push_back(PyramidObj);
 	m_Objects.push_back(CircleObj);
 	m_Objects.push_back(PlaneObj);
+	m_Objects.push_back(ModelObject);
+	m_Objects.push_back(DavidModelObject);
 
 	for (int i = 0; i < m_Objects.size(); i++) {
 		m_Objects[i]->SetWidth(SCR_WIDTH);
 		m_Objects[i]->SetHeight(SCR_HEIGHT);
 	}
 
+	ModelObject->SetPos(0.0f, 0.0f, 30.0f);
+	DavidModelObject->SetPos(0.0f, 0.0f, 100.0f);
 	// render loop
 	// -----------
 	while (!glfwWindowShouldClose(window))
@@ -196,6 +211,10 @@ void processInput(GLFWwindow* window)
 		camera.ProcessKeyboard(LEFT, deltaTime);
 	if (glfwGetKey(window, GLFW_KEY_D) == GLFW_PRESS)
 		camera.ProcessKeyboard(RIGHT, deltaTime);
+	if (glfwGetKey(window, GLFW_KEY_SPACE) == GLFW_PRESS)
+		camera.ProcessKeyboard(UP, deltaTime);
+	if (glfwGetKey(window, GLFW_KEY_LEFT_SHIFT) == GLFW_PRESS)
+		camera.ProcessKeyboard(DOWN, deltaTime);
 	if (glfwGetKey(window, GLFW_KEY_TAB) == GLFW_PRESS)
 		switch (Wireframe) {
 		case false:

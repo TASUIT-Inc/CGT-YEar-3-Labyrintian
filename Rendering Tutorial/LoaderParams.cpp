@@ -507,7 +507,7 @@ void LoaderParams::CreateSphere() {
 				AddVertex(v2.x, v2.y, v2.z);
 				AddVertex(v4.x, v4.y, v4.z);
 
-				// put tex coords of triangle
+				//put tex coords of triangle
 				AddTexCoord(v1.s, v1.t);
 				AddTexCoord(v2.s, v2.t);
 				AddTexCoord(v4.s, v4.t);
@@ -541,25 +541,132 @@ void LoaderParams::CreateSphere() {
 					Addnormal(n[0], n[1], n[2]);
 				}
 
+
 				index += 3;     // for next
 			}
 			else // 2 triangles for others ====================================
 			{
-				// put quad vertices: v1-v2-v3-v4
+				// put Triangle vertices: v1-v2-v3
+				AddVertex(v1.x, v1.y, v1.z);
+				AddVertex(v2.x, v2.y, v2.z);
+				AddVertex(v3.x, v3.y, v3.z);
+
+				// put tex coords of Triangle
+				AddTexCoord(v1.s, v1.t);
+				AddTexCoord(v2.s, v2.t);
+				AddTexCoord(v3.s, v3.t);
+
+				n = ComputeFaceNormals(v1.x, v1.y, v1.z, v2.x, v2.y, v2.z, v3.x, v3.y, v3.z);
+				for (k = 0; k < 4; ++k)  // same normals for 3 vertices
+				{
+					Addnormal(n[0], n[1], n[2]);
+				}
+				// put Triangle vertices: v4-v2-v3
+				AddVertex(v4.x, v4.y, v4.z);
+				AddVertex(v3.x, v3.y, v3.z);
+				AddVertex(v2.x, v2.y, v2.z);
+
+				// put tex coords of Triangle 2
+				AddTexCoord(v4.s, v4.t);
+				AddTexCoord(v3.s, v3.t);
+				AddTexCoord(v2.s, v2.t);
+
+				// put normal
+				n = ComputeFaceNormals(v4.x, v4.y, v4.z, v3.x, v3.y, v3.z, v2.x, v2.y, v2.z);
+				for (k = 0; k < 4; ++k)  // same normals for 3 vertices
+				{
+					Addnormal(n[0], n[1], n[2]);
+				}
+
+
+				index += 4;     // for next
+			}
+		}
+	}
+
+
+	// Note of Interest//
+	/*Use this if you want a spiral Sphere
+	int i, j, k, vi1, vi2;
+	int index = 0;                                  // index for vertex
+	for (i = 0; i < m_Segments.y; ++i)
+	{
+		vi1 = i * (m_Segments.x + 1);                // index of tmpVertices
+		vi2 = (i + 1) * (m_Segments.x + 1);
+
+		for (j = 0; j < m_Segments.x; ++j, ++vi1, ++vi2)
+		{
+			// get 4 vertices per sector
+			//  v1--v3
+			//  |    |
+			//  v2--v4
+			v1 = tmpVertices[vi1];
+			v2 = tmpVertices[vi2];
+			v3 = tmpVertices[vi1 + 1];
+			v4 = tmpVertices[vi2 + 1];
+
+			// if 1st stack and last stack, store only 1 triangle per sector
+			// otherwise, store 2 triangles (quad) per sector
+			if (i == 0) // a triangle for first stack ==========================
+			{
+				// put a triangle
+				AddVertex(v1.x, v1.y, v1.z);
+				AddVertex(v2.x, v2.y, v2.z);
+				AddVertex(v4.x, v4.y, v4.z);
+
+				//put tex coords of triangle
+				AddTexCoord(v1.s, v1.t);
+				AddTexCoord(v2.s, v2.t);
+				AddTexCoord(v4.s, v4.t);
+
+				// put normal
+				n = ComputeFaceNormals(v1.x, v1.y, v1.z, v2.x, v2.y, v2.z, v4.x, v4.y, v4.z);
+				for (k = 0; k < 3; ++k)  // same normals for 3 vertices
+				{
+					Addnormal(n[0], n[1], n[2]);
+				}
+
+
+				index += 3;     // for next
+			}
+			else if (i == (m_Segments.y - 1)) // a triangle for last stack =========
+			{
+				// put a triangle
+				AddVertex(v1.x, v1.y, v1.z);
+				AddVertex(v2.x, v2.y, v2.z);
+				AddVertex(v3.x, v3.y, v3.z);
+
+				// put tex coords of triangle
+				AddTexCoord(v1.s, v1.t);
+				AddTexCoord(v2.s, v2.t);
+				AddTexCoord(v3.s, v3.t);
+
+				// put normal
+				n = ComputeFaceNormals(v1.x, v1.y, v1.z, v2.x, v2.y, v2.z, v3.x, v3.y, v3.z);
+				for (k = 0; k < 3; ++k)  // same normals for 3 vertices
+				{
+					Addnormal(n[0], n[1], n[2]);
+				}
+
+
+				index += 3;     // for next
+			}
+			else // 2 triangles for others ====================================
+			{
+				// put Triangle vertices: v1-v2-v3-v4
 				AddVertex(v1.x, v1.y, v1.z);
 				AddVertex(v2.x, v2.y, v2.z);
 				AddVertex(v3.x, v3.y, v3.z);
 				AddVertex(v4.x, v4.y, v4.z);
 
-				// put tex coords of quad
+				// put tex coords of Triangle
 				AddTexCoord(v1.s, v1.t);
 				AddTexCoord(v2.s, v2.t);
 				AddTexCoord(v3.s, v3.t);
 				AddTexCoord(v4.s, v4.t);
 
-				// put normal
 				n = ComputeFaceNormals(v1.x, v1.y, v1.z, v2.x, v2.y, v2.z, v3.x, v3.y, v3.z);
-				for (k = 0; k < 4; ++k)  // same normals for 4 vertices
+				for (k = 0; k < 4; ++k)  // same normals for 3 vertices
 				{
 					Addnormal(n[0], n[1], n[2]);
 				}
@@ -568,6 +675,7 @@ void LoaderParams::CreateSphere() {
 			}
 		}
 	}
+	*/
 
 	// generate interleaved vertex array as well
 	SetInterlacedVertices();

@@ -19,18 +19,16 @@ void GameObject::Draw() {
 	m_Shader->SetMat4("projection", Projection);
 
 	glm::mat4 modelMatrix = glm::mat4(1.0);
-	modelMatrix = glm::translate(modelMatrix, m_Params->GetPos());
+	modelMatrix = glm::translate(modelMatrix, m_Pos);
 	modelMatrix = glm::scale(modelMatrix, m_Params->GetExtents());
 	m_Shader->SetMat4("model", modelMatrix);
 
-	/*if (isModel) {
-		m_Model->Draw(m_Shader);
+	if (isModel) {
+		m_Model->Draw(m_Shader, &modelMatrix);
 	}
 	else {
 		m_Params->Draw(m_Shader, m_Texture);
 	}
-*/
-	m_Params->Draw(m_Shader, m_Texture);
 }
 
 void GameObject::Update() {

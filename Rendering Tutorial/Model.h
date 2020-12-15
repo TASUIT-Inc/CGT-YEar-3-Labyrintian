@@ -43,11 +43,11 @@ public:
 	}
 
 	// draws the model, and thus all its meshes
-	void Draw(Shader shader,glm::mat4* model)
+	void Draw(Shader* shader,glm::mat4* model)
 	{
 		for (unsigned int i = 0; i < meshes.size(); i++)
 		{
-			shader.SetMat4("model", *model * aiMatrix4x4ToGlm(&transforms[i])); //Changes the model matrix for the whole model to account for each single mesh transform matrix
+			shader->SetMat4("model", *model * aiMatrix4x4ToGlm(&transforms[i])); //Changes the model matrix for the whole model to account for each single mesh transform matrix
 			meshes[i].Draw(shader);
 		}
 	}
