@@ -438,6 +438,20 @@ void LoaderParams::CreatePlane() {
 	InitVertexObjects();
 }
 
+void LoaderParams::CreateScreenQuad() {
+	AddVertex(-1.0f, 1.0f, 0.0f);
+	AddVertex(-1.0f, -1.0f, 0.0f);
+	AddVertex(1.0f, 1.0f, 0.0f);
+	AddVertex(1.0f, -1.0f, 0.0f);
+
+	AddTexCoord(0.0f, 1.0f);
+	AddTexCoord(0.0f, 0.0f);
+	AddTexCoord(1.0f, 1.0f);
+	AddTexCoord(1.0f, 0.0f);
+
+	SetInterlacedVertices();
+}
+
 void LoaderParams::CreateSphere() {
 
 	const float PI = acos(-1);
@@ -729,10 +743,11 @@ void LoaderParams::SetInterlacedVertices() {
 		m_InterLeavedVertices.push_back(m_Texcoords[j]);
 		m_InterLeavedVertices.push_back(m_Texcoords[j + 1]);
 
-		m_InterLeavedVertices.push_back(m_Normals[i]);
-		m_InterLeavedVertices.push_back(m_Normals[i + 1]);
-		m_InterLeavedVertices.push_back(m_Normals[i + 2]);
-
+		if (m_Normals.size() != 0) {
+			m_InterLeavedVertices.push_back(m_Normals[i]);
+			m_InterLeavedVertices.push_back(m_Normals[i + 1]);
+			m_InterLeavedVertices.push_back(m_Normals[i + 2]);
+		}
 
 	}
 }
@@ -754,12 +769,16 @@ void LoaderParams::AddTexCoord(float x, float y) {
 	m_Texcoords.push_back(y);
 }
 
-void LoaderParams::Draw(Shader* shader, unsigned int texture) {
+void LoaderParams::Draw(Shader* shader, unsigned int texture = 0) {
 	glBindVertexArray(VAO);
 	glActiveTexture(GL_TEXTURE0);
-	glBindTexture(GL_TEXTURE_2D, texture);
+	if (texture != 0) {
+		glBindTexture(GL_TEXTURE_2D, texture);
+	}
 	glDrawArrays(GL_TRIANGLES, 0, m_Vertices.size());
+
 }
+
 
 void LoaderParams::InitVertexObjects() {
 	//float* vertices = &m_InterLeavedVertices[0];

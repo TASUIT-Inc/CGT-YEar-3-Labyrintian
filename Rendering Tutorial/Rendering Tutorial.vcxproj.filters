@@ -36,6 +36,12 @@
     <ClCompile Include="LoaderParams.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="Renderer.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Light.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Shader.h">
@@ -62,6 +68,12 @@
     <ClInclude Include="LoaderParams.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="Renderer.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Light.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Text Include="FS-Default.txt">
@@ -70,10 +82,10 @@
     <Text Include="VS-Default.txt">
       <Filter>Resource Files</Filter>
     </Text>
-    <Text Include="FS-Model.txt">
+    <Text Include="VS-LightingShader.txt">
       <Filter>Resource Files</Filter>
     </Text>
-    <Text Include="VS-Model.txt">
+    <Text Include="FS-LightingShader.txt">
       <Filter>Resource Files</Filter>
     </Text>
   </ItemGroup>
