@@ -2,22 +2,21 @@
 #include "GameObject.h"
 
 
-GameObject::GameObject(LoaderParams* Params, Shader* shader, char const* TexturePath, Camera* camera) : Object(*Params), m_Params(Params), m_Pos(Params->GetPos()), m_Shader(shader), m_Camera(camera) {
+GameObject::GameObject(LoaderParams* Params, Shader* shader, char const* TexturePath) : Object(Params), m_Params(Params), m_Pos(Params->GetPos()), m_Extents(Params->GetExtents()), m_Shader(shader) {
 	m_Texture = loadTexture(TexturePath);
 	isModel = false;
 }
 
-GameObject::GameObject(LoaderParams* Params, Model* model, Shader* shader, Camera* camera) : Object(*Params), m_Params(Params), m_Pos(Params->GetPos()), m_Shader(shader), m_Model(model), m_Camera(camera) {
+GameObject::GameObject(LoaderParams* Params, Model* model, Shader* shader) : Object(Params), m_Params(Params), m_Pos(Params->GetPos()), m_Extents(Params->GetExtents()), m_Shader(shader), m_Model(model) {
 	isModel = true;
+}
+
+GameObject::GameObject(LoaderParams* Params, Shader* shader) : Object(Params), m_Params(Params), m_Pos(Params->GetPos()), m_Extents(Params->GetExtents()), m_Shader(shader), m_Texture(NULL) {
+	isModel = false;
 }
 
 void GameObject::Draw() {
 	m_Shader->Use();
-	glm::mat4 view = m_Camera->GetViewMatrix();
-	glm::mat4 Projection = glm::perspective(glm::radians(m_Camera->Zoom), (float)Width / (float)Height, 0.1f, 100.0f);
-	m_Shader->SetMat4("view", view);
-	m_Shader->SetMat4("projection", Projection);
-
 	glm::mat4 modelMatrix = glm::mat4(1.0);
 	modelMatrix = glm::translate(modelMatrix, m_Pos);
 	modelMatrix = glm::scale(modelMatrix, m_Params->GetExtents());

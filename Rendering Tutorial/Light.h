@@ -1,15 +1,14 @@
 #pragma once
-#include "Object.h"
 #include "Camera.h"
-class Light :public Object
+class Light
 {
 public:
 
-	Light(LoaderParams* Params, /*Renderer* renderer,*/ glm::vec3 Direction);
+	Light(glm::vec3 color, glm::vec3 Direction);
 
-	Light(LoaderParams* Params, /*Renderer* renderer,*/ float Linear, float Quadratic); //Point Light
-								/*					 */
-	Light(LoaderParams* Params, /*Renderer* renderer,*/ glm::vec3 direction, float CTheta); //Spot Light
+	Light(glm::vec3 pos, glm::vec3 color, float Linear, float Quadratic); //Point Light
+
+	Light(glm::vec3 pos, glm::vec3 color, glm::vec3 direction, float CTheta); //Spot Light
 
 	glm::vec3 GetPos() { return m_Pos; }
 

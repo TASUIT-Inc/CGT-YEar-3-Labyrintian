@@ -7,6 +7,6 @@ private:
 	virtual void Update() = 0;
 
 protected:
-	Object(LoaderParams Params) {}
+	Object(LoaderParams* Params) {}
 	virtual ~Object() {}
 };

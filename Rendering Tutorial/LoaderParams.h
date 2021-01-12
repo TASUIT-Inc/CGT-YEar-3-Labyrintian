@@ -49,7 +49,13 @@ public:
 
 	}
 
-	LoaderParams(glm::vec3 pos, glm::vec3 colour) : m_Pos(pos), m_Colour(colour) {}
+	LoaderParams(glm::vec3 pos, float R, float G, float B) : m_Pos(pos) {
+		m_Colour.x = R;
+		m_Colour.y = G;
+		m_Colour.z = B;
+	}
+
+	LoaderParams(glm::vec3 pos, glm::vec3 extents) : m_Pos(pos), m_Extents(extents) {}
 
 	LoaderParams() : m_InterLeavedStride(5 * sizeof(float)) {
 		CreateScreenQuad();

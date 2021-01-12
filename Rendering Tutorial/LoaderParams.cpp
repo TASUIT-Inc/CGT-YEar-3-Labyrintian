@@ -401,9 +401,9 @@ void LoaderParams::CreatePlane() {
 	AddVertex(m_Pos.x + x, m_Pos.y, m_Pos.z + z);
 	AddVertex(m_Pos.x - x, m_Pos.y, m_Pos.z + z);
 
+	AddTexCoord(1.0f, 0.0f);
 	AddTexCoord(1.0f, 1.0f);
 	AddTexCoord(0.0f, 1.0f);
-	AddTexCoord(0.0f, 0.0f);
 
 
 	normals = ComputeFaceNormals(m_Pos.x + x, m_Pos.y, m_Pos.z - z,
@@ -740,14 +740,14 @@ void LoaderParams::SetInterlacedVertices() {
 		m_InterLeavedVertices.push_back(m_Vertices[i + 1]);
 		m_InterLeavedVertices.push_back(m_Vertices[i + 2]);
 
-		m_InterLeavedVertices.push_back(m_Texcoords[j]);
-		m_InterLeavedVertices.push_back(m_Texcoords[j + 1]);
-
 		if (m_Normals.size() != 0) {
 			m_InterLeavedVertices.push_back(m_Normals[i]);
 			m_InterLeavedVertices.push_back(m_Normals[i + 1]);
 			m_InterLeavedVertices.push_back(m_Normals[i + 2]);
 		}
+
+		m_InterLeavedVertices.push_back(m_Texcoords[j]);
+		m_InterLeavedVertices.push_back(m_Texcoords[j + 1]);
 
 	}
 }
@@ -789,7 +789,9 @@ void LoaderParams::InitVertexObjects() {
 	glBufferData(GL_ARRAY_BUFFER, m_InterLeavedVertices.size() * sizeof(float), m_InterLeavedVertices.data(), GL_STATIC_DRAW);
 	glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, m_InterLeavedStride, (void*)0);
 	glEnableVertexAttribArray(0);
-	glVertexAttribPointer(1, 2, GL_FLOAT, GL_FALSE, m_InterLeavedStride, (void*)(3 * sizeof(float)));
+	glVertexAttribPointer(1, 3, GL_FLOAT, GL_FALSE, m_InterLeavedStride, (void*)(3 * sizeof(float)));
 	glEnableVertexAttribArray(1);
+	glVertexAttribPointer(2, 2, GL_FLOAT, GL_FALSE, m_InterLeavedStride, (void*)(6 * sizeof(float)));
+	glEnableVertexAttribArray(2);
 
 }

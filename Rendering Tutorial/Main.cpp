@@ -31,7 +31,7 @@ const unsigned int SCR_WIDTH = 800;
 const unsigned int SCR_HEIGHT = 600;
 
 // camera
-Camera camera(glm::vec3(0.0f, 0.0f, 3.0f));
+Camera camera(glm::vec3(8.5f, 1.0f, -1.0f));
 float lastX = (float)SCR_WIDTH / 2.0;
 float lastY = (float)SCR_HEIGHT / 2.0;
 bool firstMouse = true;
@@ -96,39 +96,49 @@ int main()
 
 	//Create Basic Shapes
 	//-------------------
-	LoaderParams Cube = LoaderParams(glm::vec3(0.0f, 0.0f, 0.0f), glm::vec3(1.5f), 'C');
-	LoaderParams Pyramid = LoaderParams(glm::vec3(1.0f, 0.0f, 1.0f), glm::vec3(1.5f), 'P');
+	LoaderParams Cube = LoaderParams(glm::vec3(0.0f, 1.5f, 0.0f), glm::vec3(25.0f, 1.0f, 25.0f), 'C');
+	/*LoaderParams Pyramid = LoaderParams(glm::vec3(1.0f, 0.0f, 1.0f), glm::vec3(1.5f), 'P');
 	LoaderParams Circle = LoaderParams(glm::vec3(5.0f, 1.5f, -5.0f), glm::vec3(1.5f), glm::vec2(25));
-	LoaderParams Plane = LoaderParams(glm::vec3(0.0f, -1.0f, 0.0f), glm::vec2(1.5f));
-	LoaderParams light = LoaderParams(glm::vec3(10.0f), glm::vec3(1.0f));
-	LoaderParams newlight = LoaderParams(glm::vec3(0.0, 2.0f, 0.0f), glm::vec3(1.0f));
+	LoaderParams Plane = LoaderParams(glm::vec3(0.0f, -1.0f, 0.0f), glm::vec2(1.5f));*/
+	LoaderParams ModelParams = LoaderParams(glm::vec3(0.0f), glm::vec3(1.0f));
 	//LoaderParams ScreenQuad = LoaderParams();
-
+	Model Tutorial = Model("Models/TestMap2.obj");
 
 	//Create GameObjects
 	//------------------
-	GameObject* CubeObj = new GameObject(&Cube, &Default, "Textures/Dev.png", &camera);
-	GameObject* PyramidObj = new GameObject(&Pyramid, &Default, "Textures/Dev.png", &camera);
-	GameObject* CircleObj = new GameObject(&Circle, &Default, "Textures/Dev.png", &camera);
-	GameObject* PlaneObj = new GameObject(&Plane, &Default, "Textures/MetalFloor.jpg", &camera);
+	GameObject* Map = new GameObject(&ModelParams, &Tutorial, &Default);
+	GameObject* Roof = new GameObject(&Cube, &Default, "Textures/Dev.png");
+	
 
 	//Create Lights
 	//-------------
-	Light* SkyLight = new Light(&light, glm::vec3(-0.2f, -1.0f, -0.3f));
-	Light* Pointlight = new Light(&newlight, 0.7f, 1.8f);
+	Light* SkyLight = new Light(glm::vec3(1.0f), glm::vec3(-0.2f, -1.0f, -0.3f));
+	Light* RoomLight1 = new Light(glm::vec3(8.5f, 1.5f, -1.0f), glm::vec3(1.0f), 0.8f, 1.5f);
+	Light* RoomLight2 = new Light(glm::vec3(3.2f, 1.5f, -1.0f), glm::vec3(1.0f), 0.8f, 1.5f);
+	Light* RoomLight3 = new Light(glm::vec3(3.2f, 1.5f,  3.8f), glm::vec3(1.0f), 0.8f, 1.5f);
+	Light* RoomLight4 = new Light(glm::vec3(-2.0f, 1.5f, 3.8f), glm::vec3(1.0f), 0.8f, 1.5f);
+	Light* RoomLight5 = new Light(glm::vec3(-2.0f, 1.5f,-1.0f), glm::vec3(1.0f), 0.8f, 1.5f);
+	Light* RoomLight6 = new Light(glm::vec3(-6.2f, 1.5f, 3.8f), glm::vec3(1.0f), 0.8f, 1.5f);
+	Light* RoomLight7 = new Light(glm::vec3(-6.2f, 1.5f,-1.0f), glm::vec3(1.0f), 0.8f, 1.5f);
+	Light* RoomLight8 = new Light(glm::vec3(3.2f, 1.5f, -5.8f), glm::vec3(1.0f), 0.8f, 1.5f);
 
 	//Fill Object Vector
 	//------------------
-	m_Objects.push_back(CubeObj);
-	m_Objects.push_back(PyramidObj);
-	m_Objects.push_back(CircleObj);
-	m_Objects.push_back(PlaneObj);
+	m_Objects.push_back(Map);
+	m_Objects.push_back(Roof);
 
 	//set Renderer Variables
 	//----------------------
 	renderer.InitShaderSamples(&Lighting);
 	renderer.AddLight(SkyLight);
-	renderer.AddLight(Pointlight);
+	renderer.AddLight(RoomLight1);
+	renderer.AddLight(RoomLight2);
+	renderer.AddLight(RoomLight3);
+	renderer.AddLight(RoomLight4);
+	renderer.AddLight(RoomLight5);
+	renderer.AddLight(RoomLight6);
+	renderer.AddLight(RoomLight7);
+	renderer.AddLight(RoomLight8);
 
 	for (int i = 0; i < m_Objects.size(); i++) {
 		m_Objects[i]->SetWidth(SCR_WIDTH);
