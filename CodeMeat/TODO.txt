@@ -1,0 +1,34 @@
+TODO:
+Ranked Most Important -> Least Important
+DO NOT remove objectives instead mark each one with a result and conclusion
+Example:
+	Implement Batch renderer - Result: Failure. Conclusion: Overall too complicated, time taken to understand the concept and implement deemed too long
+	
+Objectives:
+
+	Rendering:
+
+		Implement Defered Shading - 
+		Implement FrameBuffer Manager - 
+		
+
+	Physics:
+
+		Implement Collisions based off of VertexData in LoaderParams
+		Implement Event Manager class
+		Implement Trigger Events
+
+	Engine:
+
+		Implement Instance Managing
+		Implement External Instance Saving
+		Implement Random Map Generation
+
+	Audio:
+		Implement Instanced Audio class
+		Implement Audio Manager class
+
+	Other:
+		Refactor Code From Master Branch to new refactor Branch
+		Implement Level Saving and Loading
+		Implement TextureManager class in the Textures Sub-Folder

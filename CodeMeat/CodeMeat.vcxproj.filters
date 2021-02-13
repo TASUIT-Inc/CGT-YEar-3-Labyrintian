@@ -1,0 +1,190 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="Current" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="CodeMeat_Core">
+      <UniqueIdentifier>{2bf3d2d4-8235-481c-8994-65f244861fd1}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="CodeMeat_Core\Graphics">
+      <UniqueIdentifier>{81ba3aab-7c08-4801-8470-99b572d7fefe}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="CodeMeat_Core\Objects">
+      <UniqueIdentifier>{b41c638d-ad45-4b2e-9dc3-c7fbd8a1d9fd}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="CodeMeat_Core\Physics">
+      <UniqueIdentifier>{a5d5a46b-42ee-463d-a998-f07f0cfd47cc}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="CodeMeat_Core\Deps">
+      <UniqueIdentifier>{18f9ae6d-e0ee-40a2-9057-307ce7ac5579}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="CodeMeat_Core\Graphics\Camera">
+      <UniqueIdentifier>{007e6c68-4df4-4c0b-a78f-6b49d748ba8a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="CodeMeat_Core\Graphics\FrameBuffers">
+      <UniqueIdentifier>{e4eb64db-1f48-4b6b-bb95-d68bab50c422}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="CodeMeat_Core\Graphics\Lights">
+      <UniqueIdentifier>{57824240-2fe4-4c22-890c-d94e1f4ca94a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="CodeMeat_Core\Graphics\Shaders">
+      <UniqueIdentifier>{24e1e5ab-d143-4a61-a851-25cf79ce78b1}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="CodeMeat_Core\Graphics\Shaders\ShaderPool">
+      <UniqueIdentifier>{df90f07d-beb3-4fa1-aef2-b44aa96007ea}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="CodeMeat_Core\Graphics\Textures">
+      <UniqueIdentifier>{7a5ca7d2-b46a-418e-bc5c-04bbeb8d60ef}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="CodeMeat_Core\Graphics\Textures\TexturePool">
+      <UniqueIdentifier>{000b25f8-a4c3-4102-b8e7-b4fe4fcbd8b7}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="CodeMeat_Core\Objects\Models">
+      <UniqueIdentifier>{306d2f88-617e-45e3-9d10-defc87725dd1}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="CodeMeat_Core\Objects\Levels">
+      <UniqueIdentifier>{359129c8-eda0-4739-a519-2d845996afaa}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="CodeMeat_Core\Objects\Instances">
+      <UniqueIdentifier>{fb8b81e9-25f4-42a2-ad0e-4e2699f86733}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="CodeMeat_Core\Objects\GameObject">
+      <UniqueIdentifier>{e6da93cf-8896-4d8d-8b49-e140a4be06f9}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="CodeMeat_Core\Objects\Models\ModelPool">
+      <UniqueIdentifier>{c6599667-3e0d-459e-80a8-f2d4c9a36250}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="CodeMeat_Core\Objects\Instances\InstancePool">
+      <UniqueIdentifier>{731d2a51-ee30-43c5-83c0-6071fac1f6f7}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="CodeMeat_Core\Objects\Levels\MapPool">
+      <UniqueIdentifier>{1953ec81-1727-49ee-9d6f-9cd9c441bde3}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="src\CodeMeat_Core\Deps\stb_image.h">
+      <Filter>CodeMeat_Core\Deps</Filter>
+    </ClInclude>
+    <ClInclude Include="src\CodeMeat.h" />
+    <ClInclude Include="src\CodeMeat_Core\Graphics\Camera\Camera.h">
+      <Filter>CodeMeat_Core\Graphics\Camera</Filter>
+    </ClInclude>
+    <ClInclude Include="src\CodeMeat_Core\Graphics\FrameBuffers\Bloom.h">
+      <Filter>CodeMeat_Core\Graphics\FrameBuffers</Filter>
+    </ClInclude>
+    <ClInclude Include="src\CodeMeat_Core\Graphics\FrameBuffers\BloomBuffer.h">
+      <Filter>CodeMeat_Core\Graphics\FrameBuffers</Filter>
+    </ClInclude>
+    <ClInclude Include="src\CodeMeat_Core\Graphics\FrameBuffers\Buffer.h">
+      <Filter>CodeMeat_Core\Graphics\FrameBuffers</Filter>
+    </ClInclude>
+    <ClInclude Include="src\CodeMeat_Core\Graphics\FrameBuffers\FrameBuffer.h">
+      <Filter>CodeMeat_Core\Graphics\FrameBuffers</Filter>
+    </ClInclude>
+    <ClInclude Include="src\CodeMeat_Core\Graphics\Ligths\Light.h">
+      <Filter>CodeMeat_Core\Graphics\Lights</Filter>
+    </ClInclude>
+    <ClInclude Include="src\CodeMeat_Core\Graphics\Shaders\Shader.h">
+      <Filter>CodeMeat_Core\Graphics\Shaders</Filter>
+    </ClInclude>
+    <ClInclude Include="src\CodeMeat_Core\Graphics\Renderer.h">
+      <Filter>CodeMeat_Core\Graphics</Filter>
+    </ClInclude>
+    <ClInclude Include="src\CodeMeat_Core\Physics\Physics.h">
+      <Filter>CodeMeat_Core\Physics</Filter>
+    </ClInclude>
+    <ClInclude Include="src\CodeMeat_Core\Engine.h">
+      <Filter>CodeMeat_Core</Filter>
+    </ClInclude>
+    <ClInclude Include="src\CodeMeat_Core\Objects\GameObject\GameObject.h">
+      <Filter>CodeMeat_Core\Objects\GameObject</Filter>
+    </ClInclude>
+    <ClInclude Include="src\CodeMeat_Core\Objects\GameObject\Object.h">
+      <Filter>CodeMeat_Core\Objects\GameObject</Filter>
+    </ClInclude>
+    <ClInclude Include="src\CodeMeat_Core\Objects\Models\Mesh.h">
+      <Filter>CodeMeat_Core\Objects\Models</Filter>
+    </ClInclude>
+    <ClInclude Include="src\CodeMeat_Core\Objects\Models\Model.h">
+      <Filter>CodeMeat_Core\Objects\Models</Filter>
+    </ClInclude>
+    <ClInclude Include="src\CodeMeat_Core\Objects\LoaderParams.h">
+      <Filter>CodeMeat_Core\Objects</Filter>
+    </ClInclude>
+    <ClInclude Include="src\CodeMeat_Core\Objects\Player.h">
+      <Filter>CodeMeat_Core\Objects</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="src\CodeMeat_Core\Deps\stb_image.cpp">
+      <Filter>CodeMeat_Core\Deps</Filter>
+    </ClCompile>
+    <ClCompile Include="src\CodeMeat_Core\Graphics\Camera\Camera.cpp">
+      <Filter>CodeMeat_Core\Graphics\Camera</Filter>
+    </ClCompile>
+    <ClCompile Include="src\CodeMeat_Core\Graphics\FrameBuffers\Bloom.cpp">
+      <Filter>CodeMeat_Core\Graphics\FrameBuffers</Filter>
+    </ClCompile>
+    <ClCompile Include="src\CodeMeat_Core\Graphics\FrameBuffers\BloomBuffer.cpp">
+      <Filter>CodeMeat_Core\Graphics\FrameBuffers</Filter>
+    </ClCompile>
+    <ClCompile Include="src\CodeMeat_Core\Graphics\FrameBuffers\Buffer.cpp">
+      <Filter>CodeMeat_Core\Graphics\FrameBuffers</Filter>
+    </ClCompile>
+    <ClCompile Include="src\CodeMeat_Core\Graphics\FrameBuffers\FrameBuffer.cpp">
+      <Filter>CodeMeat_Core\Graphics\FrameBuffers</Filter>
+    </ClCompile>
+    <ClCompile Include="src\CodeMeat_Core\Graphics\Ligths\Light.cpp">
+      <Filter>CodeMeat_Core\Graphics\Lights</Filter>
+    </ClCompile>
+    <ClCompile Include="src\CodeMeat_Core\Graphics\Shaders\Shader.cpp">
+      <Filter>CodeMeat_Core\Graphics\Shaders</Filter>
+    </ClCompile>
+    <ClCompile Include="src\CodeMeat_Core\Graphics\Renderer.cpp">
+      <Filter>CodeMeat_Core\Graphics</Filter>
+    </ClCompile>
+    <ClCompile Include="src\CodeMeat_Core\Physics\Physics.cpp">
+      <Filter>CodeMeat_Core\Physics</Filter>
+    </ClCompile>
+    <ClCompile Include="src\CodeMeat_Core\Engine.cpp">
+      <Filter>CodeMeat_Core</Filter>
+    </ClCompile>
+    <ClCompile Include="src\CodeMeat_Core\Main.cpp">
+      <Filter>CodeMeat_Core</Filter>
+    </ClCompile>
+    <ClCompile Include="src\CodeMeat_Core\Objects\GameObject\GameObject.cpp">
+      <Filter>CodeMeat_Core\Objects\GameObject</Filter>
+    </ClCompile>
+    <ClCompile Include="src\CodeMeat_Core\Objects\Models\Mesh.cpp">
+      <Filter>CodeMeat_Core\Objects\Models</Filter>
+    </ClCompile>
+    <ClCompile Include="src\CodeMeat_Core\Objects\Models\Model.cpp">
+      <Filter>CodeMeat_Core\Objects\Models</Filter>
+    </ClCompile>
+    <ClCompile Include="src\CodeMeat_Core\Objects\LoaderParams.cpp">
+      <Filter>CodeMeat_Core\Objects</Filter>
+    </ClCompile>
+    <ClCompile Include="src\CodeMeat_Core\Objects\Player.cpp">
+      <Filter>CodeMeat_Core\Objects</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <Text Include="TODO.txt" />
+    <Text Include="src\CodeMeat_Core\Graphics\Shaders\ShaderPool\FS-Default.txt">
+      <Filter>CodeMeat_Core\Graphics\Shaders\ShaderPool</Filter>
+    </Text>
+    <Text Include="src\CodeMeat_Core\Graphics\Shaders\ShaderPool\FS-LightingShader.txt">
+      <Filter>CodeMeat_Core\Graphics\Shaders\ShaderPool</Filter>
+    </Text>
+    <Text Include="src\CodeMeat_Core\Graphics\Shaders\ShaderPool\FS-Model.txt">
+      <Filter>CodeMeat_Core\Graphics\Shaders\ShaderPool</Filter>
+    </Text>
+    <Text Include="src\CodeMeat_Core\Graphics\Shaders\ShaderPool\VS-Default.txt">
+      <Filter>CodeMeat_Core\Graphics\Shaders\ShaderPool</Filter>
+    </Text>
+    <Text Include="src\CodeMeat_Core\Graphics\Shaders\ShaderPool\VS-LightingShader.txt">
+      <Filter>CodeMeat_Core\Graphics\Shaders\ShaderPool</Filter>
+    </Text>
+    <Text Include="src\CodeMeat_Core\Graphics\Shaders\ShaderPool\VS-Model.txt">
+      <Filter>CodeMeat_Core\Graphics\Shaders\ShaderPool</Filter>
+    </Text>
+  </ItemGroup>
+</Project>
