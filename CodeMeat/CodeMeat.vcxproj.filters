@@ -112,6 +112,18 @@
     <ClInclude Include="src\CodeMeat_Core\Objects\Player.h">
       <Filter>CodeMeat_Core\Objects</Filter>
     </ClInclude>
+    <ClInclude Include="src\CodeMeat_Core\Deps\Math.h">
+      <Filter>CodeMeat_Core\Deps</Filter>
+    </ClInclude>
+    <ClInclude Include="src\CodeMeat_Core\Deps\Output.h">
+      <Filter>CodeMeat_Core\Deps</Filter>
+    </ClInclude>
+    <ClInclude Include="src\CodeMeat_Core\Graphics\FrameBuffers\GBuffer.h">
+      <Filter>CodeMeat_Core\Graphics\FrameBuffers</Filter>
+    </ClInclude>
+    <ClInclude Include="src\CodeMeat_Core\Deps\Commons.h">
+      <Filter>CodeMeat_Core\Deps</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\CodeMeat_Core\Deps\stb_image.cpp">
@@ -156,14 +168,17 @@
     <ClCompile Include="src\CodeMeat_Core\Objects\Models\Mesh.cpp">
       <Filter>CodeMeat_Core\Objects\Models</Filter>
     </ClCompile>
-    <ClCompile Include="src\CodeMeat_Core\Objects\Models\Model.cpp">
-      <Filter>CodeMeat_Core\Objects\Models</Filter>
-    </ClCompile>
     <ClCompile Include="src\CodeMeat_Core\Objects\LoaderParams.cpp">
       <Filter>CodeMeat_Core\Objects</Filter>
     </ClCompile>
     <ClCompile Include="src\CodeMeat_Core\Objects\Player.cpp">
       <Filter>CodeMeat_Core\Objects</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Deps\glad\src\glad.c">
+      <Filter>CodeMeat_Core\Deps</Filter>
+    </ClCompile>
+    <ClCompile Include="src\CodeMeat_Core\Graphics\FrameBuffers\GBuffer.cpp">
+      <Filter>CodeMeat_Core\Graphics\FrameBuffers</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

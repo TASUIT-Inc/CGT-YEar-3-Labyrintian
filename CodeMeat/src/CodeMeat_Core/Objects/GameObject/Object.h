@@ -1,5 +1,5 @@
 #pragma once
-#include "CodeMeat_Core/Objects/LoaderParams.h"
+
 class Object {
 private:
 
@@ -7,6 +7,6 @@ private:
 	virtual void Update() = 0;
 
 protected:
-	Object(LoaderParams* Params) {}
+	Object() {}
 	virtual ~Object() {}
 };

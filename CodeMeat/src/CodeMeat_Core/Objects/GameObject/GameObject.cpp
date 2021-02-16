@@ -1,32 +1,30 @@
-#include "stb_image.h"
+
 #include "GameObject.h"
+#include "CodeMeat_Core/Graphics/Renderer.h"
 
-
-GameObject::GameObject(LoaderParams* Params, glm::vec3 pos, glm::vec3 extents, glm::vec3 rotation) : Object(Params), m_Params(Params), m_Pos(pos), m_Extents(extents), m_Rotation(rotation) {}
+GameObject::GameObject(glm::vec3 pos, glm::vec3 extents, glm::vec3 rotation) : Object(), m_Pos(pos), m_Extents(extents), m_Rotation(rotation), m_Params(&LoaderParams(PCUBE)), m_Texture(loadTexture("Dev.png")), isModel(false) {}
 
 void GameObject::Draw() {
-	m_Shader->Use();
-	glm::mat4 modelMatrix = glm::mat4(1.0);
-	modelMatrix = glm::translate(modelMatrix, m_Pos);
-	modelMatrix = glm::scale(modelMatrix,m_Extents);
-	m_Shader->SetMat4("model", modelMatrix);
-
 	if (isModel) {
-		m_Model->Draw(m_Shader, &modelMatrix);
+		m_Model->Draw(m_Shader);
+	}
+	else {
+		m_Params->Draw();
 	}
 }
 
-void GameObject::Update() {
-	std::cout << "Update" << std::endl;
-}
 
 unsigned int GameObject::loadTexture(char const* path)
 {
 	unsigned int textureID;
 	glGenTextures(1, &textureID);
 
+	std::string FilePath = TEXTURE_POOL_PATH + (std::string)path;
+
+	const char* TotalPath = FilePath.c_str();
+
 	int width, height, nrComponents;
-	unsigned char* data = stbi_load(path, &width, &height, &nrComponents, 0);
+	unsigned char* data = stbi_load(TotalPath, &width, &height, &nrComponents, 0);
 	if (data)
 	{
 		GLenum format;

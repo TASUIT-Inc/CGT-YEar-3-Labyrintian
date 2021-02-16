@@ -32,3 +32,4 @@ Objectives:
 		Refactor Code From Master Branch to new refactor Branch
 		Implement Level Saving and Loading
 		Implement TextureManager class in the Textures Sub-Folder
+		Have Model.h aquire the functionality of LoaderParams so that both LoaderParams and Model are definable under the one type

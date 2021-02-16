@@ -2,7 +2,7 @@
 
 void LoaderParams::CreateCube()
 {
-	
+	DrawMode = GL_TRIANGLES;
 	float px = 1.0f; float nx = -1.0f;
 	float py = 1.0f; float ny = -1.0f;
 	float pz = 1.0f; float nz = -1.0f;
@@ -78,6 +78,7 @@ void LoaderParams::CreateCube()
 
 void LoaderParams::CreatePyramid() {
 
+	DrawMode = GL_TRIANGLES;
 	float px = 1.0f; float nx = -1.0f;
 	float py = 1.0f; float ny = -1.0f;
 	float pz = 1.0f; float nz = -1.0f;
@@ -136,6 +137,8 @@ void LoaderParams::CreatePyramid() {
 }
 
 void LoaderParams::CreatePlane() {
+
+	DrawMode = GL_TRIANGLES;
 	float px = 1.0f; float nx = -1.0f;
 	float py = 1.0f; float ny = -1.0f;
 	float pz = 1.0f; float nz = -1.0f;
@@ -271,4 +274,26 @@ void LoaderParams::PushVertexOrder(VertexData* V1, VertexData* V2, VertexData* V
 	m_InterLeavedVertices.push_back(V1);
 	m_InterLeavedVertices.push_back(V2);
 	m_InterLeavedVertices.push_back(V3);
+}
+
+void LoaderParams::Draw(unsigned int texture =0) {
+	glBindVertexArray(m_VAO);
+	if (texture != 0) {
+		glBindTexture(GL_TEXTURE_2D, texture);
+	}
+	glDrawArrays(DrawMode, 0, m_InterLeavedVertices.size());
+}
+
+void LoaderParams::InitBufferData() {
+	glGenVertexArrays(1, &m_VAO);
+	glGenBuffers(1, &m_VBO);
+	glBindVertexArray(m_VAO);
+	glBindBuffer(GL_ARRAY_BUFFER, m_VBO);
+	glBufferData(GL_ARRAY_BUFFER, m_InterLeavedVertices.size() * sizeof(VertexData), m_InterLeavedVertices.data(), GL_STATIC_DRAW);
+	glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, sizeof(VertexData), (void*)0);
+	glEnableVertexAttribArray(0);
+	glVertexAttribPointer(1, 3, GL_FLOAT, GL_FALSE, sizeof(VertexData), (void*)(3*sizeof(float)));
+	glEnableVertexAttribArray(1);
+	glVertexAttribPointer(2, 2, GL_FLOAT, GL_FALSE, sizeof(VertexData), (void*)(6*sizeof(float)));
+	glEnableVertexAttribArray(2);
 }

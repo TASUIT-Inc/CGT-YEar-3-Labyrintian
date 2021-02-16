@@ -1,12 +1,14 @@
 #ifndef __Engine__
 #define __Engine__
 
+#include "CodeMeat_Core/Deps/Math.h"
+#include "CodeMeat_Core/Deps/Output.h"
+#include "CodeMeat_Core/Graphics/Renderer.h"
+#include "CodeMeat_Core/Physics/Physics.h"
 #include "CodeMeat.h"
-#include <glad/glad.h>
-#include <GLFW/glfw3.h>
-#include <glm/glm.hpp>
-#include <glm/gtc/matrix_transform.hpp>
-#include <glm/gtc/type_ptr.hpp>
+
+class Renderer;
+class Physics;
 
 class Engine
 {

@@ -1,5 +1,5 @@
 #pragma once
-#include "CodeMeat.h"
+#include "CodeMeat_Core/Deps/Math.h"
 class Light
 {
 public:

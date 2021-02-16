@@ -1,25 +1,17 @@
 #ifndef __Renderer__
 #define __Renderer__
 
-#define SCR_WIDTH 800
-#define SCR_HEIGHT 600
 
-#include <glad/glad.h>
-#include <GLFW/glfw3.h>
-
-#include <glm/glm.hpp>
-#include <glm/gtc/matrix_transform.hpp>
-#include <glm/gtc/type_ptr.hpp>
-
-#include <iostream>
-#include <map>
-#include <vector>
-
+#include "CodeMeat_Core/Deps/Math.h"
 #include "CodeMeat_Core/Objects/GameObject/GameObject.h"
+#include "CodeMeat_Core/Graphics/Camera/Camera.h"
+#include "CodeMeat_Core/Deps/Commons.h"
+#include "CodeMeat_Core/Deps/Output.h"
+#include "CodeMeat_Core/Graphics/FrameBuffers/GBuffer.h"
 
-#define RENDER_MAX_VERTICES		50000
-#define RENDER_VERTEX_STRIDE	sizeof(Vertex)
-#define RENDER_BUFFER_SIZE		RENDER_MAX_VERTICES * RENDER_VERTEX_STRIDE
+
+class GameObject;
+class Camera;
 
 class Renderer
 {
@@ -43,6 +35,7 @@ public:
 
 	Camera* GetCamera() { return &m_Camera; }
 	void AddShader(const char* Identifier, const char* VertexPath, const char* FragmentPath, const char* GeometryPath = nullptr);
+	Shader* GetShader(const char* Tag) { return &m_Shaders[Tag]; }
 
 
 private:
@@ -53,6 +46,9 @@ private:
 	glm::mat4 m_Projection, m_View;
 
 	std::map<const char*, Shader > m_Shaders;
+
+	std::deque<GameObject*> m_RenderQueue;
+	GBuffer* m_GBuffer;
 
 
 	bool firstMouse;

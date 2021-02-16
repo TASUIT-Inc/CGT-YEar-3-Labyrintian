@@ -20,6 +20,9 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="src\CodeMeat.h" />
+    <ClInclude Include="src\CodeMeat_Core\Deps\Commons.h" />
+    <ClInclude Include="src\CodeMeat_Core\Deps\Math.h" />
+    <ClInclude Include="src\CodeMeat_Core\Deps\Output.h" />
     <ClInclude Include="src\CodeMeat_Core\Deps\stb_image.h" />
     <ClInclude Include="src\CodeMeat_Core\Engine.h" />
     <ClInclude Include="src\CodeMeat_Core\Graphics\Camera\Camera.h" />
@@ -27,6 +30,7 @@
     <ClInclude Include="src\CodeMeat_Core\Graphics\FrameBuffers\BloomBuffer.h" />
     <ClInclude Include="src\CodeMeat_Core\Graphics\FrameBuffers\Buffer.h" />
     <ClInclude Include="src\CodeMeat_Core\Graphics\FrameBuffers\FrameBuffer.h" />
+    <ClInclude Include="src\CodeMeat_Core\Graphics\FrameBuffers\GBuffer.h" />
     <ClInclude Include="src\CodeMeat_Core\Graphics\Ligths\Light.h" />
     <ClInclude Include="src\CodeMeat_Core\Graphics\Renderer.h" />
     <ClInclude Include="src\CodeMeat_Core\Graphics\Shaders\Shader.h" />
@@ -39,6 +43,7 @@
     <ClInclude Include="src\CodeMeat_Core\Physics\Physics.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="..\Deps\glad\src\glad.c" />
     <ClCompile Include="src\CodeMeat_Core\Deps\stb_image.cpp" />
     <ClCompile Include="src\CodeMeat_Core\Engine.cpp" />
     <ClCompile Include="src\CodeMeat_Core\Graphics\Camera\Camera.cpp" />
@@ -46,6 +51,7 @@
     <ClCompile Include="src\CodeMeat_Core\Graphics\FrameBuffers\BloomBuffer.cpp" />
     <ClCompile Include="src\CodeMeat_Core\Graphics\FrameBuffers\Buffer.cpp" />
     <ClCompile Include="src\CodeMeat_Core\Graphics\FrameBuffers\FrameBuffer.cpp" />
+    <ClCompile Include="src\CodeMeat_Core\Graphics\FrameBuffers\GBuffer.cpp" />
     <ClCompile Include="src\CodeMeat_Core\Graphics\Ligths\Light.cpp" />
     <ClCompile Include="src\CodeMeat_Core\Graphics\Renderer.cpp" />
     <ClCompile Include="src\CodeMeat_Core\Graphics\Shaders\Shader.cpp" />
@@ -53,7 +59,6 @@
     <ClCompile Include="src\CodeMeat_Core\Objects\GameObject\GameObject.cpp" />
     <ClCompile Include="src\CodeMeat_Core\Objects\LoaderParams.cpp" />
     <ClCompile Include="src\CodeMeat_Core\Objects\Models\Mesh.cpp" />
-    <ClCompile Include="src\CodeMeat_Core\Objects\Models\Model.cpp" />
     <ClCompile Include="src\CodeMeat_Core\Objects\Player.cpp" />
     <ClCompile Include="src\CodeMeat_Core\Physics\Physics.cpp" />
   </ItemGroup>
@@ -121,12 +126,12 @@
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <IncludePath>$(SolutionDir)\Deps\glm;$(SolutionDir)\Deps\glfw-3.3.2\include;$(SolutionDir)\Deps\glad\include;$(SolutionDir)\Deps\Assimp\include;$(IncludePath)</IncludePath>
     <LibraryPath>$(SolutionDir)\Deps\glfw-3.3.2\lib-vc2019;$(SolutionDir)\Deps\glad;$(SolutionDir)\Deps\Assimp\lib64;$(LibraryPath)</LibraryPath>
-    <OutDir>..\Bin\Debug</OutDir>
-    <IntDir>..\Bin\Debug\Intermediates</IntDir>
+    <OutDir>..\Bin\Debug\</OutDir>
+    <IntDir>..\Bin\Debug\Intermediates\</IntDir>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
-    <OutDir>..\Bin\Debug</OutDir>
-    <IntDir>..\Bin\Debug\Intermediates</IntDir>
+    <OutDir>..\Bin\Debug\</OutDir>
+    <IntDir>..\Bin\Debug\Intermediates\</IntDir>
   </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <ClCompile>
@@ -147,11 +152,14 @@
       <ConformanceMode>true</ConformanceMode>
       <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
       <AdditionalIncludeDirectories>$(SolutionDir)\Deps\Bullet\src;src;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>%(PreprocessorDefinitions)</PreprocessorDefinitions>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
       <AdditionalDependencies>opengl32.lib;glfw3.lib;assimp.lib;%(AdditionalDependencies)</AdditionalDependencies>
       <AdditionalLibraryDirectories>$(SolutionDir)\Deps\Bullet\lib;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+      <IgnoreAllDefaultLibraries>false</IgnoreAllDefaultLibraries>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
@@ -178,12 +186,15 @@
       <SDLCheck>true</SDLCheck>
       <ConformanceMode>true</ConformanceMode>
       <AdditionalIncludeDirectories>$(SolutionDir)\Deps\Bullet\src;src;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>%(PreprocessorDefinitions)</PreprocessorDefinitions>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
       <EnableCOMDATFolding>true</EnableCOMDATFolding>
       <OptimizeReferences>true</OptimizeReferences>
       <AdditionalLibraryDirectories>$(SolutionDir)\Deps\Bullet\lib;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+      <IgnoreAllDefaultLibraries>false</IgnoreAllDefaultLibraries>
     </Link>
   </ItemDefinitionGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

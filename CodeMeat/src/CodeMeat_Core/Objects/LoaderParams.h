@@ -4,10 +4,9 @@
 #define PSPHERE 0x003
 #define PPLANE 0x004
 
-#include <glm/glm.hpp>
 
-#include <vector>
-#include <cmath>
+#include "CodeMeat_Core/Deps/Math.h"
+#include "CodeMeat_Core/Deps/Output.h"
 
 struct VertexData {
 	glm::vec3 m_Pos;
@@ -40,11 +39,15 @@ public:
 	}
 
 	void PushVertexOrder(VertexData* V1, VertexData* V2, VertexData* V3);
+	void Draw(unsigned int texture =0);
+	void InitBufferData();
 
 	virtual ~LoaderParams() {}
 private:
 	std::vector<VertexData*> m_InterLeavedVertices;
 	bool isSphere;
+	GLint DrawMode;
+	unsigned int m_VAO, m_VBO;
 
 	void CreateCube();
 	void CreatePyramid();

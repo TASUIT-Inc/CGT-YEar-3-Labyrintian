@@ -2,22 +2,16 @@
 #ifndef MODEL_H
 #define MODEL_H
 
-#include <glad/glad.h> 
-#include "CodeMeat_Core/Objects/Models/Mesh.h"
-#include <glm/glm.hpp>
-#include <glm/gtc/matrix_transform.hpp>
+#include "CodeMeat_Core/Deps/Math.h"
+#include "CodeMeat_Core/Deps/stb_image.h"
 
 #include <assimp/Importer.hpp>
 #include <assimp/scene.h>
 #include <assimp/postprocess.h>
 
+#include "CodeMeat_Core/Objects/Models/Mesh.h"
+#include "CodeMeat_Core/Deps/Output.h"
 
-#include <string>
-#include <fstream>
-#include <sstream>
-#include <iostream>
-#include <map>
-#include <vector>
 using namespace std;
 
 
@@ -41,11 +35,11 @@ public:
 	}
 
 	// draws the model, and thus all its meshes
-	void Draw(Shader* shader,glm::mat4* model)
+	void Draw(Shader *shader)
 	{
 		for (unsigned int i = 0; i < meshes.size(); i++)
 		{
-			shader->SetMat4("model", *model * aiMatrix4x4ToGlm(&transforms[i])); //Changes the model matrix for the whole model to account for each single mesh transform matrix
+			shader->SetMat4("model", shader->GetModel() * aiMatrix4x4ToGlm(&transforms[i])); //Changes the model matrix for the whole model to account for each single mesh transform matrix
 			meshes[i].Draw(shader);
 		}
 	}

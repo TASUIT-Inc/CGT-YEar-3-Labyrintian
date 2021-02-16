@@ -40,19 +40,7 @@ bool Renderer::Init(){
 }
 
 void Renderer::GenBuffer() {
-	glGenVertexArrays(1, &m_VAO);
-	glGenBuffers(1, &m_VBO);
-
-	glBindVertexArray(m_VAO);
-	glBindBuffer(GL_ARRAY_BUFFER, m_VBO);
-	glBufferData(GL_ARRAY_BUFFER, RENDER_BUFFER_SIZE, NULL, GL_DYNAMIC_DRAW);
-	glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, RENDER_VERTEX_STRIDE, (void*)0);
-	glEnableVertexAttribArray(0);
-	glVertexAttribPointer(1, 3, GL_FLOAT, GL_FALSE, RENDER_VERTEX_STRIDE, (void*)(3*sizeof(float)));
-	glEnableVertexAttribArray(1);
-	glVertexAttribPointer(2, 2, GL_FLOAT, GL_FALSE, RENDER_VERTEX_STRIDE, (void*)(6*sizeof(float)));
-	glEnableVertexAttribArray(2);
-	glBindBuffer(GL_ARRAY_BUFFER, 0);
+	m_GBuffer = new GBuffer();
 }
 
 void Renderer::framebuffer_size_callback(GLFWwindow* window, int width, int height) {
@@ -87,18 +75,31 @@ void Renderer::AddShader(const char* Identifier, const char* VertexPath, const c
 }
 
 void Renderer::Begin() {
-	glBindBuffer(GL_ARRAY_BUFFER, m_VBO);
-	m_Buffer = (VertexData*)glMapBuffer(GL_ARRAY_BUFFER, GL_WRITE_ONLY);
+	m_GBuffer->FirstPass();
+	glm::mat4 m_Projection = glm::perspective(glm::radians(m_Camera.Zoom), (float)SCR_WIDTH / (float)SCR_HEIGHT, 0.1f, 100.0f);
+	glm::mat4 m_View = m_Camera.GetViewMatrix();
+	for (std::map<const char*, Shader>::iterator it = m_Shaders.begin(); it != m_Shaders.end(); it++) {
+		it->second.Use();
+		it->second.SetMat4("Projection", m_Projection);
+		it->second.SetMat4("View", m_View);
+
+	}
+	for (GameObject* object : m_RenderQueue) {
+		object->Draw();
+	}
 }
 
 void Renderer::Submit(GameObject* Object) {
-	m_Buffer->m_Pos = Object->GetPos();
+	m_RenderQueue.push_back(Object);
 }
 
 void Renderer::Flush() {
+	m_GBuffer->Bind();
 
 }
 
 void Renderer::End() {
-	glUnmapBuffer(GL_ARRAY_BUFFER);
+	
+	glfwSwapBuffers(m_Window);
+	glfwPollEvents();
 }

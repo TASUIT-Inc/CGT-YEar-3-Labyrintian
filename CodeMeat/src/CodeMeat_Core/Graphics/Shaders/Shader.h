@@ -1,12 +1,8 @@
 #ifndef __Shader__
 #define __Shader__
 
-#include <glad/glad.h>
-#include<glm/glm.hpp>
-#include <string>
-#include <fstream>
-#include <sstream>
-#include <iostream>
+#include "CodeMeat_Core/Deps/Math.h"
+#include "CodeMeat_Core/Deps/Output.h"
 
 class Shader
 {
@@ -32,9 +28,12 @@ public:
 	void SetMat3(const std::string& name, const glm::mat3& mat) const;
 	void SetMat4(const std::string& name, const glm::mat4& mat) const;
 	
-	
-
+	void SetModel(const glm::mat4& model) { m_Model = model; }
+	glm::mat4 GetModel() { return m_Model; }
 private:
+
+	glm::mat4 m_Model;
+
 	void checkCompileErrors(GLuint shader, std::string type)
 	{
 		GLint success;

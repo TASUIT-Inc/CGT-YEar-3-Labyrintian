@@ -1,32 +1,13 @@
 #ifndef MESH_H
 #define MESH_H
 
-#include <glad/glad.h>
-
-#include <glm/glm.hpp>
-#include <glm/gtc/matrix_transform.hpp>
-
-#include "CodeMeat.h"
-
-#include <string>
-#include <fstream>
-#include <sstream>
-#include <iostream>
-#include <vector>
+#include "CodeMeat_Core/Deps/Math.h"
+#include "CodeMeat_Core/Graphics/Shaders/Shader.h"
+#include "CodeMeat_Core/Deps/Output.h"
 
 
-/*
-
-Name: Brodie Frail
-
-Student ID: B00369676
-
-I declare that the following code was produced by Brodie Frail and Daryyl Cully as a group assignment for the Real Time graphics module and that this is our own work.
-
-I am aware of the penalties incurred by submitting in full or in part work that is not our own and that was developed by third parties that are not appropriately acknowledged.
-
-*/
-
+//Class Definitions
+class Shader;
 
 struct Vertex {
 	glm::vec3 Position;
