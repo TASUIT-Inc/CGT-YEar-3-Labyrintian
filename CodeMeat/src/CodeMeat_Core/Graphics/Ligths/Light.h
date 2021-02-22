@@ -23,10 +23,6 @@ public:
 
 	float GetTheta() { return m_Theta; }
 
-	void Draw() {}
-
-	void Update() {}
-
 	int GetType() { return type; }
 
 private:

@@ -40,15 +40,30 @@ void GBuffer::Init() {
 	if (glCheckFramebufferStatus(GL_FRAMEBUFFER) != GL_FRAMEBUFFER_COMPLETE)
 		std::cout << "Framebuffer not complete!" << std::endl;
 	glBindFramebuffer(GL_FRAMEBUFFER, 0);
+
+	m_LPassShader.Use();
+	m_LPassShader.SetInt("gPosition", 0);
+	m_LPassShader.SetInt("gNormal", 1);
+	m_LPassShader.SetInt("gAlbedoSpec", 2);
 }
 
-void GBuffer::FirstPass() {
+void GBuffer::FirstPass(std::vector<GameObject*> ObjectQueue) {
 	glBindFramebuffer(GL_FRAMEBUFFER, m_Gbuffer);
-	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+		glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+		glm::mat4 m_Projection = glm::perspective(glm::radians(m_CameraRef->Zoom), (float)SCR_WIDTH / (float)SCR_HEIGHT, 0.1f, 100.0f);
+		glm::mat4 m_View = m_CameraRef->GetViewMatrix();
+		m_GPassShader.Use();
+		m_GPassShader.SetMat4("Projection", m_Projection);
+		m_GPassShader.SetMat4("View", m_Projection);
+		for (int i = 0; i < ObjectQueue.size(); i++) {
+			ObjectQueue[i]->Draw(m_GPassShader);
+		}
+	glBindFramebuffer(GL_FRAMEBUFFER, 0);
 }
 
-void GBuffer::SecondPass(Shader* shader) {
-	shader->Use();
+void GBuffer::SecondPass(std::vector<Light*> Lightarr) {
+	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+	m_LPassShader.Use();
 	glActiveTexture(GL_TEXTURE0);
 	glBindTexture(GL_TEXTURE_2D, m_GPos);
 	glActiveTexture(GL_TEXTURE1);
@@ -56,6 +71,30 @@ void GBuffer::SecondPass(Shader* shader) {
 	glActiveTexture(GL_TEXTURE2);
 	glBindTexture(GL_TEXTURE_2D, m_AlbedoSpec);
 
+	for (unsigned int i = 0; i < Lightarr.size() ; i++)
+	{
+		switch (Lightarr[i]->GetType()) {
+		case 0:
+			m_LPassShader.SetVec3("lights[" + std::to_string(i) + "].Direction", Lightarr[i]->GetDir());
+			m_LPassShader.SetVec3("lights[" + std::to_string(i) + "].Color", Lightarr[i]->GetColour());
+			break;
+		case 1:
+			m_LPassShader.SetVec3("lights[" + std::to_string(i) + "].Position", Lightarr[i]->GetPos());
+			m_LPassShader.SetVec3("lights[" + std::to_string(i) + "].Color", Lightarr[i]->GetColour());
+			m_LPassShader.SetFloat("lights[" + std::to_string(i) + "].Quadratic", Lightarr[i]->GetQuadratic());
+			m_LPassShader.SetFloat("lights[" + std::to_string(i) + "].Linear", Lightarr[i]->GetLinear());
+			break;
+		case 2:
+			m_LPassShader.SetVec3("lights[" + std::to_string(i) + "].Position", Lightarr[i]->GetPos());
+			m_LPassShader.SetVec3("lights[" + std::to_string(i) + "].Color", Lightarr[i]->GetColour());
+			m_LPassShader.SetFloat("lights[" + std::to_string(i) + "].Quadratic", Lightarr[i]->GetQuadratic());
+			m_LPassShader.SetFloat("lights[" + std::to_string(i) + "].Linear", Lightarr[i]->GetLinear());
+			m_LPassShader.SetFloat("lights[" + std::to_string(i) + "].Theta", Lightarr[i]->GetTheta());
+			break;
+		}
+	}
+	m_LPassShader.SetVec3("viewPos", m_CameraRef->Position);
+	RenderQuad();
 }
 
 void GBuffer::Bind() {
@@ -68,4 +107,31 @@ void GBuffer::Bind() {
 	glBlitFramebuffer(0, 0, SCR_WIDTH, SCR_HEIGHT, 0, 0, SCR_WIDTH, SCR_HEIGHT, GL_DEPTH_BUFFER_BIT, GL_NEAREST);
 	glBindFramebuffer(GL_FRAMEBUFFER, 0);
 
+}
+
+void GBuffer::RenderQuad()
+{
+	if (m_VAO == 0)
+	{
+		float quadVertices[] = {
+			// positions        // texture Coords
+			-1.0f,  1.0f, 0.0f, 0.0f, 1.0f,
+			-1.0f, -1.0f, 0.0f, 0.0f, 0.0f,
+			 1.0f,  1.0f, 0.0f, 1.0f, 1.0f,
+			 1.0f, -1.0f, 0.0f, 1.0f, 0.0f,
+		};
+		// setup plane VAO
+		glGenVertexArrays(1, &m_VAO);
+		glGenBuffers(1, &m_VBO);
+		glBindVertexArray(m_VAO);
+		glBindBuffer(GL_ARRAY_BUFFER, m_VBO);
+		glBufferData(GL_ARRAY_BUFFER, sizeof(quadVertices), &quadVertices, GL_STATIC_DRAW);
+		glEnableVertexAttribArray(0);
+		glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 5 * sizeof(float), (void*)0);
+		glEnableVertexAttribArray(1);
+		glVertexAttribPointer(1, 2, GL_FLOAT, GL_FALSE, 5 * sizeof(float), (void*)(3 * sizeof(float)));
+	}
+	glBindVertexArray(m_VAO);
+	glDrawArrays(GL_TRIANGLE_STRIP, 0, 4);
+	glBindVertexArray(0);
 }

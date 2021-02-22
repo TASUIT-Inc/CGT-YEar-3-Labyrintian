@@ -38,13 +38,13 @@ public:
 		}
 	}
 
-	void PushVertexOrder(VertexData* V1, VertexData* V2, VertexData* V3);
+	void PushVertexOrder(VertexData V1, VertexData V2, VertexData V3);
 	void Draw(unsigned int texture =0);
 	void InitBufferData();
 
 	virtual ~LoaderParams() {}
 private:
-	std::vector<VertexData*> m_InterLeavedVertices;
+	std::vector<VertexData> m_InterLeavedVertices;
 	bool isSphere;
 	GLint DrawMode;
 	unsigned int m_VAO, m_VBO;

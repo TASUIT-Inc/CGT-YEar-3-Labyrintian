@@ -26,10 +26,7 @@
     <ClInclude Include="src\CodeMeat_Core\Deps\stb_image.h" />
     <ClInclude Include="src\CodeMeat_Core\Engine.h" />
     <ClInclude Include="src\CodeMeat_Core\Graphics\Camera\Camera.h" />
-    <ClInclude Include="src\CodeMeat_Core\Graphics\FrameBuffers\Bloom.h" />
-    <ClInclude Include="src\CodeMeat_Core\Graphics\FrameBuffers\BloomBuffer.h" />
     <ClInclude Include="src\CodeMeat_Core\Graphics\FrameBuffers\Buffer.h" />
-    <ClInclude Include="src\CodeMeat_Core\Graphics\FrameBuffers\FrameBuffer.h" />
     <ClInclude Include="src\CodeMeat_Core\Graphics\FrameBuffers\GBuffer.h" />
     <ClInclude Include="src\CodeMeat_Core\Graphics\Ligths\Light.h" />
     <ClInclude Include="src\CodeMeat_Core\Graphics\Renderer.h" />
@@ -47,10 +44,7 @@
     <ClCompile Include="src\CodeMeat_Core\Deps\stb_image.cpp" />
     <ClCompile Include="src\CodeMeat_Core\Engine.cpp" />
     <ClCompile Include="src\CodeMeat_Core\Graphics\Camera\Camera.cpp" />
-    <ClCompile Include="src\CodeMeat_Core\Graphics\FrameBuffers\Bloom.cpp" />
-    <ClCompile Include="src\CodeMeat_Core\Graphics\FrameBuffers\BloomBuffer.cpp" />
     <ClCompile Include="src\CodeMeat_Core\Graphics\FrameBuffers\Buffer.cpp" />
-    <ClCompile Include="src\CodeMeat_Core\Graphics\FrameBuffers\FrameBuffer.cpp" />
     <ClCompile Include="src\CodeMeat_Core\Graphics\FrameBuffers\GBuffer.cpp" />
     <ClCompile Include="src\CodeMeat_Core\Graphics\Ligths\Light.cpp" />
     <ClCompile Include="src\CodeMeat_Core\Graphics\Renderer.cpp" />
@@ -65,10 +59,8 @@
   <ItemGroup>
     <Text Include="src\CodeMeat_Core\Graphics\Shaders\ShaderPool\FS-Default.txt" />
     <Text Include="src\CodeMeat_Core\Graphics\Shaders\ShaderPool\FS-LightingShader.txt" />
-    <Text Include="src\CodeMeat_Core\Graphics\Shaders\ShaderPool\FS-Model.txt" />
     <Text Include="src\CodeMeat_Core\Graphics\Shaders\ShaderPool\VS-Default.txt" />
     <Text Include="src\CodeMeat_Core\Graphics\Shaders\ShaderPool\VS-LightingShader.txt" />
-    <Text Include="src\CodeMeat_Core\Graphics\Shaders\ShaderPool\VS-Model.txt" />
     <Text Include="TODO.txt" />
   </ItemGroup>
   <PropertyGroup Label="Globals">

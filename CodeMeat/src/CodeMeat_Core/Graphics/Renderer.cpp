@@ -1,7 +1,7 @@
 #include "Renderer.h"
 
 bool Renderer::Init(){
-	m_Camera = Camera();
+	m_Camera = Camera(glm::vec3(0.0f,0.0f,5.0f));
 	glfwInit();
 	glfwWindowHint(GLFW_CONTEXT_VERSION_MAJOR, 3);
 	glfwWindowHint(GLFW_CONTEXT_VERSION_MINOR, 3);
@@ -13,19 +13,19 @@ bool Renderer::Init(){
 
 	// glfw window creation
 	// --------------------
-	GLFWwindow* window = glfwCreateWindow(SCR_WIDTH, SCR_HEIGHT, "LearnOpenGL", NULL, NULL);
-	if (window == NULL)
+	m_Window = glfwCreateWindow(SCR_WIDTH, SCR_HEIGHT, "LearnOpenGL", NULL, NULL);
+	if (m_Window == NULL)
 	{
 		std::cout << "Failed to create GLFW window" << std::endl;
 		glfwTerminate();
 		return 0;
 	}
-	glfwMakeContextCurrent(window);
-	glfwSetFramebufferSizeCallback(window, framebuffer_size_callback);
-	glfwSetCursorPosCallback(window, mouse_callback);
+	glfwMakeContextCurrent(m_Window);
+	glfwSetFramebufferSizeCallback(m_Window, framebuffer_size_callback);
+	glfwSetCursorPosCallback(m_Window, mouse_callback);
 
 	// tell GLFW to capture our mouse
-	glfwSetInputMode(window, GLFW_CURSOR, GLFW_CURSOR_DISABLED);
+	glfwSetInputMode(m_Window, GLFW_CURSOR, GLFW_CURSOR_DISABLED);
 
 	// glad: load all OpenGL function pointers
 	// ---------------------------------------
@@ -35,12 +35,14 @@ bool Renderer::Init(){
 		return 0;
 	}
 
+	glEnable(GL_DEPTH_TEST);
+
 	GenBuffer();
 	return 1;
 }
 
 void Renderer::GenBuffer() {
-	m_GBuffer = new GBuffer();
+	m_GBuffer = new GBuffer(&m_Camera);
 }
 
 void Renderer::framebuffer_size_callback(GLFWwindow* window, int width, int height) {
@@ -75,22 +77,18 @@ void Renderer::AddShader(const char* Identifier, const char* VertexPath, const c
 }
 
 void Renderer::Begin() {
-	m_GBuffer->FirstPass();
-	glm::mat4 m_Projection = glm::perspective(glm::radians(m_Camera.Zoom), (float)SCR_WIDTH / (float)SCR_HEIGHT, 0.1f, 100.0f);
-	glm::mat4 m_View = m_Camera.GetViewMatrix();
-	for (std::map<const char*, Shader>::iterator it = m_Shaders.begin(); it != m_Shaders.end(); it++) {
-		it->second.Use();
-		it->second.SetMat4("Projection", m_Projection);
-		it->second.SetMat4("View", m_View);
-
-	}
-	for (GameObject* object : m_RenderQueue) {
-		object->Draw();
-	}
+	glClearColor(0.0f, 0.0f, 0.0f, 1.0f);
+	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+	m_GBuffer->FirstPass(m_Objects);
+	m_GBuffer->SecondPass(m_Lights);
 }
 
 void Renderer::Submit(GameObject* Object) {
-	m_RenderQueue.push_back(Object);
+	m_Objects.push_back(Object);
+}
+
+void Renderer::Submit(Light* light) {
+	m_Lights.push_back(light);
 }
 
 void Renderer::Flush() {

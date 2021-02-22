@@ -19,29 +19,38 @@ bool Engine::init() {
 		std::cout << "Renderer Init Failed!" << std::endl;
 	}
 
-	LoaderParams CubeVertex = LoaderParams(PCUBE);
-	LoaderParams SphereVertex = LoaderParams(PSPHERE);
-	LoaderParams PyramidVertex = LoaderParams(PPYRAMID);
-	LoaderParams PlaneVertex = LoaderParams(PPLANE);
+	Model* shotgun=new Model("E1M1/Shotgun.obj");
+
+	GameObject* m_Cube =new GameObject(glm::vec3(5.0f, 0.5f, 0.0f), glm::vec3(1.0f), glm::vec3(0.0f));
+	m_Cube->AttachModel(shotgun);
+	/*GameObject* m_Pyramid =new GameObject(glm::vec3(-5.0f, 0.0f, 0.0f), glm::vec3(1.0f), glm::vec3(0.0f));
+	m_Pyramid->AttachLoaderParams(new LoaderParams(PPYRAMID));
+	GameObject* m_Plane =new GameObject(glm::vec3(0.0f), glm::vec3(1.0f), glm::vec3(0.0f));
+	m_Plane->AttachLoaderParams(new LoaderParams(PPLANE));*/
+
+	REngine::Instance()->Submit(m_Cube);
+	/*REngine::Instance()->Submit(m_Pyramid);
+	REngine::Instance()->Submit(m_Plane);
+*/
+	Light m_SkyLight = Light(glm::vec3(1.0f), glm::vec3(5.0f, -5.0f, 0.0f));
 
 	return EngineState;
+}
+
+void Engine::Update() {
+	float m_CF = glfwGetTime();
+	m_DT = m_CF - m_LT;
+	m_LT = m_CF;
+}
+
+void Engine::Render() {
+	REngine::Instance()->Begin();
 }
 
 void Engine::Draw() {
 
 	REngine::Instance()->Flush();
-
-}
-
-void Engine::Render() {
-
-	REngine::Instance()->Begin();
-
-	//REngine::Instance()->Submit();
-
-}
-
-void Engine::Update() {
+	REngine::Instance()->End();
 
 }
 

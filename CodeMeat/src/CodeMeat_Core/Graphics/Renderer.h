@@ -22,10 +22,12 @@ public:
 
 	void Begin();
 	void Submit(GameObject* Object);
+	void Submit(Light* light);
 	void End();
 	void Flush();
 	
 	static Renderer* Instance() {
+
 		if (m_Instance == 0) {
 			m_Instance = new Renderer();
 			return m_Instance;
@@ -47,7 +49,8 @@ private:
 
 	std::map<const char*, Shader > m_Shaders;
 
-	std::deque<GameObject*> m_RenderQueue;
+	std::vector<GameObject*> m_Objects;
+	std::vector<Light*> m_Lights;
 	GBuffer* m_GBuffer;
 
 

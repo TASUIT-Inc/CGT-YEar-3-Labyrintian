@@ -6,12 +6,8 @@
 class Buffer
 {
 private:
-
-	virtual void FirstPass() = 0;
-	virtual void SecondPass() = 0;
 	virtual void Bind() = 0;
 	virtual void Init() = 0;
-
 protected:
 	Buffer() {}
 	virtual ~Buffer() {}

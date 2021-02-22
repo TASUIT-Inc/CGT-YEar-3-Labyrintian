@@ -31,8 +31,13 @@ public:
 
 private:
 	bool EngineState;
+	float m_DT, m_LT;
 
 	static Engine* m_Instance;
+
+	Engine() {}
+	virtual ~Engine() {}
+
 };
 typedef Engine GameEngine;
 #endif //!__Engine__

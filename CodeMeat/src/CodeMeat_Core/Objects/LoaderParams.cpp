@@ -56,24 +56,25 @@ void LoaderParams::CreateCube()
 	p7.m_TexCoord = glm::vec2(0.0f, 0.0f);
 	p8.m_TexCoord = glm::vec2(1.0f, 0.0f);
 
-	PushVertexOrder(&p1, &p2, &p3);	//Front Face
-	PushVertexOrder(&p4, &p3, &p2);
+	PushVertexOrder(p1, p2, p3);	//Front Face
+	PushVertexOrder(p4, p3, p2);
 
-	PushVertexOrder(&p6, &p1, &p8);	//Left Face
-	PushVertexOrder(&p3, &p8, &p1);
+	PushVertexOrder(p6, p1, p8);	//Left Face
+	PushVertexOrder(p3, p8, p1);
 
-	PushVertexOrder(&p5, &p6, &p7);	//Back Face
-	PushVertexOrder(&p8, &p7, &p6);
+	PushVertexOrder(p5, p6, p7);	//Back Face
+	PushVertexOrder(p8, p7, p6);
 
-	PushVertexOrder(&p2, &p5, &p4);	//Right Face
-	PushVertexOrder(&p7, &p4, &p5);
+	PushVertexOrder(p2, p5, p4);	//Right Face
+	PushVertexOrder(p7, p4, p5);
 
-	PushVertexOrder(&p6, &p5, &p1);	//Top Face
-	PushVertexOrder(&p2, &p1, &p5);
+	PushVertexOrder(p6, p5, p1);	//Top Face
+	PushVertexOrder(p2, p1, p5);
 
-	PushVertexOrder(&p3, &p4, &p8);	//Bottom Face
-	PushVertexOrder(&p7, &p8, &p4);
+	PushVertexOrder(p3, p4, p8);	//Bottom Face
+	PushVertexOrder(p7, p8, p4);
 
+	InitBufferData();
 }
 
 void LoaderParams::CreatePyramid() {
@@ -124,16 +125,18 @@ void LoaderParams::CreatePyramid() {
 	p4.m_TexCoord = glm::vec2(0.0f, 0.0f);
 	p5.m_TexCoord = glm::vec2(1.0f, 0.0f);
 
-	PushVertexOrder(&p1, &p2, &p3);	//Front Face
+	PushVertexOrder(p1, p2, p3);	//Front Face
 
-	PushVertexOrder(&p1, &p3, &p4);	//Left Face
+	PushVertexOrder(p1, p3, p4);	//Left Face
 
-	PushVertexOrder(&p1, &p4, &p5);	//Back Face
+	PushVertexOrder(p1, p4, p5);	//Back Face
 
-	PushVertexOrder(&p1, &p5, &p2);	//Right Face
+	PushVertexOrder(p1, p5, p2);	//Right Face
 
-	PushVertexOrder(&p3, &p2, &p4);	//Top Face
-	PushVertexOrder(&p5, &p4, &p2);
+	PushVertexOrder(p3, p2, p4);	//Top Face
+	PushVertexOrder(p5, p4, p2);
+
+	InitBufferData();
 }
 
 void LoaderParams::CreatePlane() {
@@ -164,8 +167,10 @@ void LoaderParams::CreatePlane() {
 	p3.m_TexCoord = glm::vec2(0.0f, 0.0f);
 	p4.m_TexCoord = glm::vec2(1.0f, 0.0f);
 	
-	PushVertexOrder(&p1, &p2, &p3);	//Front Face
-	PushVertexOrder(&p4, &p3, &p2);	
+	PushVertexOrder(p1, p2, p3);	//Front Face
+	PushVertexOrder(p4, p3, p2);	
+
+	InitBufferData();
 }
 
 void LoaderParams::CreateSphere(glm::vec2 Segments) {
@@ -270,30 +275,39 @@ void LoaderParams::CreateSphere(glm::vec2 Segments) {
 	isSphere = true;
 }
 
-void LoaderParams::PushVertexOrder(VertexData* V1, VertexData* V2, VertexData* V3) {
+void LoaderParams::PushVertexOrder(VertexData V1, VertexData V2, VertexData V3) {
 	m_InterLeavedVertices.push_back(V1);
 	m_InterLeavedVertices.push_back(V2);
 	m_InterLeavedVertices.push_back(V3);
 }
 
-void LoaderParams::Draw(unsigned int texture =0) {
+void LoaderParams::Draw(unsigned int texture) {
 	glBindVertexArray(m_VAO);
 	if (texture != 0) {
 		glBindTexture(GL_TEXTURE_2D, texture);
 	}
 	glDrawArrays(DrawMode, 0, m_InterLeavedVertices.size());
+	glBindVertexArray(0);
 }
 
 void LoaderParams::InitBufferData() {
 	glGenVertexArrays(1, &m_VAO);
 	glGenBuffers(1, &m_VBO);
+
 	glBindVertexArray(m_VAO);
+
 	glBindBuffer(GL_ARRAY_BUFFER, m_VBO);
-	glBufferData(GL_ARRAY_BUFFER, m_InterLeavedVertices.size() * sizeof(VertexData), m_InterLeavedVertices.data(), GL_STATIC_DRAW);
-	glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, sizeof(VertexData), (void*)0);
+	glBufferData(GL_ARRAY_BUFFER, m_InterLeavedVertices.size() * sizeof(VertexData), &m_InterLeavedVertices[0], GL_STATIC_DRAW);
+
+	
 	glEnableVertexAttribArray(0);
-	glVertexAttribPointer(1, 3, GL_FLOAT, GL_FALSE, sizeof(VertexData), (void*)(3*sizeof(float)));
+	glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, sizeof(VertexData), (void*)0);
+	
 	glEnableVertexAttribArray(1);
-	glVertexAttribPointer(2, 2, GL_FLOAT, GL_FALSE, sizeof(VertexData), (void*)(6*sizeof(float)));
+	glVertexAttribPointer(1, 3, GL_FLOAT, GL_FALSE, sizeof(VertexData), (void*)offsetof(VertexData, m_Norm));
+	
 	glEnableVertexAttribArray(2);
+	glVertexAttribPointer(2, 2, GL_FLOAT, GL_FALSE, sizeof(VertexData), (void*)offsetof(VertexData, m_TexCoord));
+	
+	glBindVertexArray(0);
 }

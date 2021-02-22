@@ -67,16 +67,7 @@
     <ClInclude Include="src\CodeMeat_Core\Graphics\Camera\Camera.h">
       <Filter>CodeMeat_Core\Graphics\Camera</Filter>
     </ClInclude>
-    <ClInclude Include="src\CodeMeat_Core\Graphics\FrameBuffers\Bloom.h">
-      <Filter>CodeMeat_Core\Graphics\FrameBuffers</Filter>
-    </ClInclude>
-    <ClInclude Include="src\CodeMeat_Core\Graphics\FrameBuffers\BloomBuffer.h">
-      <Filter>CodeMeat_Core\Graphics\FrameBuffers</Filter>
-    </ClInclude>
     <ClInclude Include="src\CodeMeat_Core\Graphics\FrameBuffers\Buffer.h">
-      <Filter>CodeMeat_Core\Graphics\FrameBuffers</Filter>
-    </ClInclude>
-    <ClInclude Include="src\CodeMeat_Core\Graphics\FrameBuffers\FrameBuffer.h">
       <Filter>CodeMeat_Core\Graphics\FrameBuffers</Filter>
     </ClInclude>
     <ClInclude Include="src\CodeMeat_Core\Graphics\Ligths\Light.h">
@@ -132,16 +123,7 @@
     <ClCompile Include="src\CodeMeat_Core\Graphics\Camera\Camera.cpp">
       <Filter>CodeMeat_Core\Graphics\Camera</Filter>
     </ClCompile>
-    <ClCompile Include="src\CodeMeat_Core\Graphics\FrameBuffers\Bloom.cpp">
-      <Filter>CodeMeat_Core\Graphics\FrameBuffers</Filter>
-    </ClCompile>
-    <ClCompile Include="src\CodeMeat_Core\Graphics\FrameBuffers\BloomBuffer.cpp">
-      <Filter>CodeMeat_Core\Graphics\FrameBuffers</Filter>
-    </ClCompile>
     <ClCompile Include="src\CodeMeat_Core\Graphics\FrameBuffers\Buffer.cpp">
-      <Filter>CodeMeat_Core\Graphics\FrameBuffers</Filter>
-    </ClCompile>
-    <ClCompile Include="src\CodeMeat_Core\Graphics\FrameBuffers\FrameBuffer.cpp">
       <Filter>CodeMeat_Core\Graphics\FrameBuffers</Filter>
     </ClCompile>
     <ClCompile Include="src\CodeMeat_Core\Graphics\Ligths\Light.cpp">
@@ -189,16 +171,10 @@
     <Text Include="src\CodeMeat_Core\Graphics\Shaders\ShaderPool\FS-LightingShader.txt">
       <Filter>CodeMeat_Core\Graphics\Shaders\ShaderPool</Filter>
     </Text>
-    <Text Include="src\CodeMeat_Core\Graphics\Shaders\ShaderPool\FS-Model.txt">
-      <Filter>CodeMeat_Core\Graphics\Shaders\ShaderPool</Filter>
-    </Text>
     <Text Include="src\CodeMeat_Core\Graphics\Shaders\ShaderPool\VS-Default.txt">
       <Filter>CodeMeat_Core\Graphics\Shaders\ShaderPool</Filter>
     </Text>
     <Text Include="src\CodeMeat_Core\Graphics\Shaders\ShaderPool\VS-LightingShader.txt">
-      <Filter>CodeMeat_Core\Graphics\Shaders\ShaderPool</Filter>
-    </Text>
-    <Text Include="src\CodeMeat_Core\Graphics\Shaders\ShaderPool\VS-Model.txt">
       <Filter>CodeMeat_Core\Graphics\Shaders\ShaderPool</Filter>
     </Text>
   </ItemGroup>

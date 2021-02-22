@@ -3,6 +3,7 @@
 
 #include "CodeMeat_Core/Deps/Math.h"
 #include "CodeMeat_Core/Deps/Output.h"
+#include "CodeMeat.h"
 
 class Shader
 {
@@ -28,7 +29,7 @@ public:
 	void SetMat3(const std::string& name, const glm::mat3& mat) const;
 	void SetMat4(const std::string& name, const glm::mat4& mat) const;
 	
-	void SetModel(const glm::mat4& model) { m_Model = model; }
+	void SetModel(glm::mat4& model) { m_Model = model; }
 	glm::mat4 GetModel() { return m_Model; }
 private:
 

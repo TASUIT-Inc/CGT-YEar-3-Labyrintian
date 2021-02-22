@@ -35,11 +35,11 @@ public:
 	}
 
 	// draws the model, and thus all its meshes
-	void Draw(Shader *shader)
+	void Draw(Shader shader)
 	{
 		for (unsigned int i = 0; i < meshes.size(); i++)
 		{
-			shader->SetMat4("model", shader->GetModel() * aiMatrix4x4ToGlm(&transforms[i])); //Changes the model matrix for the whole model to account for each single mesh transform matrix
+			shader.SetMat4("Model", shader.GetModel() * aiMatrix4x4ToGlm(&transforms[i])); //Changes the model matrix for the whole model to account for each single mesh transform matrix
 			meshes[i].Draw(shader);
 		}
 	}
@@ -99,9 +99,11 @@ private:
 	// loads a model with supported ASSIMP extensions from file and stores the resulting meshes in the meshes vector.
 	void loadModel(string const &path)
 	{
+		std::string FilePath = MODEL_POOL_PATH + (std::string)path;
+
 		// read file via ASSIMP
 		Assimp::Importer importer;
-		const aiScene* scene = importer.ReadFile(path, aiProcess_Triangulate | aiProcess_CalcTangentSpace | aiProcess_GenSmoothNormals | aiProcess_JoinIdenticalVertices | aiProcess_FlipUVs);
+		const aiScene* scene = importer.ReadFile(FilePath.c_str(), aiProcess_Triangulate | aiProcess_CalcTangentSpace | aiProcess_GenSmoothNormals | aiProcess_JoinIdenticalVertices | aiProcess_FlipUVs);
 		// check for errors
 		if (!scene || scene->mFlags & AI_SCENE_FLAGS_INCOMPLETE || !scene->mRootNode) // if is Not Zero
 		{

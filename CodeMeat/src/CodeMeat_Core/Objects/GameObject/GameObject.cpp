@@ -1,15 +1,26 @@
 
 #include "GameObject.h"
-#include "CodeMeat_Core/Graphics/Renderer.h"
 
-GameObject::GameObject(glm::vec3 pos, glm::vec3 extents, glm::vec3 rotation) : Object(), m_Pos(pos), m_Extents(extents), m_Rotation(rotation), m_Params(&LoaderParams(PCUBE)), m_Texture(loadTexture("Dev.png")), isModel(false) {}
 
-void GameObject::Draw() {
+GameObject::GameObject(glm::vec3 pos, glm::vec3 extents, glm::vec3 rotation) : Object(), m_Pos(pos), m_Extents(extents), m_Rotation(rotation), m_Params(&LoaderParams(PCUBE)), m_Texture(loadTexture("Dev.png")),m_ModelMatrix(glm::mat4(1.0f)) ,isModel(false) {}
+
+void GameObject::Draw(Shader shader) {
+	
+	m_ModelMatrix = glm::mat4(1.0f);
+	m_ModelMatrix = glm::translate(m_ModelMatrix, m_Pos);
+	m_ModelMatrix = glm::scale(m_ModelMatrix, m_Extents);
+	//m_ModelMatrix = glm::rotate(m_ModelMatrix, m_Rotation.x, glm::vec3(1, 0, 0));
+	//m_ModelMatrix = glm::rotate(m_ModelMatrix, m_Rotation.y, glm::vec3(0, 1, 0));
+	//m_ModelMatrix = glm::rotate(m_ModelMatrix, m_Rotation.z, glm::vec3(0, 0, 1));
+	shader.Use();
+	shader.SetModel(m_ModelMatrix);
+	shader.SetMat4("Model", m_ModelMatrix);
+
 	if (isModel) {
-		m_Model->Draw(m_Shader);
+		m_Model->Draw(shader);
 	}
 	else {
-		m_Params->Draw();
+		m_Params->Draw(m_Texture);
 	}
 }
 
@@ -21,10 +32,9 @@ unsigned int GameObject::loadTexture(char const* path)
 
 	std::string FilePath = TEXTURE_POOL_PATH + (std::string)path;
 
-	const char* TotalPath = FilePath.c_str();
 
 	int width, height, nrComponents;
-	unsigned char* data = stbi_load(TotalPath, &width, &height, &nrComponents, 0);
+	unsigned char* data = stbi_load(FilePath.c_str(), &width, &height, &nrComponents, 0);
 	if (data)
 	{
 		GLenum format;
