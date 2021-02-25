@@ -22,7 +22,7 @@ bool Engine::init() {
 	Model* shotgun=new Model("E1M1/Shotgun.obj");
 
 	GameObject* m_Cube =new GameObject(glm::vec3(5.0f, 0.5f, 0.0f), glm::vec3(1.0f), glm::vec3(0.0f));
-	m_Cube->AttachModel(shotgun);
+	//m_Cube->AttachModel(shotgun);
 	/*GameObject* m_Pyramid =new GameObject(glm::vec3(-5.0f, 0.0f, 0.0f), glm::vec3(1.0f), glm::vec3(0.0f));
 	m_Pyramid->AttachLoaderParams(new LoaderParams(PPYRAMID));
 	GameObject* m_Plane =new GameObject(glm::vec3(0.0f), glm::vec3(1.0f), glm::vec3(0.0f));
