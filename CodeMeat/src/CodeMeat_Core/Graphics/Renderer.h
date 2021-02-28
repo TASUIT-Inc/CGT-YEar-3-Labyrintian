@@ -17,14 +17,12 @@ class Renderer
 {
 public:
 	bool Init();
-	bool Render();
-	void GenBuffer();
+	void Draw();
 
-	void Begin();
 	void Submit(GameObject* Object);
 	void Submit(Light* light);
-	void End();
-	void Flush();
+
+	void processInput(float DT);
 	
 	static Renderer* Instance() {
 
@@ -36,18 +34,10 @@ public:
 	}
 
 	Camera* GetCamera() { return &m_Camera; }
-	void AddShader(const char* Identifier, const char* VertexPath, const char* FragmentPath, const char* GeometryPath = nullptr);
-	Shader* GetShader(const char* Tag) { return &m_Shaders[Tag]; }
-
-
+	GLFWwindow* GetWindow() { return m_Window; }
 private:
 	GLFWwindow* m_Window;
-	Camera m_Camera;
-	VertexData* m_Buffer;
-
-	glm::mat4 m_Projection, m_View;
-
-	std::map<const char*, Shader > m_Shaders;
+	Camera m_Camera = Camera(glm::vec3(0.0f, 2.0f, 0.0f));
 
 	std::vector<GameObject*> m_Objects;
 	std::vector<Light*> m_Lights;
@@ -56,8 +46,6 @@ private:
 
 	bool firstMouse;
 	double lastX, lastY;
-
-	unsigned int m_VAO, m_VBO;
 	
 	static Renderer* m_Instance;
 
@@ -67,7 +55,6 @@ private:
 	static void mouse_callback(GLFWwindow* window, double xpos, double ypos);
 
 	virtual ~Renderer() {}
-
 };
 typedef Renderer REngine;
 #endif //!__Renderer__

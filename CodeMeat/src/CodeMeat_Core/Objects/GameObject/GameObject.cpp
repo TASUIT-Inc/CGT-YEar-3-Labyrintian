@@ -2,9 +2,9 @@
 #include "GameObject.h"
 
 
-GameObject::GameObject(glm::vec3 pos, glm::vec3 extents, glm::vec3 rotation) : Object(), m_Pos(pos), m_Extents(extents), m_Rotation(rotation), m_Params(&LoaderParams(PCUBE)), m_Texture(loadTexture("Dev.png")),m_ModelMatrix(glm::mat4(1.0f)) ,isModel(false) {}
+GameObject::GameObject(glm::vec3 pos, glm::vec3 extents, glm::vec3 rotation) : Object(), m_Pos(pos), m_Extents(extents), m_Rotation(rotation), m_Params(new LoaderParams(PCUBE)), m_Texture(loadTexture("Dev.png")),m_ModelMatrix(glm::mat4(1.0f)) ,isModel(false) {}
 
-void GameObject::Draw(Shader shader) {
+void GameObject::Draw(Shader *shader) {
 	
 	m_ModelMatrix = glm::mat4(1.0f);
 	m_ModelMatrix = glm::translate(m_ModelMatrix, m_Pos);
@@ -12,15 +12,34 @@ void GameObject::Draw(Shader shader) {
 	//m_ModelMatrix = glm::rotate(m_ModelMatrix, m_Rotation.x, glm::vec3(1, 0, 0));
 	//m_ModelMatrix = glm::rotate(m_ModelMatrix, m_Rotation.y, glm::vec3(0, 1, 0));
 	//m_ModelMatrix = glm::rotate(m_ModelMatrix, m_Rotation.z, glm::vec3(0, 0, 1));
-	shader.Use();
-	shader.SetModel(m_ModelMatrix);
-	shader.SetMat4("Model", m_ModelMatrix);
+	shader->Use();
+	shader->SetModel(m_ModelMatrix);
+	shader->SetMat4("Model", m_ModelMatrix);
 
 	if (isModel) {
 		m_Model->Draw(shader);
 	}
 	else {
 		m_Params->Draw(m_Texture);
+	}
+
+	for (Instance I : m_Instances) {
+		m_ModelMatrix = glm::mat4(1.0f);
+		m_ModelMatrix = glm::translate(m_ModelMatrix, I.m_Pos);
+		m_ModelMatrix = glm::scale(m_ModelMatrix, I.m_Extents);
+		//m_ModelMatrix = glm::rotate(m_ModelMatrix, m_Rotation.x, glm::vec3(1, 0, 0));
+		//m_ModelMatrix = glm::rotate(m_ModelMatrix, m_Rotation.y, glm::vec3(0, 1, 0));
+		//m_ModelMatrix = glm::rotate(m_ModelMatrix, m_Rotation.z, glm::vec3(0, 0, 1));
+		shader->Use();
+		shader->SetModel(m_ModelMatrix);
+		shader->SetMat4("Model", m_ModelMatrix);
+
+		if (isModel) {
+			m_Model->Draw(shader);
+		}
+		else {
+			m_Params->Draw(m_Texture);
+		}
 	}
 }
 

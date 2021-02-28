@@ -115,6 +115,9 @@
     <ClInclude Include="src\CodeMeat_Core\Deps\Commons.h">
       <Filter>CodeMeat_Core\Deps</Filter>
     </ClInclude>
+    <ClInclude Include="src\CodeMeat_Core\Physics\Input.h">
+      <Filter>CodeMeat_Core\Physics</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\CodeMeat_Core\Deps\stb_image.cpp">

@@ -39,7 +39,7 @@ public:
 	}
 
 	void PushVertexOrder(VertexData V1, VertexData V2, VertexData V3);
-	void Draw(unsigned int texture =0);
+	void Draw(unsigned int texture);
 	void InitBufferData();
 
 	virtual ~LoaderParams() {}

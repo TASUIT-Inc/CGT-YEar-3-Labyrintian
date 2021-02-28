@@ -281,13 +281,13 @@ void LoaderParams::PushVertexOrder(VertexData V1, VertexData V2, VertexData V3) 
 	m_InterLeavedVertices.push_back(V3);
 }
 
-void LoaderParams::Draw(unsigned int texture) {
+void LoaderParams::Draw(unsigned int texture =0) {
 	glBindVertexArray(m_VAO);
+	glActiveTexture(GL_TEXTURE0);
 	if (texture != 0) {
 		glBindTexture(GL_TEXTURE_2D, texture);
 	}
-	glDrawArrays(DrawMode, 0, m_InterLeavedVertices.size());
-	glBindVertexArray(0);
+	glDrawArrays(GL_TRIANGLES, 0, m_InterLeavedVertices.size());
 }
 
 void LoaderParams::InitBufferData() {
@@ -297,17 +297,14 @@ void LoaderParams::InitBufferData() {
 	glBindVertexArray(m_VAO);
 
 	glBindBuffer(GL_ARRAY_BUFFER, m_VBO);
-	glBufferData(GL_ARRAY_BUFFER, m_InterLeavedVertices.size() * sizeof(VertexData), &m_InterLeavedVertices[0], GL_STATIC_DRAW);
+	glBufferData(GL_ARRAY_BUFFER, m_InterLeavedVertices.size() * sizeof(VertexData), m_InterLeavedVertices.data(), GL_STATIC_DRAW);
 
-	
-	glEnableVertexAttribArray(0);
 	glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, sizeof(VertexData), (void*)0);
+	glEnableVertexAttribArray(0);
 	
-	glEnableVertexAttribArray(1);
 	glVertexAttribPointer(1, 3, GL_FLOAT, GL_FALSE, sizeof(VertexData), (void*)offsetof(VertexData, m_Norm));
+	glEnableVertexAttribArray(1);
 	
-	glEnableVertexAttribArray(2);
 	glVertexAttribPointer(2, 2, GL_FLOAT, GL_FALSE, sizeof(VertexData), (void*)offsetof(VertexData, m_TexCoord));
-	
-	glBindVertexArray(0);
+	glEnableVertexAttribArray(2);
 }

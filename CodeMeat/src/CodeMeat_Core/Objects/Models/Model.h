@@ -35,11 +35,11 @@ public:
 	}
 
 	// draws the model, and thus all its meshes
-	void Draw(Shader shader)
+	void Draw(Shader *shader)
 	{
 		for (unsigned int i = 0; i < meshes.size(); i++)
 		{
-			shader.SetMat4("Model", shader.GetModel() * aiMatrix4x4ToGlm(&transforms[i])); //Changes the model matrix for the whole model to account for each single mesh transform matrix
+			shader->SetMat4("Model", shader->GetModel() * aiMatrix4x4ToGlm(&transforms[i])); //Changes the model matrix for the whole model to account for each single mesh transform matrix
 			meshes[i].Draw(shader);
 		}
 	}
@@ -48,7 +48,8 @@ private:
 	unsigned int TextureFromFile(const char* path, const string& directory, bool gamma = false)
 	{
 		string filename = string(path);
-		filename = directory + '/' + filename;
+		filename = MODEL_POOL_PATH + directory + '/' + filename;
+		
 
 		unsigned int textureID;
 		glGenTextures(1, &textureID);

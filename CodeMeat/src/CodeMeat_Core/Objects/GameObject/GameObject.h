@@ -9,13 +9,20 @@
 class Object;
 class Model;
 class Shader;
+class GameObject;
+
+struct Instance {
+	Instance(GameObject* ref, glm::vec3 pos, glm::vec3 rot, glm::vec3 extents) : m_ObjRef(ref), m_Pos(pos), m_Extents(extents), m_Rotation(rot){}
+	GameObject* m_ObjRef;
+	glm::vec3 m_Pos, m_Extents, m_Rotation;
+};
 
 class GameObject : public Object
 {
 public:
 	GameObject(glm::vec3 pos, glm::vec3 extents, glm::vec3 rotation);
 
-	void Draw(Shader shader);
+	void Draw(Shader *shader);
 	void Update() {}
 
 	void SetPos(glm::vec3 NewPos) { m_Pos = NewPos; }
@@ -32,6 +39,8 @@ public:
 	void AttachTexture(const char* TexturePath) { m_Texture = loadTexture(TexturePath); }
 	void AttachShader(Shader* shader) { m_Shader = shader; }
 
+	void AddInstance(glm::vec3 pos, glm::vec3 extents, glm::vec3 rotation) { m_Instances.push_back(Instance(this, pos, rotation, extents)); }
+
 
 	glm::vec3 GetPos() { return m_Pos; }
 	glm::vec3 GetExtents() { return m_Extents; }
@@ -46,6 +55,7 @@ private:
 
 	glm::vec3 m_Pos, m_Extents, m_Rotation;
 	glm::mat4 m_ModelMatrix;
+	std::vector<Instance> m_Instances;
 	
 	unsigned int m_Texture;
 

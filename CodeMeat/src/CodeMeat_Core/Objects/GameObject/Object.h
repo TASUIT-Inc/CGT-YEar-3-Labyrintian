@@ -6,7 +6,7 @@ class Shader;
 class Object {
 private:
 
-	virtual void Draw(Shader shader) = 0;
+	virtual void Draw(Shader *shader) = 0;
 	virtual void Update() = 0;
 
 protected:

@@ -1,7 +1,7 @@
 #include "Renderer.h"
 
 bool Renderer::Init(){
-	m_Camera = Camera(glm::vec3(0.0f,0.0f,5.0f));
+	
 	glfwInit();
 	glfwWindowHint(GLFW_CONTEXT_VERSION_MAJOR, 3);
 	glfwWindowHint(GLFW_CONTEXT_VERSION_MINOR, 3);
@@ -37,12 +37,8 @@ bool Renderer::Init(){
 
 	glEnable(GL_DEPTH_TEST);
 
-	GenBuffer();
-	return 1;
-}
-
-void Renderer::GenBuffer() {
 	m_GBuffer = new GBuffer(&m_Camera);
+	return 1;
 }
 
 void Renderer::framebuffer_size_callback(GLFWwindow* window, int width, int height) {
@@ -67,22 +63,6 @@ void Renderer::mouse_callback(GLFWwindow* window, double xpos, double ypos)
 	Instance()->m_Camera.ProcessMouseMovement(xoffset, yoffset);
 }
 
-void Renderer::AddShader(const char* Identifier, const char* VertexPath, const char* FragmentPath, const char* GeometryPath) {
-	if (GeometryPath == nullptr) {
-		m_Shaders[Identifier] = Shader(VertexPath, FragmentPath);
-	}
-	else {
-		m_Shaders[Identifier] = Shader(VertexPath, FragmentPath, GeometryPath);
-	}
-}
-
-void Renderer::Begin() {
-	glClearColor(0.0f, 0.0f, 0.0f, 1.0f);
-	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
-	m_GBuffer->FirstPass(m_Objects);
-	m_GBuffer->SecondPass(m_Lights);
-}
-
 void Renderer::Submit(GameObject* Object) {
 	m_Objects.push_back(Object);
 }
@@ -91,13 +71,31 @@ void Renderer::Submit(Light* light) {
 	m_Lights.push_back(light);
 }
 
-void Renderer::Flush() {
+
+void Renderer::Draw() {
+	glClearColor(0.0f, 0.0f, 0.0f, 1.0f);
+	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+	m_GBuffer->FirstPass(&m_Objects);
+	m_GBuffer->SecondPass(&m_Lights);
+	m_GBuffer->RenderQuad();
 	m_GBuffer->Bind();
-
-}
-
-void Renderer::End() {
-	
 	glfwSwapBuffers(m_Window);
 	glfwPollEvents();
 }
+
+void Renderer::processInput(float DT)
+{
+	if (glfwGetKey(m_Window, GLFW_KEY_ESCAPE) == GLFW_PRESS)
+		glfwSetWindowShouldClose(m_Window, true);
+
+	if (glfwGetKey(m_Window, GLFW_KEY_W) == GLFW_PRESS)
+		m_Camera.ProcessKeyboard(FORWARD, DT);
+	if (glfwGetKey(m_Window, GLFW_KEY_S) == GLFW_PRESS)
+		m_Camera.ProcessKeyboard(BACKWARD, DT);
+	if (glfwGetKey(m_Window, GLFW_KEY_A) == GLFW_PRESS)
+		m_Camera.ProcessKeyboard(LEFT, DT);
+	if (glfwGetKey(m_Window, GLFW_KEY_D) == GLFW_PRESS)
+		m_Camera.ProcessKeyboard(RIGHT, DT);
+
+}
+

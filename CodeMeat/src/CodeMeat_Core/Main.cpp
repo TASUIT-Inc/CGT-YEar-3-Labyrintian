@@ -9,7 +9,6 @@ int main()
 		while (Engine::Instance()->GetState()) {
 			
 			Engine::Instance()->Update();
-			Engine::Instance()->Render();
 			Engine::Instance()->Draw();
 		}
 		//Engine::Clean();

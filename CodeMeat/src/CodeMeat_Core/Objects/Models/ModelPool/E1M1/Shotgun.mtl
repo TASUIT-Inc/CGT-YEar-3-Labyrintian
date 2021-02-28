@@ -12,6 +12,8 @@ newmtl GunBarrel
 	Kd 0.5880 0.5880 0.5880
 	Ks 0.0000 0.0000 0.0000
 	Ke 0.0000 0.0000 0.0000
+	map_Ka GunBarrel.png
+	map_Kd GunBarrel.png
 
 newmtl GunStock
 	Ns 10.0000
@@ -24,3 +26,5 @@ newmtl GunStock
 	Kd 0.5880 0.5880 0.5880
 	Ks 0.0000 0.0000 0.0000
 	Ke 0.0000 0.0000 0.0000
+	map_Ka Stock.png
+	map_Kd Stock.png

@@ -51,6 +51,7 @@ public:
 	glm::vec3 Up;
 	glm::vec3 Right;
 	glm::vec3 WorldUp;
+	float yConstraint;
 	// Euler Angles
 	float Yaw;
 	float Pitch;
@@ -66,6 +67,7 @@ public:
 		WorldUp = up;
 		Yaw = yaw;
 		Pitch = pitch;
+		yConstraint = position.y;
 		updateCameraVectors();
 	}
 	// Constructor with scalar values
@@ -101,7 +103,7 @@ public:
 		if (direction == DOWN)
 			Position -= Up * 0.5f * velocity;
 
-		Position.y = 1.0f;
+		Position.y = yConstraint;
 	}
 
 	// Processes input received from a mouse input system. Expects the offset value in both the x and y direction.
