@@ -8,7 +8,7 @@ Objectives:
 
 	Rendering:
 
-		Implement Defered Shading - 
+		Implement Defered Shading - Result Completed. Conclusion: Due to Errors with the lighting shader and models texture path directories this caused some strife but has now been fixed and implemented
 		Implement FrameBuffer Manager - 
 		
 
@@ -20,7 +20,7 @@ Objectives:
 
 	Engine:
 
-		Implement Instance Managing
+		Implement Instance Managing - Result: Semi-Completed. Conclusion: Objects can now be instanced through the use of the AddInstance method in the gameobject.h file
 		Implement External Instance Saving
 		Implement Random Map Generation
 
@@ -29,7 +29,7 @@ Objectives:
 		Implement Audio Manager class
 
 	Other:
-		Refactor Code From Master Branch to new refactor Branch
+		Refactor Code From Master Branch to new refactor Branch - Result: Completed. Conclusion: Code from the master branch is now cleaner and more effitient.
 		Implement Level Saving and Loading
 		Implement TextureManager class in the Textures Sub-Folder
 		Have Model.h aquire the functionality of LoaderParams so that both LoaderParams and Model are definable under the one type
