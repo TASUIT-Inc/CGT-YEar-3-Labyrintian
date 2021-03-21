@@ -31,6 +31,11 @@
     <ClInclude Include="src\CodeMeat_Core\Graphics\Ligths\Light.h" />
     <ClInclude Include="src\CodeMeat_Core\Graphics\Renderer.h" />
     <ClInclude Include="src\CodeMeat_Core\Graphics\Shaders\Shader.h" />
+    <ClInclude Include="src\CodeMeat_Core\Objects\Audio\AudioBuffer.h" />
+    <ClInclude Include="src\CodeMeat_Core\Objects\Audio\AudioDevice.h" />
+    <ClInclude Include="src\CodeMeat_Core\Objects\Audio\AudioManager.h" />
+    <ClInclude Include="src\CodeMeat_Core\Objects\Audio\AudioSource.h" />
+    <ClInclude Include="src\CodeMeat_Core\Objects\Audio\MusicBuffer.h" />
     <ClInclude Include="src\CodeMeat_Core\Objects\GameObject\GameObject.h" />
     <ClInclude Include="src\CodeMeat_Core\Objects\GameObject\Object.h" />
     <ClInclude Include="src\CodeMeat_Core\Objects\LoaderParams.h" />
@@ -51,6 +56,10 @@
     <ClCompile Include="src\CodeMeat_Core\Graphics\Renderer.cpp" />
     <ClCompile Include="src\CodeMeat_Core\Graphics\Shaders\Shader.cpp" />
     <ClCompile Include="src\CodeMeat_Core\Main.cpp" />
+    <ClCompile Include="src\CodeMeat_Core\Objects\Audio\AudioBuffer.cpp" />
+    <ClCompile Include="src\CodeMeat_Core\Objects\Audio\AudioDevice.cpp" />
+    <ClCompile Include="src\CodeMeat_Core\Objects\Audio\AudioSource.cpp" />
+    <ClCompile Include="src\CodeMeat_Core\Objects\Audio\MusicBuffer.cpp" />
     <ClCompile Include="src\CodeMeat_Core\Objects\GameObject\GameObject.cpp" />
     <ClCompile Include="src\CodeMeat_Core\Objects\LoaderParams.cpp" />
     <ClCompile Include="src\CodeMeat_Core\Objects\Models\Mesh.cpp" />
@@ -117,8 +126,8 @@
   </ImportGroup>
   <PropertyGroup Label="UserMacros" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
-    <IncludePath>$(SolutionDir)\Deps\glm;$(SolutionDir)\Deps\glfw-3.3.2\include;$(SolutionDir)\Deps\glad\include;$(SolutionDir)\Deps\Assimp\include;$(IncludePath)</IncludePath>
-    <LibraryPath>$(SolutionDir)\Deps\glfw-3.3.2\lib-vc2019;$(SolutionDir)\Deps\glad;$(SolutionDir)\Deps\Assimp\lib64;$(LibraryPath)</LibraryPath>
+    <IncludePath>$(SolutionDir)\Deps\openal-soft-master\include;$(SolutionDir)\Deps\glm;$(SolutionDir)\Deps\glfw-3.3.2\include;$(SolutionDir)\Deps\glad\include;$(SolutionDir)\Deps\Assimp\include;$(IncludePath)</IncludePath>
+    <LibraryPath>$(SolutionDir)\Deps\openal-soft-master\build\Debug;$(SolutionDir)\Deps\glfw-3.3.2\lib-vc2019;$(SolutionDir)\Deps\glad;$(SolutionDir)\Deps\Assimp\lib64;$(LibraryPath)</LibraryPath>
     <OutDir>..\Bin\Debug\</OutDir>
     <IntDir>..\Bin\Debug\Intermediates\</IntDir>
   </PropertyGroup>
@@ -149,7 +158,7 @@
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
-      <AdditionalDependencies>glfw3.lib;assimp.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>glfw3.lib;assimp.lib;OpenAL32.lib;%(AdditionalDependencies)</AdditionalDependencies>
       <AdditionalLibraryDirectories>$(SolutionDir)\Deps\Bullet\lib;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
       <GenerateDebugInformation>true</GenerateDebugInformation>
       <IgnoreAllDefaultLibraries>false</IgnoreAllDefaultLibraries>

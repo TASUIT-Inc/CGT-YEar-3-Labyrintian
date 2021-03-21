@@ -58,6 +58,9 @@
     <Filter Include="CodeMeat_Core\Objects\Levels\MapPool">
       <UniqueIdentifier>{1953ec81-1727-49ee-9d6f-9cd9c441bde3}</UniqueIdentifier>
     </Filter>
+    <Filter Include="CodeMeat_Core\Objects\Audio">
+      <UniqueIdentifier>{5102045f-c76f-42ff-b66f-416ae2f01bff}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="src\CodeMeat_Core\Deps\stb_image.h">
@@ -118,6 +121,21 @@
     <ClInclude Include="src\CodeMeat_Core\Physics\Input.h">
       <Filter>CodeMeat_Core\Physics</Filter>
     </ClInclude>
+    <ClInclude Include="src\CodeMeat_Core\Objects\Audio\AudioBuffer.h">
+      <Filter>CodeMeat_Core\Objects\Audio</Filter>
+    </ClInclude>
+    <ClInclude Include="src\CodeMeat_Core\Objects\Audio\AudioDevice.h">
+      <Filter>CodeMeat_Core\Objects\Audio</Filter>
+    </ClInclude>
+    <ClInclude Include="src\CodeMeat_Core\Objects\Audio\AudioManager.h">
+      <Filter>CodeMeat_Core\Objects\Audio</Filter>
+    </ClInclude>
+    <ClInclude Include="src\CodeMeat_Core\Objects\Audio\AudioSource.h">
+      <Filter>CodeMeat_Core\Objects\Audio</Filter>
+    </ClInclude>
+    <ClInclude Include="src\CodeMeat_Core\Objects\Audio\MusicBuffer.h">
+      <Filter>CodeMeat_Core\Objects\Audio</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\CodeMeat_Core\Deps\stb_image.cpp">
@@ -164,6 +182,18 @@
     </ClCompile>
     <ClCompile Include="src\CodeMeat_Core\Graphics\FrameBuffers\GBuffer.cpp">
       <Filter>CodeMeat_Core\Graphics\FrameBuffers</Filter>
+    </ClCompile>
+    <ClCompile Include="src\CodeMeat_Core\Objects\Audio\AudioBuffer.cpp">
+      <Filter>CodeMeat_Core\Objects\Audio</Filter>
+    </ClCompile>
+    <ClCompile Include="src\CodeMeat_Core\Objects\Audio\AudioDevice.cpp">
+      <Filter>CodeMeat_Core\Objects\Audio</Filter>
+    </ClCompile>
+    <ClCompile Include="src\CodeMeat_Core\Objects\Audio\AudioSource.cpp">
+      <Filter>CodeMeat_Core\Objects\Audio</Filter>
+    </ClCompile>
+    <ClCompile Include="src\CodeMeat_Core\Objects\Audio\MusicBuffer.cpp">
+      <Filter>CodeMeat_Core\Objects\Audio</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
