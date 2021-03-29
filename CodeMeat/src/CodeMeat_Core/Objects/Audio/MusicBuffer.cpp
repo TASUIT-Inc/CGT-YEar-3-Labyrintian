@@ -1,6 +1,6 @@
 #include "MusicBuffer.h"
 #include <iostream>
-#include <AL/alext.h>
+#include "al.h"
 
 void MusicBuffer::Play()
 {

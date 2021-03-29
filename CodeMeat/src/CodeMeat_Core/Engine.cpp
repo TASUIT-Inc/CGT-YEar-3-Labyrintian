@@ -21,7 +21,7 @@ bool Engine::init() {
 		std::cout << "Renderer Init Failed!" << std::endl;
 	}
 
-	ALCdevice* bob;
+	//ALCdevice* bob;
 
 	GameObject* l_Cube =new GameObject(glm::vec3(0.0f), glm::vec3(5.0f, 1.0f, 5.0f), glm::vec3(0.0f));
 

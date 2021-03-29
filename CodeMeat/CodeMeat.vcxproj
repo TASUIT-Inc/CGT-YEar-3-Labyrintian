@@ -31,6 +31,19 @@
     <ClInclude Include="src\CodeMeat_Core\Graphics\Ligths\Light.h" />
     <ClInclude Include="src\CodeMeat_Core\Graphics\Renderer.h" />
     <ClInclude Include="src\CodeMeat_Core\Graphics\Shaders\Shader.h" />
+    <ClInclude Include="src\CodeMeat_Core\Graphics\UI\imconfig.h" />
+    <ClInclude Include="src\CodeMeat_Core\Graphics\UI\imgui.h" />
+    <ClInclude Include="src\CodeMeat_Core\Graphics\UI\imgui_impl_glfw.h" />
+    <ClInclude Include="src\CodeMeat_Core\Graphics\UI\imgui_impl_opengl3.h" />
+    <ClInclude Include="src\CodeMeat_Core\Graphics\UI\imgui_internal.h" />
+    <ClInclude Include="src\CodeMeat_Core\Graphics\UI\imstb_rectpack.h" />
+    <ClInclude Include="src\CodeMeat_Core\Graphics\UI\imstb_textedit.h" />
+    <ClInclude Include="src\CodeMeat_Core\Graphics\UI\imstb_truetype.h" />
+    <ClInclude Include="src\CodeMeat_Core\Objects\Audio\AudioBuffer.h" />
+    <ClInclude Include="src\CodeMeat_Core\Objects\Audio\AudioDevice.h" />
+    <ClInclude Include="src\CodeMeat_Core\Objects\Audio\AudioManager.h" />
+    <ClInclude Include="src\CodeMeat_Core\Objects\Audio\AudioSource.h" />
+    <ClInclude Include="src\CodeMeat_Core\Objects\Audio\MusicBuffer.h" />
     <ClInclude Include="src\CodeMeat_Core\Objects\GameObject\GameObject.h" />
     <ClInclude Include="src\CodeMeat_Core\Objects\GameObject\Object.h" />
     <ClInclude Include="src\CodeMeat_Core\Objects\LoaderParams.h" />
@@ -50,7 +63,18 @@
     <ClCompile Include="src\CodeMeat_Core\Graphics\Ligths\Light.cpp" />
     <ClCompile Include="src\CodeMeat_Core\Graphics\Renderer.cpp" />
     <ClCompile Include="src\CodeMeat_Core\Graphics\Shaders\Shader.cpp" />
+    <ClCompile Include="src\CodeMeat_Core\Graphics\UI\imgui.cpp" />
+    <ClCompile Include="src\CodeMeat_Core\Graphics\UI\imgui_demo.cpp" />
+    <ClCompile Include="src\CodeMeat_Core\Graphics\UI\imgui_draw.cpp" />
+    <ClCompile Include="src\CodeMeat_Core\Graphics\UI\imgui_impl_glfw.cpp" />
+    <ClCompile Include="src\CodeMeat_Core\Graphics\UI\imgui_impl_opengl3.cpp" />
+    <ClCompile Include="src\CodeMeat_Core\Graphics\UI\imgui_tables.cpp" />
+    <ClCompile Include="src\CodeMeat_Core\Graphics\UI\imgui_widgets.cpp" />
     <ClCompile Include="src\CodeMeat_Core\Main.cpp" />
+    <ClCompile Include="src\CodeMeat_Core\Objects\Audio\AudioBuffer.cpp" />
+    <ClCompile Include="src\CodeMeat_Core\Objects\Audio\AudioDevice.cpp" />
+    <ClCompile Include="src\CodeMeat_Core\Objects\Audio\AudioSource.cpp" />
+    <ClCompile Include="src\CodeMeat_Core\Objects\Audio\MusicBuffer.cpp" />
     <ClCompile Include="src\CodeMeat_Core\Objects\GameObject\GameObject.cpp" />
     <ClCompile Include="src\CodeMeat_Core\Objects\LoaderParams.cpp" />
     <ClCompile Include="src\CodeMeat_Core\Objects\Models\Mesh.cpp" />
@@ -117,8 +141,8 @@
   </ImportGroup>
   <PropertyGroup Label="UserMacros" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
-    <IncludePath>$(SolutionDir)\Deps\openal-soft-master\include;$(SolutionDir)\Deps\glm;$(SolutionDir)\Deps\glfw-3.3.2\include;$(SolutionDir)\Deps\glad\include;$(SolutionDir)\Deps\Assimp\include;$(IncludePath)</IncludePath>
-    <LibraryPath>$(SolutionDir)\Deps\openal-soft-master\build\Debug;$(SolutionDir)\Deps\glfw-3.3.2\lib-vc2019;$(SolutionDir)\Deps\glad;$(SolutionDir)\Deps\Assimp\lib64;$(LibraryPath)</LibraryPath>
+    <IncludePath>$(SolutionDir)\Deps\OpenALExtension\include;$(SolutionDir)\Deps\glm;$(SolutionDir)\Deps\glfw-3.3.2\include;$(SolutionDir)\Deps\glad\include;$(SolutionDir)\Deps\Assimp\include;$(IncludePath)</IncludePath>
+    <LibraryPath>$(SolutionDir)\Deps\OpenALExtension\lib;$(SolutionDir)\Deps\glfw-3.3.2\lib-vc2019;$(SolutionDir)\Deps\glad;$(SolutionDir)\Deps\Assimp\lib64;$(LibraryPath)</LibraryPath>
     <OutDir>..\Bin\Debug\</OutDir>
     <IntDir>..\Bin\Debug\Intermediates\</IntDir>
   </PropertyGroup>
@@ -146,13 +170,13 @@
       <SDLCheck>true</SDLCheck>
       <ConformanceMode>true</ConformanceMode>
       <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
-      <AdditionalIncludeDirectories>$(SolutionDir)\Deps\Bullet\src;src;$(SolutionDir)\Deps\OpenAl\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(SolutionDir)\Deps\OpenALExtension\include;$(SolutionDir)\Deps\Bullet\src;src;$(SolutionDir)\Deps\OpenAl\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <PreprocessorDefinitions>%(PreprocessorDefinitions)</PreprocessorDefinitions>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
-      <AdditionalDependencies>glfw3.lib;assimp.lib;OpenAL32.lib;%(AdditionalDependencies)</AdditionalDependencies>
-      <AdditionalLibraryDirectories>$(SolutionDir)\Deps\Bullet\lib;%(AdditionalLibraryDirectories);$(SolutionDir)\Deps\OpenAl\libs\Win64</AdditionalLibraryDirectories>
+      <AdditionalDependencies>glfw3.lib;assimp.lib;OpenAL32.lib;sndfile.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalLibraryDirectories>$(SolutionDir)\Deps\OpenALExtension\lib;$(SolutionDir)\Deps\Bullet\lib;%(AdditionalLibraryDirectories);$(SolutionDir)\Deps\OpenAl\libs\Win64</AdditionalLibraryDirectories>
       <GenerateDebugInformation>true</GenerateDebugInformation>
       <IgnoreAllDefaultLibraries>false</IgnoreAllDefaultLibraries>
     </Link>

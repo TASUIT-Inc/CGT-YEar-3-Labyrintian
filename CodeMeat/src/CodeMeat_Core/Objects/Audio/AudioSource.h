@@ -1,5 +1,6 @@
 #pragma once
-#include <AL/al.h>
+#include <al.h>
+
 class AudioSource
 {
 public:

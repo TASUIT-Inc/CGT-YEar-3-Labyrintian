@@ -1,6 +1,7 @@
 #include "AudioBuffer.h"
 #include <inttypes.h>
-#include <AL/alext.h>
+#include "al.h"
+#include "alc.h"
 #include <sndfile.h>
 
 AudioBuffer* AudioBuffer::get()

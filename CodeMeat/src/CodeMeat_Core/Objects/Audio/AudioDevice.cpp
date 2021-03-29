@@ -1,5 +1,5 @@
 #include "AudioDevice.h"
-#include <AL/al.h>
+#include <al.h>
 #include <stdio.h>
 #include <vector>
 
