@@ -122,14 +122,16 @@
   </ImportGroup>
   <PropertyGroup Label="UserMacros" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
-    <IncludePath>$(SolutionDir)\Deps\glm;$(SolutionDir)\Deps\glfw-3.3.2\include;$(SolutionDir)\Deps\glad\include;$(SolutionDir)\Deps\Assimp\include;$(IncludePath)</IncludePath>
-    <LibraryPath>$(SolutionDir)\Deps\glfw-3.3.2\lib-vc2019;$(SolutionDir)\Deps\glad;$(SolutionDir)\Deps\Assimp\lib64;$(LibraryPath)</LibraryPath>
+    <IncludePath>$(SolutionDir)\Deps\openal-soft-master\include;$(SolutionDir)\Deps\glm;$(SolutionDir)\Deps\glfw-3.3.2\include;$(SolutionDir)\Deps\glad\include;$(SolutionDir)\Deps\Assimp\include;$(IncludePath)</IncludePath>
+    <LibraryPath>$(SolutionDir)\Deps\openal-soft-master\build\Debug;$(SolutionDir)\Deps\glfw-3.3.2\lib-vc2019;$(SolutionDir)\Deps\glad;$(SolutionDir)\Deps\Assimp\lib64;$(LibraryPath)</LibraryPath>
     <OutDir>..\Bin\Debug\</OutDir>
     <IntDir>..\Bin\Debug\Intermediates\</IntDir>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
     <OutDir>..\Bin\Debug\</OutDir>
     <IntDir>..\Bin\Debug\Intermediates\</IntDir>
+    <IncludePath>$(VC_IncludePath);$(WindowsSDK_IncludePath);;$(SolutionDir)\Deps\OpenAl\include</IncludePath>
+    <LibraryPath>$(VC_LibraryPath_x64);$(WindowsSDK_LibraryPath_x64);$(SolutionDir)\Deps\OpenAl\libs\Win64</LibraryPath>
   </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <ClCompile>
@@ -149,13 +151,13 @@
       <SDLCheck>true</SDLCheck>
       <ConformanceMode>true</ConformanceMode>
       <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
-      <AdditionalIncludeDirectories>$(SolutionDir)\Deps\Bullet\src;src;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(SolutionDir)\Deps\Bullet\src;src;$(SolutionDir)\Deps\OpenAl\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <PreprocessorDefinitions>%(PreprocessorDefinitions)</PreprocessorDefinitions>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
-      <AdditionalDependencies>glfw3.lib;assimp.lib;%(AdditionalDependencies)</AdditionalDependencies>
-      <AdditionalLibraryDirectories>$(SolutionDir)\Deps\Bullet\lib;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalDependencies>glfw3.lib;assimp.lib;OpenAL32.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalLibraryDirectories>$(SolutionDir)\Deps\Bullet\lib;%(AdditionalLibraryDirectories);$(SolutionDir)\Deps\OpenAl\libs\Win64</AdditionalLibraryDirectories>
       <GenerateDebugInformation>true</GenerateDebugInformation>
       <IgnoreAllDefaultLibraries>false</IgnoreAllDefaultLibraries>
     </Link>
@@ -183,17 +185,17 @@
       <IntrinsicFunctions>true</IntrinsicFunctions>
       <SDLCheck>true</SDLCheck>
       <ConformanceMode>true</ConformanceMode>
-      <AdditionalIncludeDirectories>$(SolutionDir)\Deps\Bullet\src;src;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(SolutionDir)\Deps\Bullet\src;src;$(SolutionDir)\Deps\OpenAl\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <PreprocessorDefinitions>%(PreprocessorDefinitions)</PreprocessorDefinitions>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
       <EnableCOMDATFolding>true</EnableCOMDATFolding>
       <OptimizeReferences>true</OptimizeReferences>
-      <AdditionalLibraryDirectories>$(SolutionDir)\Deps\Bullet\lib;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalLibraryDirectories>$(SolutionDir)\Deps\Bullet\lib;$SolutionDir)\Deps\OpenAl\libs\Win64;%(AdditionalLibraryDirectories);$(SolutionDir)\Deps\OpenAl\libs\Win64</AdditionalLibraryDirectories>
       <GenerateDebugInformation>true</GenerateDebugInformation>
       <IgnoreAllDefaultLibraries>false</IgnoreAllDefaultLibraries>
-      <AdditionalDependencies>glfw3.lib;assimp.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>glfw3.lib;assimp.lib;OpenAL32.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
   </ItemDefinitionGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
