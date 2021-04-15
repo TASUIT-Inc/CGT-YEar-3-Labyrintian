@@ -26,5 +26,5 @@ newmtl GunStock
 	Kd 0.5880 0.5880 0.5880
 	Ks 0.0000 0.0000 0.0000
 	Ke 0.0000 0.0000 0.0000
-	map_Ka Stock.png
-	map_Kd Stock.png
+	map_Ka Stock.PNG
+	map_Kd Stock.PNG

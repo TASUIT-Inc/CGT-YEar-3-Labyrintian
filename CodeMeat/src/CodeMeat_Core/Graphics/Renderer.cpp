@@ -1,15 +1,18 @@
 #include "Renderer.h"
 
-bool Renderer::Init(){
-	
+
+
+bool Renderer::Init() {
+
 	glfwInit();
 	glfwWindowHint(GLFW_CONTEXT_VERSION_MAJOR, 3);
 	glfwWindowHint(GLFW_CONTEXT_VERSION_MINOR, 3);
 	glfwWindowHint(GLFW_OPENGL_PROFILE, GLFW_OPENGL_CORE_PROFILE);
 
-#ifdef __APPLE__
+			
+	#ifdef __APPLE__
 	glfwWindowHint(GLFW_OPENGL_FORWARD_COMPAT, GL_TRUE);
-#endif
+	#endif
 
 	// glfw window creation
 	// --------------------
@@ -20,6 +23,8 @@ bool Renderer::Init(){
 		glfwTerminate();
 		return 0;
 	}
+			
+
 	glfwMakeContextCurrent(m_Window);
 	glfwSetFramebufferSizeCallback(m_Window, framebuffer_size_callback);
 	glfwSetCursorPosCallback(m_Window, mouse_callback);
@@ -73,7 +78,7 @@ void Renderer::Submit(Light* light) {
 
 
 void Renderer::Draw() {
-	glClearColor(0.0f, 0.0f, 0.0f, 1.0f);
+	glClearColor(1.0f, 1.0f, 1.0f, 1.0f);
 	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 	m_GBuffer->FirstPass(&m_Objects);
 	m_GBuffer->SecondPass(&m_Lights);
@@ -98,4 +103,3 @@ void Renderer::processInput(float DT)
 		m_Camera.ProcessKeyboard(RIGHT, DT);
 
 }
-

@@ -58,6 +58,9 @@
     <Filter Include="CodeMeat_Core\Objects\Levels\MapPool">
       <UniqueIdentifier>{1953ec81-1727-49ee-9d6f-9cd9c441bde3}</UniqueIdentifier>
     </Filter>
+    <Filter Include="CodeMeat_Core\Physics\Componenets">
+      <UniqueIdentifier>{13248193-47b4-4c75-a07b-1268e9676190}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="src\CodeMeat_Core\Deps\stb_image.h">
@@ -118,6 +121,15 @@
     <ClInclude Include="src\CodeMeat_Core\Physics\Input.h">
       <Filter>CodeMeat_Core\Physics</Filter>
     </ClInclude>
+    <ClInclude Include="src\CodeMeat_Core\Physics\Components\Collider.h">
+      <Filter>CodeMeat_Core\Physics\Componenets</Filter>
+    </ClInclude>
+    <ClInclude Include="src\CodeMeat_Core\Physics\Components\Component.h">
+      <Filter>CodeMeat_Core\Physics\Componenets</Filter>
+    </ClInclude>
+    <ClInclude Include="src\CodeMeat_Core\Physics\Components\Kinematic.h">
+      <Filter>CodeMeat_Core\Physics\Componenets</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\CodeMeat_Core\Deps\stb_image.cpp">
@@ -164,6 +176,12 @@
     </ClCompile>
     <ClCompile Include="src\CodeMeat_Core\Graphics\FrameBuffers\GBuffer.cpp">
       <Filter>CodeMeat_Core\Graphics\FrameBuffers</Filter>
+    </ClCompile>
+    <ClCompile Include="src\CodeMeat_Core\Physics\Components\Collider.cpp">
+      <Filter>CodeMeat_Core\Physics\Componenets</Filter>
+    </ClCompile>
+    <ClCompile Include="src\CodeMeat_Core\Physics\Components\Kinematic.cpp">
+      <Filter>CodeMeat_Core\Physics\Componenets</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
