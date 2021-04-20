@@ -19,6 +19,6 @@ public:
 
 	void Draw();
 private:
-	void(*uiElem)() = nullptr;
+	void(*UIelem)() = nullptr;
 	
 };
