@@ -39,6 +39,7 @@
     <ClInclude Include="src\CodeMeat_Core\Graphics\UI\imstb_rectpack.h" />
     <ClInclude Include="src\CodeMeat_Core\Graphics\UI\imstb_textedit.h" />
     <ClInclude Include="src\CodeMeat_Core\Graphics\UI\imstb_truetype.h" />
+    <ClInclude Include="src\CodeMeat_Core\Graphics\UI\UIHandler.h" />
     <ClInclude Include="src\CodeMeat_Core\Objects\Audio\AudioBuffer.h" />
     <ClInclude Include="src\CodeMeat_Core\Objects\Audio\AudioDevice.h" />
     <ClInclude Include="src\CodeMeat_Core\Objects\Audio\AudioManager.h" />
@@ -52,9 +53,13 @@
     <ClInclude Include="src\CodeMeat_Core\Objects\Player.h" />
     <ClInclude Include="src\CodeMeat_Core\Physics\Input.h" />
     <ClInclude Include="src\CodeMeat_Core\Physics\Physics.h" />
+    <ClInclude Include="UI.h" />
+    <ClInclude Include="UIContext.h" />
+    <ClInclude Include="UIElements.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\Deps\glad\src\glad.c" />
+    <ClCompile Include="Context.cpp" />
     <ClCompile Include="src\CodeMeat_Core\Deps\stb_image.cpp" />
     <ClCompile Include="src\CodeMeat_Core\Engine.cpp" />
     <ClCompile Include="src\CodeMeat_Core\Graphics\Camera\Camera.cpp" />
@@ -70,6 +75,7 @@
     <ClCompile Include="src\CodeMeat_Core\Graphics\UI\imgui_impl_opengl3.cpp" />
     <ClCompile Include="src\CodeMeat_Core\Graphics\UI\imgui_tables.cpp" />
     <ClCompile Include="src\CodeMeat_Core\Graphics\UI\imgui_widgets.cpp" />
+    <ClCompile Include="src\CodeMeat_Core\Graphics\UI\UIHandler.cpp" />
     <ClCompile Include="src\CodeMeat_Core\Main.cpp" />
     <ClCompile Include="src\CodeMeat_Core\Objects\Audio\AudioBuffer.cpp" />
     <ClCompile Include="src\CodeMeat_Core\Objects\Audio\AudioDevice.cpp" />
@@ -80,6 +86,8 @@
     <ClCompile Include="src\CodeMeat_Core\Objects\Models\Mesh.cpp" />
     <ClCompile Include="src\CodeMeat_Core\Objects\Player.cpp" />
     <ClCompile Include="src\CodeMeat_Core\Physics\Physics.cpp" />
+    <ClCompile Include="UIContext.cpp" />
+    <ClCompile Include="UIElements.cpp" />
   </ItemGroup>
   <ItemGroup>
     <Text Include="src\CodeMeat_Core\Graphics\Shaders\ShaderPool\FS-Default.txt" />

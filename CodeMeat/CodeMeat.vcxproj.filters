@@ -163,6 +163,18 @@
     <ClInclude Include="src\CodeMeat_Core\Graphics\UI\imstb_truetype.h">
       <Filter>CodeMeat_Core\Graphics\UI</Filter>
     </ClInclude>
+    <ClInclude Include="src\CodeMeat_Core\Graphics\UI\UIHandler.h">
+      <Filter>CodeMeat_Core\Graphics\UI</Filter>
+    </ClInclude>
+    <ClInclude Include="UI.h">
+      <Filter>CodeMeat_Core\Graphics\UI</Filter>
+    </ClInclude>
+    <ClInclude Include="UIElements.h">
+      <Filter>CodeMeat_Core\Graphics\UI</Filter>
+    </ClInclude>
+    <ClInclude Include="UIContext.h">
+      <Filter>CodeMeat_Core\Graphics\UI</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\CodeMeat_Core\Deps\stb_image.cpp">
@@ -179,9 +191,6 @@
     </ClCompile>
     <ClCompile Include="src\CodeMeat_Core\Graphics\Shaders\Shader.cpp">
       <Filter>CodeMeat_Core\Graphics\Shaders</Filter>
-    </ClCompile>
-    <ClCompile Include="src\CodeMeat_Core\Graphics\Renderer.cpp">
-      <Filter>CodeMeat_Core\Graphics</Filter>
     </ClCompile>
     <ClCompile Include="src\CodeMeat_Core\Physics\Physics.cpp">
       <Filter>CodeMeat_Core\Physics</Filter>
@@ -243,6 +252,15 @@
     <ClCompile Include="src\CodeMeat_Core\Graphics\UI\imgui_widgets.cpp">
       <Filter>CodeMeat_Core\Graphics\UI</Filter>
     </ClCompile>
+    <ClCompile Include="src\CodeMeat_Core\Graphics\UI\UIHandler.cpp">
+      <Filter>CodeMeat_Core\Graphics\UI</Filter>
+    </ClCompile>
+    <ClCompile Include="src\CodeMeat_Core\Graphics\Renderer.cpp">
+      <Filter>CodeMeat_Core\Graphics</Filter>
+    </ClCompile>
+    <ClCompile Include="Context.cpp" />
+    <ClCompile Include="UIElements.cpp" />
+    <ClCompile Include="UIContext.cpp" />
   </ItemGroup>
   <ItemGroup>
     <Text Include="TODO.txt" />

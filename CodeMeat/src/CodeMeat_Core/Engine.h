@@ -1,6 +1,8 @@
 #ifndef __Engine__
 #define __Engine__
 
+
+#include "CodeMeat_Core/Graphics/UI/UIHandler.h"
 #include "CodeMeat_Core/Deps/Math.h"
 #include "CodeMeat_Core/Deps/Output.h"
 #include "CodeMeat_Core/Graphics/Renderer.h"
@@ -10,6 +12,7 @@
 
 class Renderer;
 class Physics;
+class UIHandler;
 
 class Engine
 {

@@ -4,12 +4,24 @@
 
 Renderer* Renderer::m_Instance = 0;
 Physics* Physics::m_Instance = 0;
+UIHandler* UIHandler::m_Instance = 0;
+
+bool* isOpen = NULL;
 
 bool Engine::init() {
 	if (Renderer::Instance()->Init()) {
 		EngineState = true;
 		if (Physics::Instance()->Init()) {
 			EngineState = true;
+			/*if (UIHandler::Instance()->Init(Renderer::Instance()->GetWindow()))
+			{
+				EngineState = true;
+			}
+			else
+			{
+				EngineState = false;
+				std::cout << "UI Handler Init failed" << std::endl;
+			}*/
 		}
 		else {
 			EngineState = false;
@@ -23,7 +35,11 @@ bool Engine::init() {
 
 	//ALCdevice* bob;
 
+
+
 	GameObject* l_Cube =new GameObject(glm::vec3(0.0f), glm::vec3(5.0f, 1.0f, 5.0f), glm::vec3(0.0f));
+
+	//UIHandler::Instance()->createPauseMenu(Title, font1, isOpen);
 
 	//room instances
 		//room 1
@@ -33,6 +49,7 @@ bool Engine::init() {
 	l_Cube->AddInstance(glm::vec3(2.5f, 2.0f, -4.5f), glm::vec3(1.75f, 1.0f, 0.5f), glm::vec3(0.0f));
 	l_Cube->AddInstance(glm::vec3(-2.5f, 2.0f, -4.5f), glm::vec3(1.75f, 1.0f, 0.5f), glm::vec3(0.0f));
 	l_Cube->AddInstance(glm::vec3(0.0f, 2.75f, -4.5f), glm::vec3(0.75f, 0.25f, 0.5f), glm::vec3(0.0f));
+
 
 	REngine::Instance()->Submit(l_Cube);
 
@@ -50,8 +67,11 @@ void Engine::Update() {
 	REngine::Instance()->processInput(m_DT);
 }
 
+
 void Engine::Draw() {
+
 	REngine::Instance()->Draw();
+	
 }
 
 void Engine::Clean() {
