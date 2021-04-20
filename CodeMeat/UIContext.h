@@ -15,10 +15,10 @@ public:
 
 	bool init(GLFWwindow* window);
 	void begin();
-	void SetUIContext(std::function<void(UIElements*)> newfunction) { UIelem = newfunction; }
+	void SetUIContext(void(*Newfunction)()) { UIelem = newfunction; }
 
 	void Draw();
 private:
-	std::function<void(UIElements*)> UIelem = nullptr;
+	void(*uiElem)() = nullptr;
 	
 };
