@@ -27,7 +27,7 @@ void UIContext::begin()
 
 void UIContext::Draw()
 {
-	if (&UIelem != NULL)
+	if (UIelem != nullptr)
 	{
 		begin();
 		ImGui::Begin("Test", NULL);
