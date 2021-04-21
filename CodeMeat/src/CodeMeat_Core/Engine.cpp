@@ -4,24 +4,12 @@
 
 Renderer* Renderer::m_Instance = 0;
 Physics* Physics::m_Instance = 0;
-UIHandler* UIHandler::m_Instance = 0;
-
-bool* isOpen = NULL;
 
 bool Engine::init() {
 	if (Renderer::Instance()->Init()) {
 		EngineState = true;
 		if (Physics::Instance()->Init()) {
 			EngineState = true;
-			/*if (UIHandler::Instance()->Init(Renderer::Instance()->GetWindow()))
-			{
-				EngineState = true;
-			}
-			else
-			{
-				EngineState = false;
-				std::cout << "UI Handler Init failed" << std::endl;
-			}*/
 		}
 		else {
 			EngineState = false;
@@ -39,7 +27,6 @@ bool Engine::init() {
 
 	GameObject* l_Cube =new GameObject(glm::vec3(0.0f), glm::vec3(5.0f, 1.0f, 5.0f), glm::vec3(0.0f));
 
-	//UIHandler::Instance()->createPauseMenu(Title, font1, isOpen);
 
 	//room instances
 		//room 1

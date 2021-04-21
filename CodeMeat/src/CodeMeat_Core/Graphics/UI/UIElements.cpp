@@ -2,6 +2,7 @@
 
 void UIElements::PauseMenu()
 {
+	
 	ImGui::Text("This is normal text.");
 	if (ImGui::Button("Resume", ImVec2(120, 120)))
 	{
@@ -18,4 +19,5 @@ void UIElements::PauseMenu()
 		//Do nothing
 		std::cout << "Exit";
 	}
+	
 }

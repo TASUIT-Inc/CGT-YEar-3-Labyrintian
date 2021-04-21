@@ -163,16 +163,10 @@
     <ClInclude Include="src\CodeMeat_Core\Graphics\UI\imstb_truetype.h">
       <Filter>CodeMeat_Core\Graphics\UI</Filter>
     </ClInclude>
-    <ClInclude Include="src\CodeMeat_Core\Graphics\UI\UIHandler.h">
+    <ClInclude Include="src\CodeMeat_Core\Graphics\UI\UIContext.h">
       <Filter>CodeMeat_Core\Graphics\UI</Filter>
     </ClInclude>
-    <ClInclude Include="UI.h">
-      <Filter>CodeMeat_Core\Graphics\UI</Filter>
-    </ClInclude>
-    <ClInclude Include="UIElements.h">
-      <Filter>CodeMeat_Core\Graphics\UI</Filter>
-    </ClInclude>
-    <ClInclude Include="UIContext.h">
+    <ClInclude Include="src\CodeMeat_Core\Graphics\UI\UIElements.h">
       <Filter>CodeMeat_Core\Graphics\UI</Filter>
     </ClInclude>
   </ItemGroup>
@@ -252,15 +246,15 @@
     <ClCompile Include="src\CodeMeat_Core\Graphics\UI\imgui_widgets.cpp">
       <Filter>CodeMeat_Core\Graphics\UI</Filter>
     </ClCompile>
-    <ClCompile Include="src\CodeMeat_Core\Graphics\UI\UIHandler.cpp">
-      <Filter>CodeMeat_Core\Graphics\UI</Filter>
-    </ClCompile>
     <ClCompile Include="src\CodeMeat_Core\Graphics\Renderer.cpp">
       <Filter>CodeMeat_Core\Graphics</Filter>
     </ClCompile>
-    <ClCompile Include="Context.cpp" />
-    <ClCompile Include="UIElements.cpp" />
-    <ClCompile Include="UIContext.cpp" />
+    <ClCompile Include="src\CodeMeat_Core\Graphics\UI\UIContext.cpp">
+      <Filter>CodeMeat_Core\Graphics\UI</Filter>
+    </ClCompile>
+    <ClCompile Include="src\CodeMeat_Core\Graphics\UI\UIElements.cpp">
+      <Filter>CodeMeat_Core\Graphics\UI</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <Text Include="TODO.txt" />

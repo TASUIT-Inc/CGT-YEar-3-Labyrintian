@@ -27,12 +27,17 @@ void UIContext::begin()
 
 void UIContext::Draw()
 {
-	if (UIelem != nullptr)
+
+	if (uiElem != nullptr)
 	{
 		begin();
+		ImGui::PushStyleColor(ImGuiCol_WindowBg, ImVec4(0.3, 0.4, 0.3, 1.0));
 		ImGui::Begin("Test", NULL);
-		UIelem();
+		uiElem();
+		ImGui::PopStyleColor();
 		ImGui::End();
+		ImGui::Render();
 		ImGui_ImplOpenGL3_RenderDrawData(ImGui::GetDrawData());
+		uiElem = nullptr;
 	}
 }

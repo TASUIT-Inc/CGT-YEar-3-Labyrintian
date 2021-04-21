@@ -11,7 +11,8 @@
 #include "CodeMeat_Core/Graphics/UI/imgui.h"
 #include "CodeMeat_Core/Graphics/UI/imgui_impl_glfw.h"
 #include "CodeMeat_Core/Graphics/UI/imgui_impl_opengl3.h"
-#include "CodeMeat_Core/Graphics/UI/UIHandler.h"
+#include "CodeMeat_Core/Graphics/UI/UIContext.h"
+#include "CodeMeat_Core/Graphics/UI/UIElements.h"
 
 
 class GameObject;
@@ -47,9 +48,8 @@ private:
 	std::vector<Light*> m_Lights;
 	GBuffer* m_GBuffer;
 	
-	bool* isOpen = NULL;
-	UIHandler* UIManager;
-	//const char* glsl_version = "#version 130";
+	UIContext* m_UiContext;
+	
 
 
 	bool firstMouse;

@@ -15,10 +15,9 @@ public:
 
 	bool init(GLFWwindow* window);
 	void begin();
-	void SetUIContext(void(*Newfunction)() = nullptr) { UIelem = newfunction; }
+	void SetUIContext(void(*Newfunction)() = nullptr) { uiElem = Newfunction; }
 
 	void Draw();
 private:
 	void(*uiElem)() = nullptr;
-	
 };

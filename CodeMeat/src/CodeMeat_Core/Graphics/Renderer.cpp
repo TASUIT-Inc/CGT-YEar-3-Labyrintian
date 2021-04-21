@@ -37,18 +37,11 @@ bool Renderer::Init(){
 
 	//Imgui stuffs
 
-	//ImGui::CreateContext();
-	//ImGui_ImplGlfw_InitForOpenGL(m_Window, true);
-	//ImGui_ImplOpenGL3_Init(glsl_version);
-	//ImGui::StyleColorsDark();
-
-	//ImGuiIO& io = ImGui::GetIO();
-	//std::cout << glGetString(GL_VERSION) << std::endl;
-	UIManager->Init(m_Window);
-
+	m_UiContext = new UIContext(m_Window);
 	glEnable(GL_DEPTH_TEST);
 
 	m_GBuffer = new GBuffer(&m_Camera);
+	//m_UiContext->SetUIContext(&UIElements::PauseMenu);
 	return 1;
 }
 
@@ -91,16 +84,15 @@ void Renderer::Draw() {
 	m_GBuffer->RenderQuad();
 	m_GBuffer->Bind();
 	
-	UIManager->Draw();
-	UIManager->createPauseMenu(isOpen);
-	UIManager->Render();
+	m_UiContext->Draw();
+
 	glfwSwapBuffers(m_Window);
 	glfwPollEvents();
 }
 
 void Renderer::processInput(float DT)
 {
-	if (glfwGetKey(m_Window, GLFW_KEY_ESCAPE) == GLFW_PRESS)
+	if (glfwGetKey(m_Window, GLFW_KEY_P) == GLFW_PRESS)
 		glfwSetWindowShouldClose(m_Window, true);
 
 	if (glfwGetKey(m_Window, GLFW_KEY_W) == GLFW_PRESS)
@@ -111,8 +103,11 @@ void Renderer::processInput(float DT)
 		m_Camera.ProcessKeyboard(LEFT, DT);
 	if (glfwGetKey(m_Window, GLFW_KEY_D) == GLFW_PRESS)
 		m_Camera.ProcessKeyboard(RIGHT, DT);
-	/*if (glfwGetKey(m_Window, GLFW_KEY_U) == GLFW_PRESS)
-		UIManager->createPauseMenu(isOpen);*/
+	if (glfwGetKey(m_Window, GLFW_KEY_ESCAPE) == GLFW_PRESS)
+		m_UiContext->SetUIContext(&UIElements::PauseMenu);
+
+
+
 
 }
 
