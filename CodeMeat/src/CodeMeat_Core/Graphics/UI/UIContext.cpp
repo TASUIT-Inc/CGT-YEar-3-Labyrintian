@@ -15,6 +15,9 @@ bool UIContext::init(GLFWwindow* window)
 	}
 
 	std::cout << "Initialised ImGui stuffs" << std::endl;
+	UIStyle = new UIElements();
+	BgColor = ImVec4(1.0, 0.5, 0.3, 1.0);
+	TxtColor = ImVec4(0.1, 0.2, 0.9, 1.0);
 	return 1;
 }
 
@@ -31,10 +34,10 @@ void UIContext::Draw()
 	if (uiElem != nullptr)
 	{
 		begin();
-		ImGui::PushStyleColor(ImGuiCol_WindowBg, ImVec4(0.3, 0.4, 0.3, 1.0));
+		UIStyle->UIStyling(BgColor, TxtColor);
 		ImGui::Begin("Test", NULL);
 		uiElem();
-		ImGui::PopStyleColor();
+		UIStyle->CleanStyling();
 		ImGui::End();
 		ImGui::Render();
 		ImGui_ImplOpenGL3_RenderDrawData(ImGui::GetDrawData());

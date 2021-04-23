@@ -5,9 +5,11 @@ class UIElements
 {
 public:
 	static void PauseMenu();
-
-private:
+	static void UIStyling(ImColor col, ImColor col2);
+	static void CleanStyling();
 	UIElements() {}
 	~UIElements() {};
+private:
+	
 	
 };

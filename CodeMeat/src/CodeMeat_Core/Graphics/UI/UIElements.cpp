@@ -21,3 +21,15 @@ void UIElements::PauseMenu()
 	}
 	
 }
+
+void UIElements::UIStyling(ImColor col, ImColor col2)
+{
+	ImGui::PushStyleColor(ImGuiCol_WindowBg, ImVec4(col));
+	ImGui::PushStyleColor(ImGuiCol_Text, ImVec4(col2));
+}
+
+void UIElements::CleanStyling()
+{
+	ImGui::PopStyleColor();
+	ImGui::PopStyleColor();
+}
