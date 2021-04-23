@@ -20,4 +20,7 @@ public:
 	void Draw();
 private:
 	void(*uiElem)() = nullptr;
+	UIElements* UIStyle;
+	ImColor BgColor;
+	ImColor TxtColor;
 };

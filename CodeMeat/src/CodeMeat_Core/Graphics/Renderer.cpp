@@ -25,8 +25,8 @@ bool Renderer::Init(){
 	glfwSetCursorPosCallback(m_Window, mouse_callback);
 
 	// tell GLFW to capture our mouse
-	//glfwSetInputMode(m_Window, GLFW_CURSOR, GLFW_CURSOR_DISABLED);
-	glfwSetInputMode(m_Window, GLFW_CURSOR, GLFW_CURSOR);
+	glfwSetInputMode(m_Window, GLFW_CURSOR, GLFW_CURSOR_DISABLED);
+	//glfwSetInputMode(m_Window, GLFW_CURSOR, GLFW_CURSOR);
 
 	// glad: load all OpenGL function pointers
 	// ---------------------------------------
