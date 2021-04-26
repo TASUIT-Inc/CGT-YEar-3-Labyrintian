@@ -6,7 +6,9 @@ void UIElements::PauseMenu()
 	ImGui::Text("This is normal text.");
 	if (ImGui::Button("Resume", ImVec2(120, 120)))
 	{
+		static AudioSource speaker;
 		//Do nothing
+		speaker.Play(SE_LOAD("Error.wav"));
 		std::cout << "Resume";
 	}
 	if (ImGui::Button("Options", ImVec2(120, 120)))

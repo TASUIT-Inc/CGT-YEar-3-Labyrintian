@@ -1,6 +1,9 @@
 #pragma once
 #include <al.h>
 #include <vector>
+#include <iostream>
+#include <string>
+#include "CodeMeat.h"
 
 /*
 The following code excerpt is from Openal-soft alext.h to allow the use of multi-channel audio;

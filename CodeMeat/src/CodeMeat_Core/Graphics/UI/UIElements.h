@@ -1,5 +1,7 @@
 #pragma once
 #include "CodeMeat_Core/Graphics/UI/imgui.h"
+#include "CodeMeat_Core/Objects/Audio/AudioBuffer.h"
+#include "CodeMeat_Core/Objects/Audio/AudioSource.h"
 #include <iostream>
 class UIElements
 {
@@ -10,6 +12,7 @@ public:
 	UIElements() {}
 	~UIElements() {};
 private:
-	
+
+
 	
 };

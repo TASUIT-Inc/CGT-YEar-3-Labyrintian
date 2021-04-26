@@ -20,16 +20,18 @@ ALuint AudioBuffer::addAudioFX(const char* filename)
     sf_count_t num_frames;
     ALsizei num_bytes;
 
+    std::string FilePath = SFX_POOL_PATH + (std::string)filename;
+
     // Open the audio file
-    sndfile = sf_open(filename, SFM_READ, &sfinfo);
+    sndfile = sf_open(FilePath.c_str(), SFM_READ, &sfinfo);
     if (!sndfile)
     {
-        fprintf(stderr, "Could not open audio in %s: %s\n", filename, sf_strerror(sndfile));
+        fprintf(stderr, "Could not open audio in %s: %s\n", FilePath.c_str(), sf_strerror(sndfile));
         return 0;
     }
     if (sfinfo.frames < 1 || sfinfo.frames >(sf_count_t)(INT_MAX / sizeof(short)) / sfinfo.channels)
     {
-        fprintf(stderr, "Bad sample count in %s (%" PRId64 ")\n", filename, sfinfo.frames);
+        fprintf(stderr, "Bad sample count in %s (%" PRId64 ")\n", FilePath.c_str(), sfinfo.frames);
         sf_close(sndfile);
         return 0;
     }
@@ -71,7 +73,7 @@ ALuint AudioBuffer::addAudioFX(const char* filename)
     {
         free(membuf);
         sf_close(sndfile);
-        fprintf(stderr, "Failed to read samples in %s (%" PRId64 ")\n", filename, num_frames);
+        fprintf(stderr, "Failed to read samples in %s (%" PRId64 ")\n", FilePath.c_str(), num_frames);
         return 0;
     }
 

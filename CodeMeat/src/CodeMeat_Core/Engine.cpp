@@ -5,6 +5,7 @@
 Renderer* Renderer::m_Instance = 0;
 Physics* Physics::m_Instance = 0;
 
+
 bool Engine::init() {
 	if (Renderer::Instance()->Init()) {
 		EngineState = true;
@@ -20,14 +21,18 @@ bool Engine::init() {
 		EngineState = false;
 		std::cout << "Renderer Init Failed!" << std::endl;
 	}
-
+	AudioDevice::init();
 	//ALCdevice* bob;
 
-
+	//uint32_t snd1 = AudioBuffer::get()->addAudioFX("Error.wav");
+	//AudioSource speaker;
 
 	GameObject* l_Cube =new GameObject(glm::vec3(0.0f), glm::vec3(5.0f, 1.0f, 5.0f), glm::vec3(0.0f));
 
+	myMusic = new MusicBuffer("PauseMenu.wav");
 
+	myMusic->Play();
+	//speaker.Play(snd1);
 	//room instances
 		//room 1
 	l_Cube->AddInstance(glm::vec3(4.5f, 2.0f, 0.0f), glm::vec3(0.5f, 1.0f, 5.0f), glm::vec3(0.0f));
@@ -52,6 +57,10 @@ void Engine::Update() {
 	m_DT = l_CF - m_LT;
 	m_LT = l_CF;
 	REngine::Instance()->processInput(m_DT);
+	if (myMusic->isPlaying())
+	{
+		myMusic->UpdateBufferStream();
+	}
 }
 
 

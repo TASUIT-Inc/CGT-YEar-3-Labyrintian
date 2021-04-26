@@ -1,7 +1,7 @@
 #pragma once
 #include <al.h>
 #include <sndfile.h>
-
+#include "CodeMeat.h"
 
 /*
 The following code excerpt is from Openal-soft alext.h to allow the use of multi-channel audio;
@@ -45,6 +45,7 @@ public:
 
 	MusicBuffer(const char* filename);
 	~MusicBuffer();
+	//MusicBuffer();
 
 private:
 	ALuint src;
@@ -56,6 +57,6 @@ private:
 	short* membuf;
 	ALenum format;
 
-
-	MusicBuffer() = delete;
+	//MusicBuffer(){}
+	
 };

@@ -1,8 +1,10 @@
 #ifndef __Engine__
 #define __Engine__
 
-
-
+#include "CodeMeat_Core/Objects/Audio/MusicBuffer.h"
+#include "CodeMeat_Core/Objects/Audio/AudioSource.h"
+#include "CodeMeat_Core/Objects/Audio/AudioBuffer.h"
+#include "CodeMeat_Core/Objects/Audio/AudioDevice.h"
 #include "CodeMeat_Core/Deps/Math.h"
 #include "CodeMeat_Core/Deps/Output.h"
 #include "CodeMeat_Core/Graphics/Renderer.h"
@@ -38,6 +40,7 @@ private:
 	float m_DT, m_LT;
 	Player m_Player;
 	static Engine* m_Instance;
+	MusicBuffer* myMusic;
 
 	Engine() {}
 	virtual ~Engine() {}
