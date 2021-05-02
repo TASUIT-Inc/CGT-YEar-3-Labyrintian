@@ -31,6 +31,7 @@ bool Renderer::Init() {
 	centerWindow(m_Window, glfwGetPrimaryMonitor());
 	// tell GLFW to capture our mouse
 	glfwSetInputMode(m_Window, GLFW_CURSOR, GLFW_CURSOR_DISABLED);
+	//glfwSetInputMode(m_Window, GLFW_CURSOR, GLFW_CURSOR);
 
 	// glad: load all OpenGL function pointers
 	// ---------------------------------------
@@ -39,13 +40,37 @@ bool Renderer::Init() {
 		std::cout << "Failed to initialize GLAD" << std::endl;
 		return 0;
 	}
+	//Imgui stuffs
+
+	m_UiContext = new UIContext(m_Window);
+	//m_UiContext->SetUIContext(&UIElements::PauseMenu);
+
 	glEnable(GL_DEPTH_TEST);
 	m_GBuffer = new GBuffer();
+
 	return 1;
 }
 
 void Renderer::framebuffer_size_callback(GLFWwindow* window, int width, int height) {
 	glViewport(0, 0, width, height);
+}
+
+void Renderer::mouse_callback(GLFWwindow* window, double xpos, double ypos)
+{
+	if (Instance()->firstMouse)
+	{
+		Instance()->lastX = xpos;
+		Instance()->lastY = ypos;
+		Instance()->firstMouse = false;
+	}
+
+	float xoffset = xpos - Instance()->lastX;
+	float yoffset = Instance()->lastY - ypos; // reversed since y-coordinates go from bottom to top
+
+	Instance()->lastX = xpos;
+	Instance()->lastY = ypos;
+
+	Instance()->m_Camera.ProcessMouseMovement(xoffset, yoffset);
 }
 
 void Renderer::Submit(GameObject* Object) {
@@ -70,6 +95,9 @@ void Renderer::Draw() {
 	m_GBuffer->SecondPass(m_Camera, &m_Lights);
 	m_GBuffer->RenderQuad();
 	m_GBuffer->Bind();
+	
+	m_UiContext->Draw();
+
 	glfwSwapBuffers(m_Window);
 	glfwPollEvents();
 }
@@ -95,6 +123,8 @@ void Renderer::mouse_callback(GLFWwindow* window, double xpos, double ypos)
 void Renderer::Input(float dt)
 {
 
+	if (glfwGetKey(m_Window, GLFW_KEY_P) == GLFW_PRESS)
+		glfwSetWindowShouldClose(m_Window, true);
 	if (glfwGetKey(m_Window, GLFW_KEY_W) == GLFW_PRESS)
 		m_Camera->ProcessKeyboard(FORWARD, dt);
 	if (glfwGetKey(m_Window, GLFW_KEY_S) == GLFW_PRESS)
@@ -102,7 +132,13 @@ void Renderer::Input(float dt)
 	if (glfwGetKey(m_Window, GLFW_KEY_A) == GLFW_PRESS)
 		m_Camera->ProcessKeyboard(LEFT, dt);
 	if (glfwGetKey(m_Window, GLFW_KEY_D) == GLFW_PRESS)
-		m_Camera->ProcessKeyboard(RIGHT, dt);
+		m_Camera->ProcessKeyboard(RIGHT, DT);
+	if (glfwGetKey(m_Window, GLFW_KEY_ESCAPE) != GLFW_RELEASE)
+		m_UiContext->SetUIContext(&UIElements::PauseMenu);
+	if (glfwGetKey(m_Window, GLFW_KEY_I) != GLFW_PRESS)
+		m_UiContext->SetUIContext(&UIElements::PuzzleTest);
+
+
 
 }
 

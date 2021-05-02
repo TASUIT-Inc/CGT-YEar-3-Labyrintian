@@ -1,6 +1,6 @@
 #pragma once
 #include <map>
-#include <AL/al.h>
+#include <al.h>
 class AudioManager
 {
 	struct AudioSrc

@@ -338,3 +338,4 @@ ASALocalRun/
 
 # BeatPulse healthcheck temp database
 healthchecksdb
+/CodeMeat/src/CodeMeat_Core/Graphics/UI/UIContext.h~HEAD

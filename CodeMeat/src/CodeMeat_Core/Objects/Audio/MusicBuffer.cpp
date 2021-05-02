@@ -1,6 +1,6 @@
 #include "MusicBuffer.h"
 #include <iostream>
-#include <AL/alext.h>
+#include "al.h"
 
 void MusicBuffer::Play()
 {
@@ -139,8 +139,9 @@ MusicBuffer::MusicBuffer(const char* filename)
 	alGenBuffers(NUM_BUFFERS, buffers);
 
 	std::size_t frame_size;
+	std::string FilePath = SFX_POOL_PATH + (std::string)filename;
 
-	sndFile = sf_open(filename, SFM_READ, &sfinfo);
+	sndFile = sf_open(FilePath.c_str(), SFM_READ, &sfinfo);
 	if (!sndFile)
 	{
 		throw("Could not open music file -- check path");

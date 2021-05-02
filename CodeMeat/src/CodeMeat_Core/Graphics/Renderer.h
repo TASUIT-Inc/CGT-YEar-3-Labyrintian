@@ -8,7 +8,12 @@
 #include "CodeMeat_Core/Deps/Commons.h"
 #include "CodeMeat_Core/Deps/Output.h"
 #include "CodeMeat_Core/Graphics/FrameBuffers/GBuffer.h"
-#include "CodeMeat_Core/Objects/Player.h"
+
+#include "CodeMeat_Core/Graphics/UI/imgui.h"
+#include "CodeMeat_Core/Graphics/UI/imgui_impl_glfw.h"
+#include "CodeMeat_Core/Graphics/UI/imgui_impl_opengl3.h"
+#include "CodeMeat_Core/Graphics/UI/UIContext.h"
+#include "CodeMeat_Core/Graphics/UI/UIElements.h"
 
 
 class GameObject;
@@ -43,6 +48,8 @@ class Camera;
 		private:
 			GLFWwindow* m_Window;
 			Camera* m_Camera = new Camera(glm::vec3(0.0f, 0.5f, 0.0f));
+      UIContext* m_UiContext;
+
 
 			std::vector<GameObject*> m_Objects;
 			std::vector<Shader*> m_Shaders;

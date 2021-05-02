@@ -7,6 +7,7 @@
 Renderer* Renderer::m_Instance = 0;
 Physics* Physics::m_Instance = 0;
 
+
 bool Engine::init() {
 	if (Renderer::Instance()->Init()) {
 		EngineState = true;
@@ -22,8 +23,20 @@ bool Engine::init() {
 		EngineState = false;
 		std::cout << "Renderer Init Failed!" << std::endl;
 	}
-	
+
+	AudioDevice::init();
+	//ALCdevice* bob;
+
+	//uint32_t snd1 = AudioBuffer::get()->addAudioFX("Error.wav");
+	//AudioSource speaker;
+	myMusic = new MusicBuffer("PauseMenu.wav");
+
+	//myMusic->Play();
+	//speaker.Play(snd1);
+	//room instances
+		//room 1
 	LoadLevel1();
+
 
 	return EngineState;
 }
@@ -32,12 +45,21 @@ void Engine::Update() {
 	float l_CF = glfwGetTime();
 	m_DT = l_CF - m_LT;
 	m_LT = l_CF;
+
+	
+	if (myMusic->isPlaying())
+	{
+		myMusic->UpdateBufferStream();
+	}
 	REngine::Instance()->Input(m_DT);
 	PEngine::Instance()->Update(REngine::Instance()->GetCamera() ,REngine::Instance()->GetObjectListRef(), m_DT);
 }
 
+
 void Engine::Draw() {
 	REngine::Instance()->Draw();
+	
+	
 }
 
 void Engine::Clean() {
