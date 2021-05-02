@@ -102,23 +102,6 @@ void Renderer::Draw() {
 	glfwPollEvents();
 }
 
-void Renderer::mouse_callback(GLFWwindow* window, double xpos, double ypos)
-{
-	if (m_Instance->firstMouse)
-	{
-		m_Instance->lastX = xpos;
-		m_Instance->lastY = ypos;
-		m_Instance->firstMouse = false;
-	}
-
-	float xoffset = xpos - m_Instance->lastX;
-	float yoffset = m_Instance->lastY - ypos; // reversed since y-coordinates go from bottom to top
-
-	m_Instance->lastX = xpos;
-	m_Instance->lastY = ypos;
-
-	m_Instance->m_Camera->ProcessMouseMovement(xoffset, yoffset);
-}
 
 void Renderer::Input(float dt)
 {
