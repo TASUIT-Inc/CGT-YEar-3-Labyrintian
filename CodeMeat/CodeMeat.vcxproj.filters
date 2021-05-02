@@ -171,7 +171,7 @@
     </ClInclude>
     <ClInclude Include="src\CodeMeat_Core\Graphics\UI\UIElements.h">
       <Filter>CodeMeat_Core\Graphics\UI</Filter>
-
+    </ClInclude>
     <ClInclude Include="src\CodeMeat_Core\Deps\Vertex.h">
       <Filter>CodeMeat_Core\Deps</Filter>
     </ClInclude>
@@ -207,7 +207,6 @@
     </ClInclude>
     <ClInclude Include="src\CodeMeat_Core\Physics\Collisions\MeshCollider.h">
       <Filter>CodeMeat_Core\Physics\Collisions</Filter>
-
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
