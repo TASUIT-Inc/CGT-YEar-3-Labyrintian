@@ -29,9 +29,10 @@ bool Engine::init() {
 
 	GameObject* l_Cube =new GameObject(glm::vec3(0.0f), glm::vec3(5.0f, 1.0f, 5.0f), glm::vec3(0.0f));
 
+
 	myMusic = new MusicBuffer("PauseMenu.wav");
 
-	myMusic->Play();
+	//myMusic->Play();
 	//speaker.Play(snd1);
 	//room instances
 		//room 1
@@ -65,8 +66,8 @@ void Engine::Update() {
 
 
 void Engine::Draw() {
-
 	REngine::Instance()->Draw();
+	
 	
 }
 

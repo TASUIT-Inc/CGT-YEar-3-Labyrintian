@@ -25,8 +25,8 @@ bool Renderer::Init(){
 	glfwSetCursorPosCallback(m_Window, mouse_callback);
 
 	// tell GLFW to capture our mouse
-	//glfwSetInputMode(m_Window, GLFW_CURSOR, GLFW_CURSOR_DISABLED);
-	glfwSetInputMode(m_Window, GLFW_CURSOR, GLFW_CURSOR);
+	glfwSetInputMode(m_Window, GLFW_CURSOR, GLFW_CURSOR_DISABLED);
+	//glfwSetInputMode(m_Window, GLFW_CURSOR, GLFW_CURSOR);
 
 	// glad: load all OpenGL function pointers
 	// ---------------------------------------
@@ -68,6 +68,7 @@ void Renderer::mouse_callback(GLFWwindow* window, double xpos, double ypos)
 	Instance()->m_Camera.ProcessMouseMovement(xoffset, yoffset);
 }
 
+
 void Renderer::Submit(GameObject* Object) {
 	m_Objects.push_back(Object);
 }
@@ -104,9 +105,10 @@ void Renderer::processInput(float DT)
 		m_Camera.ProcessKeyboard(LEFT, DT);
 	if (glfwGetKey(m_Window, GLFW_KEY_D) == GLFW_PRESS)
 		m_Camera.ProcessKeyboard(RIGHT, DT);
-	if (glfwGetKey(m_Window, GLFW_KEY_ESCAPE) == GLFW_PRESS)
+	if (glfwGetKey(m_Window, GLFW_KEY_ESCAPE) != GLFW_RELEASE)
 		m_UiContext->SetUIContext(&UIElements::PauseMenu);
-
+	if (glfwGetKey(m_Window, GLFW_KEY_I) != GLFW_PRESS)
+		m_UiContext->SetUIContext(&UIElements::PuzzleTest);
 
 
 }
