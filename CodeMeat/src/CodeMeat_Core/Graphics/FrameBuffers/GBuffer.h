@@ -11,12 +11,12 @@ class Light;
 
 class GBuffer : public Buffer {
 public:
-	GBuffer(Camera *camera) : Buffer() ,m_CameraRef(camera) ,m_GPassShader(Shader("VS-Default.txt","FS-Default.txt")), m_LPassShader(Shader("VS-LightingShader.txt","FS-LightingShader.txt")), m_VAO(0) {
+	GBuffer() : Buffer() ,m_GPassShader(Shader("VS-Default.txt","FS-Default.txt")), m_LPassShader(Shader("VS-LightingShader.txt","FS-LightingShader.txt")), m_VAO(0) {
 		Init();
 	}
 
-	void FirstPass(std::vector<GameObject*> *ObjectQueue);
-	void SecondPass(std::vector<Light*> *LightQueue);
+	void FirstPass(Camera* camera, std::vector<GameObject*> *ObjectQueue);
+	void SecondPass(Camera* camera, std::vector<Light*> *LightQueue);
 	void RenderQuad();
 	void Bind();
 private:
@@ -27,7 +27,6 @@ private:
 	void Init();
 	
 
-	Camera* m_CameraRef;
 	Shader m_GPassShader, m_LPassShader;
 
 	unsigned int m_VAO, m_VBO;

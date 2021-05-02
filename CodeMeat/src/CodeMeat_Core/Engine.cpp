@@ -2,6 +2,8 @@
 #include "al.h"
 #include "alc.h"
 
+
+
 Renderer* Renderer::m_Instance = 0;
 Physics* Physics::m_Instance = 0;
 
@@ -21,35 +23,21 @@ bool Engine::init() {
 		EngineState = false;
 		std::cout << "Renderer Init Failed!" << std::endl;
 	}
+
 	AudioDevice::init();
 	//ALCdevice* bob;
 
 	//uint32_t snd1 = AudioBuffer::get()->addAudioFX("Error.wav");
 	//AudioSource speaker;
-
-	GameObject* l_Cube =new GameObject(glm::vec3(0.0f), glm::vec3(5.0f, 1.0f, 5.0f), glm::vec3(0.0f));
-
-
 	myMusic = new MusicBuffer("PauseMenu.wav");
 
 	//myMusic->Play();
 	//speaker.Play(snd1);
 	//room instances
 		//room 1
-	l_Cube->AddInstance(glm::vec3(4.5f, 2.0f, 0.0f), glm::vec3(0.5f, 1.0f, 5.0f), glm::vec3(0.0f));
-	l_Cube->AddInstance(glm::vec3(-4.5f, 2.0f, 0.0f), glm::vec3(0.5f, 1.0f, 5.0f), glm::vec3(0.0f));
-	l_Cube->AddInstance(glm::vec3(0.0f, 2.0f, 4.5f), glm::vec3(5.0f, 1.0f, 0.5f), glm::vec3(0.0f));
-	l_Cube->AddInstance(glm::vec3(2.5f, 2.0f, -4.5f), glm::vec3(1.75f, 1.0f, 0.5f), glm::vec3(0.0f));
-	l_Cube->AddInstance(glm::vec3(-2.5f, 2.0f, -4.5f), glm::vec3(1.75f, 1.0f, 0.5f), glm::vec3(0.0f));
-	l_Cube->AddInstance(glm::vec3(0.0f, 2.75f, -4.5f), glm::vec3(0.75f, 0.25f, 0.5f), glm::vec3(0.0f));
+	LoadLevel1();
 
 
-	REngine::Instance()->Submit(l_Cube);
-
-	Light* l_SkyLight =new Light(glm::vec3(1.0f), glm::vec3(-0.2f, -1.0f, -0.3f));
-	//Light* l_PL = new Light(glm::vec3(0.0f), glm::vec3(1.0f), 0.8f, 1.5f);
-	REngine::Instance()->Submit(l_SkyLight);
-	//REngine::Instance()->Submit(l_PL);
 	return EngineState;
 }
 
@@ -57,11 +45,14 @@ void Engine::Update() {
 	float l_CF = glfwGetTime();
 	m_DT = l_CF - m_LT;
 	m_LT = l_CF;
-	REngine::Instance()->processInput(m_DT);
+
+	
 	if (myMusic->isPlaying())
 	{
 		myMusic->UpdateBufferStream();
 	}
+	REngine::Instance()->Input(m_DT);
+	PEngine::Instance()->Update(REngine::Instance()->GetCamera() ,REngine::Instance()->GetObjectListRef(), m_DT);
 }
 
 
@@ -72,5 +63,40 @@ void Engine::Draw() {
 }
 
 void Engine::Clean() {
+
+}
+
+
+void Engine::LoadLevel1() 
+{
+	Renderer* R = REngine::Instance();
+	Model* Chairmodel = new Model("Chair/Chair.fbx");
+	Model* CeilingLight = new Model("Light/Light.fbx");
+	//Begining room layout
+	GameObject* floor = new GameObject(glm::vec3(0.0f, 0.5f, 0.0f), glm::vec3(1.0f, 1.0f, 1.0f));
+	floor->AttachModel(new Model("Labyrinth/Roof.obj"));
+
+	
+	Light* RoomLight = new Light(glm::vec3(0.0f, 0.5f, 0.0f), glm::vec3(1.0f), 0.8, 0.8);
+	Light* SkyLight = new Light(glm::vec3(1.0f), glm::vec3(1.0f, -1.0f, 0.0f));
+
+	R->Submit(floor);
+	/*R->Submit(DoorWayTop);
+	R->Submit(DoorWayRight);
+	R->Submit(DoorWayleft);
+	R->Submit(LeftWall);
+	R->Submit(RightWall);
+	R->Submit(BackWall);
+	R->Submit(Celing);
+	R->Submit(Chair);
+	R->Submit(light);
+	R->Submit(CorridorRightWall);
+	R->Submit(Maze_LeftWall);*/
+
+	R->Submit(RoomLight);
+	R->Submit(SkyLight);
+
+
+
 
 }

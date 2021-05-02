@@ -58,8 +58,11 @@
     <Filter Include="CodeMeat_Core\Objects\Levels\MapPool">
       <UniqueIdentifier>{1953ec81-1727-49ee-9d6f-9cd9c441bde3}</UniqueIdentifier>
     </Filter>
-    <Filter Include="CodeMeat_Core\Objects\Audio">
-      <UniqueIdentifier>{5102045f-c76f-42ff-b66f-416ae2f01bff}</UniqueIdentifier>
+    <Filter Include="CodeMeat_Core\Physics\Collisions">
+      <UniqueIdentifier>{13248193-47b4-4c75-a07b-1268e9676190}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="CodeMeat_Core\Physics\Newtonians">
+      <UniqueIdentifier>{8f3b76b3-c5ba-4eea-a0ed-8de33ab34bca}</UniqueIdentifier>
     </Filter>
     <Filter Include="CodeMeat_Core\Graphics\UI">
       <UniqueIdentifier>{d3398bb3-2693-4858-84cf-9f58b5458f6a}</UniqueIdentifier>
@@ -168,6 +171,43 @@
     </ClInclude>
     <ClInclude Include="src\CodeMeat_Core\Graphics\UI\UIElements.h">
       <Filter>CodeMeat_Core\Graphics\UI</Filter>
+
+    <ClInclude Include="src\CodeMeat_Core\Deps\Vertex.h">
+      <Filter>CodeMeat_Core\Deps</Filter>
+    </ClInclude>
+    <ClInclude Include="src\CodeMeat_Core\Physics\Collisions\Collider.h">
+      <Filter>CodeMeat_Core\Physics\Collisions</Filter>
+    </ClInclude>
+    <ClInclude Include="src\CodeMeat_Core\Physics\Collisions\CollisionData.h">
+      <Filter>CodeMeat_Core\Physics\Collisions</Filter>
+    </ClInclude>
+    <ClInclude Include="src\CodeMeat_Core\Physics\Collisions\Contacts.h">
+      <Filter>CodeMeat_Core\Physics\Collisions</Filter>
+    </ClInclude>
+    <ClInclude Include="src\CodeMeat_Core\Physics\Collisions\CollisionManager.h">
+      <Filter>CodeMeat_Core\Physics\Collisions</Filter>
+    </ClInclude>
+    <ClInclude Include="src\CodeMeat_Core\Physics\Newtonians\Kinematics.h">
+      <Filter>CodeMeat_Core\Physics\Newtonians</Filter>
+    </ClInclude>
+    <ClInclude Include="src\CodeMeat_Core\Physics\Newtonians\Transform.h">
+      <Filter>CodeMeat_Core\Physics\Newtonians</Filter>
+    </ClInclude>
+    <ClInclude Include="src\CodeMeat_Core\Physics\Newtonians\Solver.h">
+      <Filter>CodeMeat_Core\Physics\Newtonians</Filter>
+    </ClInclude>
+    <ClInclude Include="src\CodeMeat_Core\Physics\Newtonians\EulerSolver.h">
+      <Filter>CodeMeat_Core\Physics\Newtonians</Filter>
+    </ClInclude>
+    <ClInclude Include="src\CodeMeat_Core\Physics\Collisions\ContactSolver.h">
+      <Filter>CodeMeat_Core\Physics\Collisions</Filter>
+    </ClInclude>
+    <ClInclude Include="src\CodeMeat_Core\Physics\Collisions\BoundingBox.h">
+      <Filter>CodeMeat_Core\Physics\Collisions</Filter>
+    </ClInclude>
+    <ClInclude Include="src\CodeMeat_Core\Physics\Collisions\MeshCollider.h">
+      <Filter>CodeMeat_Core\Physics\Collisions</Filter>
+
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -254,6 +294,35 @@
     </ClCompile>
     <ClCompile Include="src\CodeMeat_Core\Graphics\UI\UIElements.cpp">
       <Filter>CodeMeat_Core\Graphics\UI</Filter>
+    <ClCompile Include="src\CodeMeat_Core\Physics\Collisions\Collider.cpp">
+      <Filter>CodeMeat_Core\Physics\Collisions</Filter>
+    </ClCompile>
+    <ClCompile Include="src\CodeMeat_Core\Physics\Collisions\Contacts.cpp">
+      <Filter>CodeMeat_Core\Physics\Collisions</Filter>
+    </ClCompile>
+    <ClCompile Include="src\CodeMeat_Core\Physics\Collisions\CollisionManager.cpp">
+      <Filter>CodeMeat_Core\Physics\Collisions</Filter>
+    </ClCompile>
+    <ClCompile Include="src\CodeMeat_Core\Deps\Math.cpp">
+      <Filter>CodeMeat_Core\Deps</Filter>
+    </ClCompile>
+    <ClCompile Include="src\CodeMeat_Core\Physics\Newtonians\Transform.cpp">
+      <Filter>CodeMeat_Core\Physics\Newtonians</Filter>
+    </ClCompile>
+    <ClCompile Include="src\CodeMeat_Core\Physics\Newtonians\Solver.cpp">
+      <Filter>CodeMeat_Core\Physics\Newtonians</Filter>
+    </ClCompile>
+    <ClCompile Include="src\CodeMeat_Core\Physics\Newtonians\EulerSolver.cpp">
+      <Filter>CodeMeat_Core\Physics\Newtonians</Filter>
+    </ClCompile>
+    <ClCompile Include="src\CodeMeat_Core\Physics\Collisions\ContactSolver.cpp">
+      <Filter>CodeMeat_Core\Physics\Collisions</Filter>
+    </ClCompile>
+    <ClCompile Include="src\CodeMeat_Core\Physics\Collisions\BoundingBox.cpp">
+      <Filter>CodeMeat_Core\Physics\Collisions</Filter>
+    </ClCompile>
+    <ClCompile Include="src\CodeMeat_Core\Physics\Collisions\MeshCollider.cpp">
+      <Filter>CodeMeat_Core\Physics\Collisions</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -268,6 +337,9 @@
       <Filter>CodeMeat_Core\Graphics\Shaders\ShaderPool</Filter>
     </Text>
     <Text Include="src\CodeMeat_Core\Graphics\Shaders\ShaderPool\VS-LightingShader.txt">
+      <Filter>CodeMeat_Core\Graphics\Shaders\ShaderPool</Filter>
+    </Text>
+    <Text Include="src\CodeMeat_Core\Graphics\Shaders\ShaderPool\FS-Collision.txt">
       <Filter>CodeMeat_Core\Graphics\Shaders\ShaderPool</Filter>
     </Text>
   </ItemGroup>

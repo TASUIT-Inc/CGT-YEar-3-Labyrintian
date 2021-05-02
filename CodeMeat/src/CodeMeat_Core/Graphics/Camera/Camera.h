@@ -1,13 +1,11 @@
 #ifndef CAMERA_H
 #define CAMERA_H
 
-#include <glad/glad.h>
-#include <glm/glm.hpp>
-#include <glm/gtc/matrix_transform.hpp>
-
-#include <iostream>
-
-#include <vector>
+#include "CodeMeat_Core/Deps/Math.h"
+#include "CodeMeat_Core/Deps/Output.h"
+#include "CodeMeat_Core/Physics/Collisions/BoundingBox.h"
+#include "CodeMeat_Core/Physics/Newtonians/Kinematics.h"
+#include "CodeMeat_Core/Objects/GameObject/GameObject.h"
 
 
 /*
@@ -28,15 +26,13 @@ enum Camera_Movement {
 	FORWARD,
 	BACKWARD,
 	LEFT,
-	RIGHT,
-	UP,
-	DOWN
+	RIGHT
 };
 
 // Default camera values
 const float YAW = 180.0f;
 const float PITCH = 0.0f;
-const float SPEED = 5.0f;
+const float SPEED = 100.0f;
 const float SENSITIVITY = 0.1f;
 const float ZOOM = 45.0f;
 
@@ -46,7 +42,8 @@ class Camera
 {
 public:
 	// Camera Attributes
-	glm::vec3 Position;
+	
+	
 	glm::vec3 Front;
 	glm::vec3 Up;
 	glm::vec3 Right;
@@ -63,7 +60,12 @@ public:
 	// Constructor with vectors
 	Camera(glm::vec3 position = glm::vec3(0.0f, 0.0f, 0.0f), glm::vec3 up = glm::vec3(0.0f, 1.0f, 0.0f), float yaw = YAW, float pitch = PITCH) : Front(glm::vec3(0.0f, 0.0f, -1.0f)), MovementSpeed(SPEED), MouseSensitivity(SENSITIVITY), Zoom(ZOOM)
 	{
-		Position = position;
+
+		m_Kinematics = new Kinematics(10.0f, position);
+		m_Kinematics->m_Transform.Scale(glm::vec3(1.0f));
+		glm::vec3 pos = m_Kinematics->m_Transform.GetPos();
+		glm::vec3 extents = glm::vec3(1.0f);
+		m_Collider = new BoundingBox(pos, extents);
 		WorldUp = up;
 		Yaw = yaw;
 		Pitch = pitch;
@@ -73,7 +75,9 @@ public:
 	// Constructor with scalar values
 	Camera(float posX, float posY, float posZ, float upX, float upY, float upZ, float yaw, float pitch) : Front(glm::vec3(0.0f, 0.0f, -1.0f)), MovementSpeed(SPEED), MouseSensitivity(SENSITIVITY), Zoom(ZOOM)
 	{
-		Position = glm::vec3(posX, posY, posZ);
+		m_Kinematics = new Kinematics(10.0f, glm::vec3(posX, posY, posZ));
+		m_Kinematics->m_Transform.Scale(glm::vec3(1.0f));
+		m_Collider = new BoundingBox(glm::vec3(posX, posY, posZ), glm::vec3(1.0f));
 		WorldUp = glm::vec3(upX, upY, upZ);
 		Yaw = yaw;
 		Pitch = pitch;
@@ -83,27 +87,26 @@ public:
 	// Returns the view matrix calculated using Euler Angles and the LookAt Matrix
 	glm::mat4 GetViewMatrix()
 	{
-		return glm::lookAt(Position, Position + Front, Up);
+		glm::vec3 Pos = m_Kinematics->m_Transform.GetPos();
+		return glm::lookAt(Pos, Pos + Front, Up);
 	}
 
 	// Processes input received from any keyboard-like input system. Accepts input parameter in the form of camera defined ENUM (to abstract it from windowing systems)
 	void ProcessKeyboard(Camera_Movement direction, float deltaTime)
 	{
+		m_Kinematics->m_Vel = glm::vec3(0.0f);
 		float velocity = MovementSpeed * deltaTime;
 		if (direction == FORWARD)
-			Position += Front * velocity;
+			m_Kinematics->m_Vel = Front * velocity;
 		if (direction == BACKWARD)
-			Position -= Front * velocity;
+			m_Kinematics->m_Vel = Front * -velocity;
 		if (direction == LEFT)
-			Position -= Right * velocity;
+			m_Kinematics->m_Vel = Right * -velocity;
 		if (direction == RIGHT)
-			Position += Right * velocity;
-		if (direction == UP)
-			Position += Up * 0.5f * velocity;
-		if (direction == DOWN)
-			Position -= Up * 0.5f * velocity;
+			m_Kinematics->m_Vel = Right * velocity;
+		m_Kinematics->m_Vel.y = 0.0f;
+		Update(deltaTime);
 
-		Position.y = yConstraint;
 	}
 
 	// Processes input received from a mouse input system. Expects the offset value in both the x and y direction.
@@ -139,11 +142,19 @@ public:
 			Zoom = 45.0f;
 	}
 
+	glm::vec3 GetPos() { return m_Kinematics->m_Transform.GetPos(); }
 
-	glm::vec3 GetPos() { return Position; }
+	BoundingBox* m_Collider;
 
 private:
 	
+	void Update(float dt) 
+	{
+		glm::vec3 newPos = m_Kinematics->m_Vel * dt;
+		m_Kinematics->m_Transform.Translate(newPos);
+		m_Collider->Update(m_Kinematics->m_Transform);
+	}
+	Kinematics* m_Kinematics;
 	// Calculates the front vector from the Camera's (updated) Euler Angles
 	void updateCameraVectors()
 	{
@@ -157,5 +168,6 @@ private:
 		Right = glm::normalize(glm::cross(Front, WorldUp));  // Normalize the vectors, because their length gets closer to 0 the more you look up or down which results in slower movement.
 		Up = glm::normalize(glm::cross(Right, Front));
 	}
+
 };
 #endif
