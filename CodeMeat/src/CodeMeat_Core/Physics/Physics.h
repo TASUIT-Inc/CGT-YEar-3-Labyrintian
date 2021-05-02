@@ -1,18 +1,19 @@
 #ifndef __Physics__
 #define __Physics__
 
-#include <glad/glad.h>
-#include <GLFW/glfw3.h>
-
-#include <glm/glm.hpp>
-#include <glm/gtc/matrix_transform.hpp>
-#include <glm/gtc/type_ptr.hpp>
+#include "CodeMeat_Core/Graphics/Renderer.h"
+#include "CodeMeat_Core/Physics/Newtonians/EulerSolver.h"
+#include "CodeMeat_Core/Physics/Collisions/ContactSolver.h"
+#include "CodeMeat_Core/Physics/Collisions/CollisionData.h"
+#include "CodeMeat_Core/Physics/Collisions/CollisionManager.h"
 
 class Physics
 {
 public:
 
-	bool Init() { return true; }
+	bool Init();
+	void Update(Camera* camera, std::vector<GameObject*> &Objs, float dt);
+	void GetCollisionData(Camera* camera, std::vector<GameObject*> &Objs);
 
 	static Physics* Instance() {
 		if (m_Instance == 0) {
@@ -25,6 +26,11 @@ public:
 private:
 
 	static Physics* m_Instance;
+	Solver* m_Solver;
+	ContactSolver* m_Resolver;
+	std::vector<std::unique_ptr<CollisionData>> m_CollisionData;
+
+
 	Physics() {}
 	virtual ~Physics() {}
 

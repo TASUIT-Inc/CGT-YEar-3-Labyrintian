@@ -16,6 +16,7 @@ class Engine
 public:
 	bool init();
 	void Render();
+	void LoadLevel1();
 	void Draw();
 	void Update();
 	void Clean();
@@ -33,7 +34,6 @@ public:
 private:
 	bool EngineState;
 	float m_DT, m_LT;
-	Player m_Player;
 	static Engine* m_Instance;
 
 	Engine() {}

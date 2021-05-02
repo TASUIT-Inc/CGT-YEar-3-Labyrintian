@@ -4,22 +4,11 @@
 #include "CodeMeat_Core/Deps/Math.h"
 #include "CodeMeat_Core/Graphics/Shaders/Shader.h"
 #include "CodeMeat_Core/Deps/Output.h"
+#include "CodeMeat_Core/Deps/Vertex.h"
 
 
 //Class Definitions
 class Shader;
-
-struct Vertex {
-	glm::vec3 Position;
-
-	glm::vec3 Normal;
-
-	glm::vec2 TexCoords;
-
-	glm::vec3 Tangent;
-
-	glm::vec3 Bitangent;
-};
 
 struct Texture {
 	unsigned int id;

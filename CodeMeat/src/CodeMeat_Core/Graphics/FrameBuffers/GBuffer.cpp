@@ -65,11 +65,11 @@ void GBuffer::Init() {
 	m_LPassShader.SetInt("m_AlbedoSpec", 2);
 }
 
-void GBuffer::FirstPass(std::vector<GameObject*> *ObjectQueue) {
+void GBuffer::FirstPass(Camera* camera, std::vector<GameObject*> *ObjectQueue) {
 	glBindFramebuffer(GL_FRAMEBUFFER, m_Gbuffer);
 		glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
-		glm::mat4 m_Projection = glm::perspective(glm::radians(m_CameraRef->Zoom), (float)SCR_WIDTH / (float)SCR_HEIGHT, 0.1f, 100.0f);
-		glm::mat4 m_View = m_CameraRef->GetViewMatrix();
+		glm::mat4 m_Projection = glm::perspective(glm::radians(camera->Zoom), (float)SCR_WIDTH / (float)SCR_HEIGHT, 0.001f, 1000.0f);
+		glm::mat4 m_View = camera->GetViewMatrix();
 		m_GPassShader.Use();
 		m_GPassShader.SetMat4("Projection", m_Projection);
 		m_GPassShader.SetMat4("View", m_View);
@@ -79,7 +79,7 @@ void GBuffer::FirstPass(std::vector<GameObject*> *ObjectQueue) {
 	glBindFramebuffer(GL_FRAMEBUFFER, 0);
 }
 
-void GBuffer::SecondPass(std::vector<Light*> *Lights) {
+void GBuffer::SecondPass(Camera* camera, std::vector<Light*> *Lights) {
 	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 	m_LPassShader.Use();
 	glActiveTexture(GL_TEXTURE0);
@@ -114,7 +114,7 @@ void GBuffer::SecondPass(std::vector<Light*> *Lights) {
 			break;
 		}
 	}
-	m_LPassShader.SetVec3("viewPos", m_CameraRef->GetPos());
+	m_LPassShader.SetVec3("viewPos", camera->GetPos());
 }
 
 void GBuffer::Bind() {

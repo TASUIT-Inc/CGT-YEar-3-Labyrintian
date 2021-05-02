@@ -44,6 +44,17 @@ public:
 		}
 	}
 
+	inline glm::mat4 aiMatrix4x4ToGlm(const aiMatrix4x4* from)
+	{
+		glm::mat4 to;
+		to[0][0] = (GLfloat)from->a1; to[0][1] = (GLfloat)from->b1;  to[0][2] = (GLfloat)from->c1; to[0][3] = (GLfloat)from->d1;
+		to[1][0] = (GLfloat)from->a2; to[1][1] = (GLfloat)from->b2;  to[1][2] = (GLfloat)from->c2; to[1][3] = (GLfloat)from->d2;
+		to[2][0] = (GLfloat)from->a3; to[2][1] = (GLfloat)from->b3;  to[2][2] = (GLfloat)from->c3; to[2][3] = (GLfloat)from->d3;
+		to[3][0] = (GLfloat)from->a4; to[3][1] = (GLfloat)from->b4;  to[3][2] = (GLfloat)from->c4; to[3][3] = (GLfloat)from->d4;
+
+		return to;
+	}
+
 private:
 	unsigned int TextureFromFile(const char* path, const string& directory, bool gamma = false)
 	{
@@ -86,16 +97,7 @@ private:
 		return textureID;
 	}
 	//Converts aiMatrix4x4 to glm::mat4
-	inline glm::mat4 aiMatrix4x4ToGlm(const aiMatrix4x4* from)
-	{
-		glm::mat4 to;
-		to[0][0] = (GLfloat)from->a1; to[0][1] = (GLfloat)from->b1;  to[0][2] = (GLfloat)from->c1; to[0][3] = (GLfloat)from->d1;
-		to[1][0] = (GLfloat)from->a2; to[1][1] = (GLfloat)from->b2;  to[1][2] = (GLfloat)from->c2; to[1][3] = (GLfloat)from->d2;
-		to[2][0] = (GLfloat)from->a3; to[2][1] = (GLfloat)from->b3;  to[2][2] = (GLfloat)from->c3; to[2][3] = (GLfloat)from->d3;
-		to[3][0] = (GLfloat)from->a4; to[3][1] = (GLfloat)from->b4;  to[3][2] = (GLfloat)from->c4; to[3][3] = (GLfloat)from->d4;
 
-		return to;
-	}
 
 	// loads a model with supported ASSIMP extensions from file and stores the resulting meshes in the meshes vector.
 	void loadModel(string const &path)
@@ -158,14 +160,14 @@ private:
 			vector.x = mesh->mVertices[i].x;
 			vector.y = mesh->mVertices[i].y;
 			vector.z = mesh->mVertices[i].z;
-			vertex.Position = vector;
+			vertex.m_Pos = vector;
 			// normals
 			if (mesh->HasNormals())
 			{
 				vector.x = mesh->mNormals[i].x;
 				vector.y = mesh->mNormals[i].y;
 				vector.z = mesh->mNormals[i].z;
-				vertex.Normal = vector;
+				vertex.m_Norm = vector;
 			}
 			// texture coordinates
 			if (mesh->mTextureCoords[0]) // does the mesh contain texture coordinates?
@@ -175,10 +177,10 @@ private:
 				// use models where a vertex can have multiple texture coordinates so we always take the first set (0).
 				vec.x = mesh->mTextureCoords[0][i].x;
 				vec.y = mesh->mTextureCoords[0][i].y;
-				vertex.TexCoords = vec;
+				vertex.m_TexCoords = vec;
 			}
 			else
-				vertex.TexCoords = glm::vec2(0.0f, 0.0f);
+				vertex.m_TexCoords = glm::vec2(0.0f, 0.0f);
 
 			//Tangents and Bitangents
 			if (mesh->HasTangentsAndBitangents())
@@ -187,12 +189,12 @@ private:
 				vector.x = mesh->mTangents[i].x;
 				vector.y = mesh->mTangents[i].y;
 				vector.z = mesh->mTangents[i].z;
-				vertex.Tangent = vector;
+				vertex.m_Tangent = vector;
 				// bitangent
 				vector.x = mesh->mBitangents[i].x;
 				vector.y = mesh->mBitangents[i].y;
 				vector.z = mesh->mBitangents[i].z;
-				vertex.Bitangent = vector;
+				vertex.m_Bitangent = vector;
 			}
 			vertices.push_back(vertex);
 		}
