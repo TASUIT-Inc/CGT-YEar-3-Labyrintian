@@ -70,7 +70,7 @@ void Renderer::mouse_callback(GLFWwindow* window, double xpos, double ypos)
 	Instance()->lastX = xpos;
 	Instance()->lastY = ypos;
 
-	Instance()->m_Camera.ProcessMouseMovement(xoffset, yoffset);
+	Instance()->m_Camera->ProcessMouseMovement(xoffset, yoffset);
 }
 
 void Renderer::Submit(GameObject* Object) {
@@ -132,7 +132,7 @@ void Renderer::Input(float dt)
 	if (glfwGetKey(m_Window, GLFW_KEY_A) == GLFW_PRESS)
 		m_Camera->ProcessKeyboard(LEFT, dt);
 	if (glfwGetKey(m_Window, GLFW_KEY_D) == GLFW_PRESS)
-		m_Camera->ProcessKeyboard(RIGHT, DT);
+		m_Camera->ProcessKeyboard(RIGHT, dt);
 	if (glfwGetKey(m_Window, GLFW_KEY_ESCAPE) != GLFW_RELEASE)
 		m_UiContext->SetUIContext(&UIElements::PauseMenu);
 	if (glfwGetKey(m_Window, GLFW_KEY_I) != GLFW_PRESS)
