@@ -24,6 +24,7 @@
     <ClInclude Include="src\CodeMeat_Core\Deps\Math.h" />
     <ClInclude Include="src\CodeMeat_Core\Deps\Output.h" />
     <ClInclude Include="src\CodeMeat_Core\Deps\stb_image.h" />
+    <ClInclude Include="src\CodeMeat_Core\Deps\Vertex.h" />
     <ClInclude Include="src\CodeMeat_Core\Engine.h" />
     <ClInclude Include="src\CodeMeat_Core\Graphics\Camera\Camera.h" />
     <ClInclude Include="src\CodeMeat_Core\Graphics\FrameBuffers\Buffer.h" />
@@ -37,14 +38,23 @@
     <ClInclude Include="src\CodeMeat_Core\Objects\Models\Mesh.h" />
     <ClInclude Include="src\CodeMeat_Core\Objects\Models\Model.h" />
     <ClInclude Include="src\CodeMeat_Core\Objects\Player.h" />
-    <ClInclude Include="src\CodeMeat_Core\Physics\Components\Collider.h" />
-    <ClInclude Include="src\CodeMeat_Core\Physics\Components\Component.h" />
-    <ClInclude Include="src\CodeMeat_Core\Physics\Components\Kinematic.h" />
+    <ClInclude Include="src\CodeMeat_Core\Physics\Collisions\BoundingBox.h" />
+    <ClInclude Include="src\CodeMeat_Core\Physics\Collisions\Collider.h" />
+    <ClInclude Include="src\CodeMeat_Core\Physics\Collisions\CollisionData.h" />
+    <ClInclude Include="src\CodeMeat_Core\Physics\Collisions\CollisionManager.h" />
+    <ClInclude Include="src\CodeMeat_Core\Physics\Collisions\Contacts.h" />
+    <ClInclude Include="src\CodeMeat_Core\Physics\Collisions\ContactSolver.h" />
+    <ClInclude Include="src\CodeMeat_Core\Physics\Collisions\MeshCollider.h" />
     <ClInclude Include="src\CodeMeat_Core\Physics\Input.h" />
+    <ClInclude Include="src\CodeMeat_Core\Physics\Newtonians\EulerSolver.h" />
+    <ClInclude Include="src\CodeMeat_Core\Physics\Newtonians\Kinematics.h" />
+    <ClInclude Include="src\CodeMeat_Core\Physics\Newtonians\Solver.h" />
+    <ClInclude Include="src\CodeMeat_Core\Physics\Newtonians\Transform.h" />
     <ClInclude Include="src\CodeMeat_Core\Physics\Physics.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\Deps\glad\src\glad.c" />
+    <ClCompile Include="src\CodeMeat_Core\Deps\Math.cpp" />
     <ClCompile Include="src\CodeMeat_Core\Deps\stb_image.cpp" />
     <ClCompile Include="src\CodeMeat_Core\Engine.cpp" />
     <ClCompile Include="src\CodeMeat_Core\Graphics\Camera\Camera.cpp" />
@@ -58,11 +68,19 @@
     <ClCompile Include="src\CodeMeat_Core\Objects\LoaderParams.cpp" />
     <ClCompile Include="src\CodeMeat_Core\Objects\Models\Mesh.cpp" />
     <ClCompile Include="src\CodeMeat_Core\Objects\Player.cpp" />
-    <ClCompile Include="src\CodeMeat_Core\Physics\Components\Collider.cpp" />
-    <ClCompile Include="src\CodeMeat_Core\Physics\Components\Kinematic.cpp" />
+    <ClCompile Include="src\CodeMeat_Core\Physics\Collisions\BoundingBox.cpp" />
+    <ClCompile Include="src\CodeMeat_Core\Physics\Collisions\Collider.cpp" />
+    <ClCompile Include="src\CodeMeat_Core\Physics\Collisions\CollisionManager.cpp" />
+    <ClCompile Include="src\CodeMeat_Core\Physics\Collisions\Contacts.cpp" />
+    <ClCompile Include="src\CodeMeat_Core\Physics\Collisions\ContactSolver.cpp" />
+    <ClCompile Include="src\CodeMeat_Core\Physics\Collisions\MeshCollider.cpp" />
+    <ClCompile Include="src\CodeMeat_Core\Physics\Newtonians\EulerSolver.cpp" />
+    <ClCompile Include="src\CodeMeat_Core\Physics\Newtonians\Solver.cpp" />
+    <ClCompile Include="src\CodeMeat_Core\Physics\Newtonians\Transform.cpp" />
     <ClCompile Include="src\CodeMeat_Core\Physics\Physics.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <Text Include="src\CodeMeat_Core\Graphics\Shaders\ShaderPool\FS-Collision.txt" />
     <Text Include="src\CodeMeat_Core\Graphics\Shaders\ShaderPool\FS-Default.txt" />
     <Text Include="src\CodeMeat_Core\Graphics\Shaders\ShaderPool\FS-LightingShader.txt" />
     <Text Include="src\CodeMeat_Core\Graphics\Shaders\ShaderPool\VS-Default.txt" />
@@ -122,16 +140,16 @@
   </ImportGroup>
   <PropertyGroup Label="UserMacros" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
-    <IncludePath>$(SolutionDir)\Deps\openal-soft-master\include;$(SolutionDir)\Deps\glm;$(SolutionDir)\Deps\glfw-3.3.2\include;$(SolutionDir)\Deps\glad\include;$(SolutionDir)\Deps\Assimp\include;$(IncludePath)</IncludePath>
-    <LibraryPath>$(SolutionDir)\Deps\openal-soft-master\build\Debug;$(SolutionDir)\Deps\glfw-3.3.2\lib-vc2019;$(SolutionDir)\Deps\glad;$(SolutionDir)\Deps\Assimp\lib64;$(LibraryPath)</LibraryPath>
+    <IncludePath>$(SolutionDir)\Deps\openal-soft-master\include;$(SolutionDir)\Deps\glm;$(SolutionDir)\Deps\glfw-3.3.2\include;$(SolutionDir)\Deps\glad\include;$(SolutionDir)\Deps\Assimp\include;$(IncludePath);</IncludePath>
+    <LibraryPath>$(SolutionDir)\Deps\openal-soft-master\build\Debug;$(SolutionDir)\Deps\glfw-3.3.2\lib-vc2019;$(SolutionDir)\Deps\glad;$(SolutionDir)\Deps\Assimp\lib64;$(LibraryPath);</LibraryPath>
     <OutDir>..\Bin\Debug\</OutDir>
     <IntDir>..\Bin\Debug\Intermediates\</IntDir>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
     <OutDir>..\Bin\Debug\</OutDir>
     <IntDir>..\Bin\Debug\Intermediates\</IntDir>
-    <IncludePath>$(VC_IncludePath);$(WindowsSDK_IncludePath);;$(SolutionDir)\Deps\OpenAl\include</IncludePath>
-    <LibraryPath>$(VC_LibraryPath_x64);$(WindowsSDK_LibraryPath_x64);$(SolutionDir)\Deps\OpenAl\libs\Win64</LibraryPath>
+    <IncludePath>$(VC_IncludePath);$(WindowsSDK_IncludePath);;$(SolutionDir)\Deps\OpenAl\include;$(SolutionDir)\Deps\GLUT;</IncludePath>
+    <LibraryPath>$(VC_LibraryPath_x64);$(WindowsSDK_LibraryPath_x64);$(SolutionDir)\Deps\OpenAl\libs\Win64;;</LibraryPath>
   </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <ClCompile>
@@ -157,7 +175,7 @@
     <Link>
       <SubSystem>Console</SubSystem>
       <AdditionalDependencies>glfw3.lib;assimp.lib;OpenAL32.lib;%(AdditionalDependencies)</AdditionalDependencies>
-      <AdditionalLibraryDirectories>$(SolutionDir)\Deps\Bullet\lib;%(AdditionalLibraryDirectories);$(SolutionDir)\Deps\OpenAl\libs\Win64</AdditionalLibraryDirectories>
+      <AdditionalLibraryDirectories>$(SolutionDir)\Deps\Bullet\lib;%(AdditionalLibraryDirectories);$(SolutionDir)\Deps\OpenAl\libs\Win64;</AdditionalLibraryDirectories>
       <GenerateDebugInformation>true</GenerateDebugInformation>
       <IgnoreAllDefaultLibraries>false</IgnoreAllDefaultLibraries>
     </Link>
@@ -192,7 +210,7 @@
       <SubSystem>Console</SubSystem>
       <EnableCOMDATFolding>true</EnableCOMDATFolding>
       <OptimizeReferences>true</OptimizeReferences>
-      <AdditionalLibraryDirectories>$(SolutionDir)\Deps\Bullet\lib;$SolutionDir)\Deps\OpenAl\libs\Win64;%(AdditionalLibraryDirectories);$(SolutionDir)\Deps\OpenAl\libs\Win64</AdditionalLibraryDirectories>
+      <AdditionalLibraryDirectories>$(SolutionDir)\Deps\Bullet\lib;$SolutionDir)\Deps\OpenAl\libs\Win64;%(AdditionalLibraryDirectories);$(SolutionDir)\Deps\OpenAl\libs\Win64;</AdditionalLibraryDirectories>
       <GenerateDebugInformation>true</GenerateDebugInformation>
       <IgnoreAllDefaultLibraries>false</IgnoreAllDefaultLibraries>
       <AdditionalDependencies>glfw3.lib;assimp.lib;OpenAL32.lib;%(AdditionalDependencies)</AdditionalDependencies>

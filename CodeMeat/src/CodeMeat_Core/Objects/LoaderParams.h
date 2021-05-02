@@ -7,12 +7,7 @@
 
 #include "CodeMeat_Core/Deps/Math.h"
 #include "CodeMeat_Core/Deps/Output.h"
-
-struct VertexData {
-	glm::vec3 m_Pos;
-	glm::vec3 m_Norm;
-	glm::vec2 m_TexCoord;
-};
+#include "CodeMeat_Core/Deps/Vertex.h"
 
 class LoaderParams
 {
@@ -38,16 +33,19 @@ public:
 		}
 	}
 
-	void PushVertexOrder(VertexData V1, VertexData V2, VertexData V3);
+	void PushVertexOrder(Vertex V1, Vertex V2, Vertex V3);
 	void Draw(unsigned int texture);
 	void InitBufferData();
 
+	//getters
+	std::vector<Vertex>& GetVertexData() { return m_InterLeavedVertices; }
+
 	virtual ~LoaderParams() {}
 private:
-	std::vector<VertexData> m_InterLeavedVertices;
+	std::vector<Vertex> m_InterLeavedVertices;
 	bool isSphere;
 	GLint DrawMode;
-	unsigned int m_VAO, m_VBO;
+	unsigned int m_VAO = 0, m_VBO = 0;
 
 	void CreateCube();
 	void CreatePyramid();

@@ -3,11 +3,11 @@
 void LoaderParams::CreateCube()
 {
 	DrawMode = GL_TRIANGLES;
-	float px = 1.0f; float nx = -1.0f;
-	float py = 1.0f; float ny = -1.0f;
-	float pz = 1.0f; float nz = -1.0f;
+	float px = 0.1f; float nx = -0.1f;
+	float py = 0.1f; float ny = -0.1f;
+	float pz = 0.1f; float nz = -0.1f;
 
-	VertexData p1, p2, p3, p4, p5, p6, p7, p8;
+	Vertex p1, p2, p3, p4, p5, p6, p7, p8;
 
 	//face layout
 
@@ -46,15 +46,15 @@ void LoaderParams::CreateCube()
 	p7.m_Norm = p7.m_Pos;
 	p8.m_Norm = p8.m_Pos;
 
-	p1.m_TexCoord = glm::vec2(0.0f, 1.0f);
-	p2.m_TexCoord = glm::vec2(1.0f, 1.0f);
-	p3.m_TexCoord = glm::vec2(0.0f, 0.0f);
-	p4.m_TexCoord = glm::vec2(1.0f, 0.0f);
+	p1.m_TexCoords = glm::vec2(0.0f, 1.0f);
+	p2.m_TexCoords = glm::vec2(1.0f, 1.0f);
+	p3.m_TexCoords = glm::vec2(0.0f, 0.0f);
+	p4.m_TexCoords = glm::vec2(1.0f, 0.0f);
 
-	p5.m_TexCoord = glm::vec2(0.0f, 1.0f);
-	p6.m_TexCoord = glm::vec2(1.0f, 1.0f);
-	p7.m_TexCoord = glm::vec2(0.0f, 0.0f);
-	p8.m_TexCoord = glm::vec2(1.0f, 0.0f);
+	p5.m_TexCoords = glm::vec2(0.0f, 1.0f);
+	p6.m_TexCoords = glm::vec2(1.0f, 1.0f);
+	p7.m_TexCoords = glm::vec2(0.0f, 0.0f);
+	p8.m_TexCoords = glm::vec2(1.0f, 0.0f);
 
 	PushVertexOrder(p1, p2, p3);	//Front Face
 	PushVertexOrder(p4, p3, p2);
@@ -80,12 +80,12 @@ void LoaderParams::CreateCube()
 void LoaderParams::CreatePyramid() {
 
 	DrawMode = GL_TRIANGLES;
-	float px = 1.0f; float nx = -1.0f;
-	float py = 1.0f; float ny = -1.0f;
-	float pz = 1.0f; float nz = -1.0f;
+	float px = 0.1f; float nx = -0.1f;
+	float py = 0.1f; float ny = -0.1f;
+	float pz = 0.1f; float nz = -0.1f;
 	float ze = 0.0f;
 
-	VertexData p1, p2, p3, p4, p5;
+	Vertex p1, p2, p3, p4, p5;
 
 	//face layout
 
@@ -117,13 +117,13 @@ void LoaderParams::CreatePyramid() {
 	p4.m_Norm = p4.m_Pos;
 	p5.m_Norm = p5.m_Pos;
 
-	p1.m_TexCoord = glm::vec2(0.5f, 0.5f);
+	p1.m_TexCoords = glm::vec2(0.5f, 0.5f);
 
-	p2.m_TexCoord = glm::vec2(1.0f, 1.0f);
-	p3.m_TexCoord = glm::vec2(0.0f, 1.0f);
+	p2.m_TexCoords = glm::vec2(1.0f, 1.0f);
+	p3.m_TexCoords = glm::vec2(0.0f, 1.0f);
 
-	p4.m_TexCoord = glm::vec2(0.0f, 0.0f);
-	p5.m_TexCoord = glm::vec2(1.0f, 0.0f);
+	p4.m_TexCoords = glm::vec2(0.0f, 0.0f);
+	p5.m_TexCoords = glm::vec2(1.0f, 0.0f);
 
 	PushVertexOrder(p1, p2, p3);	//Front Face
 
@@ -147,7 +147,7 @@ void LoaderParams::CreatePlane() {
 	float pz = 1.0f; float nz = -1.0f;
 	float ze = 0.0f;
 
-	VertexData p1, p2, p3, p4;
+	Vertex p1, p2, p3, p4;
 
 	p1.m_Pos = glm::vec3(nx, py, ze);
 	p2.m_Pos = glm::vec3(px, py, ze);
@@ -161,11 +161,11 @@ void LoaderParams::CreatePlane() {
 	p3.m_Norm = p3.m_Pos;
 	p4.m_Norm = p4.m_Pos;
 
-	p1.m_TexCoord = glm::vec2(0.0f, 1.0f);
-	p2.m_TexCoord = glm::vec2(1.0f, 1.0f);
+	p1.m_TexCoords = glm::vec2(0.0f, 1.0f);
+	p2.m_TexCoords = glm::vec2(1.0f, 1.0f);
 
-	p3.m_TexCoord = glm::vec2(0.0f, 0.0f);
-	p4.m_TexCoord = glm::vec2(1.0f, 0.0f);
+	p3.m_TexCoords = glm::vec2(0.0f, 0.0f);
+	p4.m_TexCoords = glm::vec2(1.0f, 0.0f);
 	
 	PushVertexOrder(p1, p2, p3);	//Front Face
 	PushVertexOrder(p4, p3, p2);	
@@ -275,7 +275,7 @@ void LoaderParams::CreateSphere(glm::vec2 Segments) {
 	isSphere = true;
 }
 
-void LoaderParams::PushVertexOrder(VertexData V1, VertexData V2, VertexData V3) {
+void LoaderParams::PushVertexOrder(Vertex V1, Vertex V2, Vertex V3) {
 	m_InterLeavedVertices.push_back(V1);
 	m_InterLeavedVertices.push_back(V2);
 	m_InterLeavedVertices.push_back(V3);
@@ -283,8 +283,8 @@ void LoaderParams::PushVertexOrder(VertexData V1, VertexData V2, VertexData V3) 
 
 void LoaderParams::Draw(unsigned int texture =0) {
 	glBindVertexArray(m_VAO);
-	glActiveTexture(GL_TEXTURE0);
 	if (texture != 0) {
+		glActiveTexture(GL_TEXTURE0);
 		glBindTexture(GL_TEXTURE_2D, texture);
 	}
 	glDrawArrays(GL_TRIANGLES, 0, m_InterLeavedVertices.size());
@@ -297,14 +297,22 @@ void LoaderParams::InitBufferData() {
 	glBindVertexArray(m_VAO);
 
 	glBindBuffer(GL_ARRAY_BUFFER, m_VBO);
-	glBufferData(GL_ARRAY_BUFFER, m_InterLeavedVertices.size() * sizeof(VertexData), m_InterLeavedVertices.data(), GL_STATIC_DRAW);
+	glBufferData(GL_ARRAY_BUFFER, m_InterLeavedVertices.size() * sizeof(Vertex), m_InterLeavedVertices.data(), GL_STATIC_DRAW);
 
-	glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, sizeof(VertexData), (void*)0);
+	glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, sizeof(Vertex), (void*)0);
 	glEnableVertexAttribArray(0);
 	
-	glVertexAttribPointer(1, 3, GL_FLOAT, GL_FALSE, sizeof(VertexData), (void*)offsetof(VertexData, m_Norm));
+	glVertexAttribPointer(1, 3, GL_FLOAT, GL_FALSE, sizeof(Vertex), (void*)offsetof(Vertex, m_Norm));
 	glEnableVertexAttribArray(1);
 	
-	glVertexAttribPointer(2, 2, GL_FLOAT, GL_FALSE, sizeof(VertexData), (void*)offsetof(VertexData, m_TexCoord));
+	glVertexAttribPointer(2, 2, GL_FLOAT, GL_FALSE, sizeof(Vertex), (void*)offsetof(Vertex, m_TexCoords));
 	glEnableVertexAttribArray(2);
+
+	glVertexAttribPointer(3, 3, GL_FLOAT, GL_FALSE, sizeof(Vertex), (void*)offsetof(Vertex, m_Tangent));
+	glEnableVertexAttribArray(3);
+	
+	glVertexAttribPointer(4, 3, GL_FLOAT, GL_FALSE, sizeof(Vertex), (void*)offsetof(Vertex, m_Bitangent));
+	glEnableVertexAttribArray(4);
+	
+	glBindVertexArray(0);
 }

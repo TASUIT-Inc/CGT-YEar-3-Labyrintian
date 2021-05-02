@@ -5,62 +5,64 @@
 #include "CodeMeat_Core/Objects/Models/Model.h"
 #include "CodeMeat_Core/Deps/Output.h"
 #include "CodeMeat.h"
+#include "CodeMeat_Core/Physics/Collisions/MeshCollider.h"
+#include "CodeMeat_Core/Physics/Collisions/BoundingBox.h"
+#include "CodeMeat_Core/Physics/Newtonians/Kinematics.h"
+#include "CodeMeat_Core/Physics/Newtonians/Transform.h"
+
 
 class Object;
 class Model;
 class Shader;
 class GameObject;
+class Collider;
 
-struct Instance {
-	Instance(GameObject* ref, glm::vec3 pos, glm::vec3 rot, glm::vec3 extents) : m_ObjRef(ref), m_Pos(pos), m_Extents(extents), m_Rotation(rot){}
-	GameObject* m_ObjRef;
-	glm::vec3 m_Pos, m_Extents, m_Rotation;
-};
+
 
 class GameObject : public Object
 {
 public:
-	GameObject(glm::vec3 pos, glm::vec3 extents, glm::vec3 rotation);
+	GameObject(glm::vec3 pos, glm::vec3 extents);
+	/*GameObject() : Object() {}*/
 
 	void Draw(Shader *shader);
-	void Update() {}
+	void Update() { }
 
-	void SetPos(glm::vec3 NewPos) { m_Pos = NewPos; }
-	void SetPos(float Posx, float Posy, float Posz) { m_Pos.x = Posx; m_Pos.y = Posy; m_Pos.z = Posz; }
-
-	void SetExtents(glm::vec3 Newextents) { m_Extents = Newextents; }
-	void SetExtents(float Extentsx, float Extentsy, float Extentsz) { m_Extents.x = Extentsx; m_Extents.y = Extentsy; m_Extents.z = Extentsz; }
-
-	void SetRotation(glm::vec3 Newrotation) { m_Rotation = Newrotation; }
-	void SetRotation(float Rotationx, float Rotationy, float Rotationz) { m_Rotation.x = Rotationx; m_Rotation.y = Rotationy; m_Rotation.z = Rotationz; }
-
-	void AttachModel(Model *NewModel) { m_Model = NewModel; isModel = true; }
-	void AttachLoaderParams(LoaderParams* NewParams) { m_Params = NewParams;}
+	void AttachModel(Model* model) { m_Model = model; m_Params = nullptr; GenerateColliders(); }
+	void AttachLoaderParams(LoaderParams* NewParams) { m_Params = NewParams; m_Model = nullptr; }
 	void AttachTexture(const char* TexturePath) { m_Texture = loadTexture(TexturePath); }
 	void AttachShader(Shader* shader) { m_Shader = shader; }
 
-	void AddInstance(glm::vec3 pos, glm::vec3 extents, glm::vec3 rotation) { m_Instances.push_back(Instance(this, pos, rotation, extents)); }
 
+	Collider* GetCollider() 
+	{ 
+		if (m_AABB != nullptr) 
+		{
+			return m_AABB;
+		}
+		else if (m_MeshCollider != nullptr) 
+		{
+			return m_MeshCollider;
+		}
+	}
 
-	glm::vec3 GetPos() { return m_Pos; }
-	glm::vec3 GetExtents() { return m_Extents; }
-	glm::vec3 GetRotation() { return m_Rotation; }
+	Kinematics* GetKinematics() const { return m_Kinematic; } 
 
-	virtual ~GameObject() {}
-private:
+	virtual ~GameObject();
+protected:
 
 	unsigned int loadTexture(char const* path);
+	void GenerateColliders();
 
-	bool isModel;
-
-	glm::vec3 m_Pos, m_Extents, m_Rotation;
 	glm::mat4 m_ModelMatrix;
-	std::vector<Instance> m_Instances;
 	
 	unsigned int m_Texture;
 
-	Model* m_Model;
-	LoaderParams* m_Params;
-	Shader* m_Shader;
+	Model* m_Model = nullptr;
+	LoaderParams* m_Params = nullptr;
+	Shader* m_Shader = nullptr;
+	Kinematics* m_Kinematic;
+	BoundingBox* m_AABB = nullptr;
+	MeshCollider* m_MeshCollider = nullptr;
 
 };

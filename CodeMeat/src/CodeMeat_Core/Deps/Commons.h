@@ -1,5 +1,4 @@
 #pragma once
-
-#define SCR_WIDTH 800
-#define SCR_HEIGHT 640
+#define SCR_WIDTH 1240
+#define SCR_HEIGHT 800
 
