@@ -70,6 +70,9 @@
     <Filter Include="CodeMeat_Core\Objects\Audio">
       <UniqueIdentifier>{04c7bf9f-0f36-4157-9067-8c2be337ceec}</UniqueIdentifier>
     </Filter>
+    <Filter Include="CodeMeat_Core\Physics\Events">
+      <UniqueIdentifier>{5ac88c23-bfd2-42a5-b483-dbea9a1f1819}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="src\CodeMeat_Core\Deps\stb_image.h">
@@ -211,6 +214,12 @@
     <ClInclude Include="src\CodeMeat_Core\Objects\Audio\AudioBuffer.h">
       <Filter>CodeMeat_Core\Objects\Audio</Filter>
     </ClInclude>
+    <ClInclude Include="src\CodeMeat_Core\Physics\Events\Events.h">
+      <Filter>CodeMeat_Core\Physics\Events</Filter>
+    </ClInclude>
+    <ClInclude Include="src\CodeMeat_Core\Physics\Collisions\Ray.h">
+      <Filter>CodeMeat_Core\Physics\Collisions</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\CodeMeat_Core\Deps\stb_image.cpp">
@@ -326,6 +335,12 @@
     </ClCompile>
     <ClCompile Include="src\CodeMeat_Core\Objects\Audio\AudioBuffer.cpp">
       <Filter>CodeMeat_Core\Objects\Audio</Filter>
+    </ClCompile>
+    <ClCompile Include="src\CodeMeat_Core\Physics\Events\Events.cpp">
+      <Filter>CodeMeat_Core\Physics\Events</Filter>
+    </ClCompile>
+    <ClCompile Include="src\CodeMeat_Core\Physics\Collisions\Ray.cpp">
+      <Filter>CodeMeat_Core\Physics\Collisions</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

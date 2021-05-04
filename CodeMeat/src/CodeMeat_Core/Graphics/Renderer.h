@@ -18,58 +18,71 @@
 
 class GameObject;
 class Camera;
+class UIContext;
 		
-	class Renderer
+class Renderer
+{
+public:
+	bool Init();
+	void Draw();
+
+	void ComputeShaders();
+
+	void Submit(GameObject* Object);
+	void Submit(Light* light);
+	void Submit(Shader* shader);
+
+	static Renderer* Instance() {
+
+		if (m_Instance == 0) {
+			m_Instance = new Renderer();
+			return m_Instance;
+		}
+		return m_Instance;
+	}
+
+	Camera* GetCamera() { return m_Camera; }
+	GLFWwindow* GetWindow() { return m_Window; }
+	std::vector<GameObject*>& GetObjectListRef() { return m_Objects; }
+	UIContext* GetContext() const { return m_UiContext; }
+	GameObject* FindObjectWithTag(const char* tag) 
+	{
+		for (auto* G : m_Objects)
 		{
-		public:
-			bool Init();
-			void Draw();
-
-			void ComputeShaders();
-
-			void Submit(GameObject* Object);
-			void Submit(Light* light);
-			void Submit(Shader* shader);
-
-			static Renderer* Instance() {
-
-				if (m_Instance == 0) {
-					m_Instance = new Renderer();
-					return m_Instance;
-				}
-				return m_Instance;
+			if (G->GetTag() == tag) {
+				return G;
 			}
 
-			Camera* GetCamera() { return m_Camera; }
-			GLFWwindow* GetWindow() { return m_Window; }
-			std::vector<GameObject*>& GetObjectListRef() { return m_Objects; }
+		}
+		return nullptr;
+	}
 
-			void Input(float dt);
-		private:
-			GLFWwindow* m_Window;
-			Camera* m_Camera = new Camera(glm::vec3(0.0f, 0.5f, 0.0f));
-      UIContext* m_UiContext;
-
-
-			std::vector<GameObject*> m_Objects;
-			std::vector<Shader*> m_Shaders;
-			std::vector<Light*> m_Lights;
-			GBuffer* m_GBuffer;
+	void Input(float dt);
+private:
+	GLFWwindow* m_Window;
+	Camera* m_Camera = new Camera(glm::vec3(0.0f, 0.5f, 0.0f));
+	UIContext* m_UiContext;
 
 
-			bool firstMouse = true;
-			double lastX = 0.0f, lastY = 0.0f;
+	std::vector<GameObject*> m_Objects;
+	std::vector<Shader*> m_Shaders;
+	std::vector<Light*> m_Lights;
+	GBuffer* m_GBuffer;
 
-			static Renderer* m_Instance;
 
-			Renderer() {}
+	bool firstMouse = true;
+	double lastX = 0.0f, lastY = 0.0f;
 
-			static void framebuffer_size_callback(GLFWwindow* window, int width, int height);
-			static void mouse_callback(GLFWwindow* window, double xpos, double ypos);
-			void centerWindow(GLFWwindow* window, GLFWmonitor* monitor);
+	static Renderer* m_Instance;
+
+	Renderer() {}
+
+	static void framebuffer_size_callback(GLFWwindow* window, int width, int height);
+	static void mouse_callback(GLFWwindow* window, double xpos, double ypos);
+	void centerWindow(GLFWwindow* window, GLFWmonitor* monitor);
 			
 
-			virtual ~Renderer() {}
-		};
-		typedef Renderer REngine;
+	virtual ~Renderer() {}
+};
+typedef Renderer REngine;
 #endif //!__Renderer__

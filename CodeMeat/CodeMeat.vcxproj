@@ -60,6 +60,8 @@
     <ClInclude Include="src\CodeMeat_Core\Physics\Collisions\Contacts.h" />
     <ClInclude Include="src\CodeMeat_Core\Physics\Collisions\ContactSolver.h" />
     <ClInclude Include="src\CodeMeat_Core\Physics\Collisions\MeshCollider.h" />
+    <ClInclude Include="src\CodeMeat_Core\Physics\Collisions\Ray.h" />
+    <ClInclude Include="src\CodeMeat_Core\Physics\Events\Events.h" />
     <ClInclude Include="src\CodeMeat_Core\Physics\Input.h" />
     <ClInclude Include="src\CodeMeat_Core\Physics\Newtonians\EulerSolver.h" />
     <ClInclude Include="src\CodeMeat_Core\Physics\Newtonians\Kinematics.h" />
@@ -102,6 +104,8 @@
     <ClCompile Include="src\CodeMeat_Core\Physics\Collisions\Contacts.cpp" />
     <ClCompile Include="src\CodeMeat_Core\Physics\Collisions\ContactSolver.cpp" />
     <ClCompile Include="src\CodeMeat_Core\Physics\Collisions\MeshCollider.cpp" />
+    <ClCompile Include="src\CodeMeat_Core\Physics\Collisions\Ray.cpp" />
+    <ClCompile Include="src\CodeMeat_Core\Physics\Events\Events.cpp" />
     <ClCompile Include="src\CodeMeat_Core\Physics\Newtonians\EulerSolver.cpp" />
     <ClCompile Include="src\CodeMeat_Core\Physics\Newtonians\Solver.cpp" />
     <ClCompile Include="src\CodeMeat_Core\Physics\Newtonians\Transform.cpp" />

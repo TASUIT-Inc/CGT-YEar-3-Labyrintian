@@ -1,16 +1,4 @@
 #pragma once
-//#pragma warning (disable:4251)
-//
-//#ifdef CM_PLATFORM_WINDOWS
-//#ifdef CM_CORE_DLL
-//#define CM_CORE __declspec(dllexport)
-//#else
-//#define CM_CORE __declspec(dllimport)
-//#endif
-//#else
-//#define CM_CORE
-//#endif
-
 //Path Definitions
 
 #define TEXTURE_POOL_PATH "src/CodeMeat_Core/Graphics/Textures/TexturePool/"

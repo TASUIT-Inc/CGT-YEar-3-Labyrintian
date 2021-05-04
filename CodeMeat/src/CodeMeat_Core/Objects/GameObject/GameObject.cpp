@@ -10,24 +10,18 @@ GameObject::GameObject(glm::vec3 pos, glm::vec3 extents) : Object()
 
 void GameObject::Draw(Shader *shader) {
 	
-	
+	glm::mat4 modelmatrix = m_Kinematic->m_Transform.LocalToWorld();
 
 	if (m_Model != nullptr) {
-		m_ModelMatrix = glm::mat4(1.0f);
-		m_ModelMatrix = glm::translate(m_ModelMatrix, m_Kinematic->m_Transform.GetPos());
-		m_ModelMatrix = glm::scale(m_ModelMatrix, m_Kinematic->m_Transform.GetScalar());
 		shader->Use();
-		shader->SetModel(m_ModelMatrix);
-		shader->SetMat4("Model", m_ModelMatrix);
+		shader->SetModel(modelmatrix);
+		shader->SetMat4("Model", modelmatrix);
 		m_Model->Draw(shader);
 	}
 	else if(m_Params != nullptr) {
-		m_ModelMatrix = glm::mat4(1.0f);
-		m_ModelMatrix = glm::translate(m_ModelMatrix, m_Kinematic->m_Transform.GetPos());
-		m_ModelMatrix = glm::scale(m_ModelMatrix, m_Kinematic->m_Transform.GetScalar());
 		shader->Use();
-		shader->SetModel(m_ModelMatrix);
-		shader->SetMat4("Model", m_ModelMatrix);
+		shader->SetModel(modelmatrix);
+		shader->SetMat4("Model", modelmatrix);
 		m_Params->Draw(m_Texture);
 		
 	}

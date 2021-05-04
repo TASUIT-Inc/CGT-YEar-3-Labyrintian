@@ -4,6 +4,7 @@
 #include "CodeMeat_Core/Deps/Math.h"
 #include "CodeMeat_Core/Deps/Output.h"
 #include "CodeMeat_Core/Physics/Collisions/BoundingBox.h"
+#include "CodeMeat_Core/Physics/Collisions/Ray.h"
 #include "CodeMeat_Core/Physics/Newtonians/Kinematics.h"
 #include "CodeMeat_Core/Objects/GameObject/GameObject.h"
 
@@ -145,6 +146,7 @@ public:
 	glm::vec3 GetPos() { return m_Kinematics->m_Transform.GetPos(); }
 
 	BoundingBox* m_Collider;
+	Ray* m_Ray = nullptr;
 
 private:
 	

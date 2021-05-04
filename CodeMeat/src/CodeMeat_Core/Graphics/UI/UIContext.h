@@ -6,6 +6,9 @@
 #include <functional>
 #include "UIElements.h"
 
+
+class UIElements;
+
 class UIContext
 {
 
@@ -16,6 +19,7 @@ public:
 	bool init(GLFWwindow* window);
 	void begin();
 	void SetUIContext(void(*Newfunction)() = nullptr) { uiElem = Newfunction; }
+	void* GetUIElem() const { return uiElem; }
 
 	void Draw();
 private:

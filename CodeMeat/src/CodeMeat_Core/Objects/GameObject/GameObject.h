@@ -29,10 +29,11 @@ public:
 	void Update() { }
 
 	void AttachModel(Model* model) { m_Model = model; m_Params = nullptr; GenerateColliders(); }
+	void AttachBoundingBox(glm::vec3 const& pos, glm::vec3 const& extents) { m_AABB = new BoundingBox(pos, extents); m_MeshCollider = nullptr; }
 	void AttachLoaderParams(LoaderParams* NewParams) { m_Params = NewParams; m_Model = nullptr; }
 	void AttachTexture(const char* TexturePath) { m_Texture = loadTexture(TexturePath); }
 	void AttachShader(Shader* shader) { m_Shader = shader; }
-
+	static unsigned int loadTexture(char const* path);
 
 	Collider* GetCollider() 
 	{ 
@@ -47,16 +48,20 @@ public:
 	}
 
 	Kinematics* GetKinematics() const { return m_Kinematic; } 
+	const char* GetTag() const { return m_Tag; }
+
+	void SetTag(const char* newtag) { m_Tag = newtag; }
 
 	virtual ~GameObject();
 protected:
 
-	unsigned int loadTexture(char const* path);
+	
 	void GenerateColliders();
 
 	glm::mat4 m_ModelMatrix;
 	
 	unsigned int m_Texture;
+	const char* m_Tag = "OBJ";
 
 	Model* m_Model = nullptr;
 	LoaderParams* m_Params = nullptr;

@@ -26,19 +26,22 @@ void UIElements::PauseMenu()
 
 void UIElements::PuzzleTest()
 {
-	static int c1, c2, c3, c4;
-	static bool a1 = false;
-	static bool a2 = false;
-	static bool a3 = false;
-	static bool a4 = false;
-	static bool answer = false;
-	static bool wrong = false;
+	ImGui::SetNextWindowContentSize(ImVec2(550, 500));
+	ImGui::SetWindowSize(ImVec2(0, 0));
+	ImGui::SetWindowFontScale(9.5);
+	const float Spacing = ImGui::GetStyle().ItemSpacing.x;
+	static float ButtonWidth = 100.0f;
+	float pos;
+	static unsigned int Img1 = GameObject::loadTexture("2.png");
+	static unsigned int Img2 = GameObject::loadTexture("3.png");
+	static unsigned int Img3 = GameObject::loadTexture("5.png");
+	static unsigned int Img4 = GameObject::loadTexture("9.png");
+	static int b1Index = 0;
+	static int b2Index = 0;
+	static int b3Index = 0;
+	static int b4Index = 0;
 
 	static bool input = false;
-
-	static int userInput = 0;
-
-	
 	
 	ImGui::OpenPopup("Puzzle");
 
@@ -46,98 +49,200 @@ void UIElements::PuzzleTest()
 	while (ImGui::BeginPopup("Puzzle"))
 	{
 
-		
-		if (userInput == 0)
+		pos = ButtonWidth + Spacing;
+		ImGui::SameLine(ImGui::GetWindowWidth() - pos);
+		if (ImGui::ArrowButton("UArr1", ImGuiDir_Up))
 		{
-			ImGui::Text("%d", c1);
-		}
-		if (userInput == 1)
-		{
-			ImGui::Text("%d", c2);
-		}
-		if (userInput == 2)
-		{
-			ImGui::Text("%d", c3);
-		}
-		if (userInput == 3)
-		{
-			ImGui::Text("%d", c4);
-		}
-
-		//if (wrong)
-		//{
-		//	ImGui::TextColored(ImVec4(1.0, 0.1, 0.1, 1.0), "Incorrect");
-		//}
-		//if (!wrong)
-		//{
-		//	ImGui::TextColored(ImVec4(0.0, 0.1, 1.0, 1.0), "correct");
-		//}
-		
-		if (ImGui::Button("1", ImVec2(120, 120)))
-		{
+			b1Index--;
+			
+			if (b1Index < 0)
+				b1Index = 3;
+			std::cout << b1Index << std::endl;
 				
-			std::cout << "c1";
-				a1 = true;
-				userInput++;
-				input = true;
-				c1 = 1;
-				//testInput[0] = c1;
-				/**/
-				 
-				//Do nothing
 		}
+		ButtonWidth = ImGui::GetItemRectSize().x;
 
-		if (ImGui::Button("2", ImVec2(120, 120)))
+
+		pos += ButtonWidth + Spacing;
+		ImGui::SameLine(ImGui::GetWindowWidth() - pos);
+		if (ImGui::ArrowButton("UArr2", ImGuiDir_Up))
 		{
-			std::cout << "c2";
-				a2 = true;
-				userInput++;
-				c2 = 2;
-			//Do nothing
-		}
-
-		if (ImGui::Button("3", ImVec2(120, 120)) )
-		{
-			std::cout << "c3";
-			userInput++;
-			c3 = 3;
-			//if (userInput == 2) {
-			//	//a3 = true;
-			//	c1 = 3;
-			//}
-				 
-			//Do nothing
-		}
-		//std::cout << a3 << std::endl;
-
-		if (ImGui::Button("4", ImVec2(120, 120)))
-		{
-			std::cout << "c4";
-				a4 = true;
-				c4 = 4;
-
-			//Do nothing
-		}
-
+			b2Index--;
 			
-			
-		if (ImGui::Button("Return", ImVec2(120, 120)))
-		{
-			if (a1 == true && a2 == true && a3 == true && a4 == true)
-			{
-				answer = true;
-				std::cout << answer;
-				break;
-				ImGui::EndPopup();
+			if (b2Index < 0)
+				b2Index = 3;
+			std::cout << b2Index << std::endl;
+		}
+		ButtonWidth = ImGui::GetItemRectSize().x;
 
-			}
-			else
+		pos += ButtonWidth + Spacing;
+		ImGui::SameLine(ImGui::GetWindowWidth() - pos);
+		if (ImGui::ArrowButton("UArr3", ImGuiDir_Up))
+		{
+			b3Index--;
+			
+			if (b3Index < 0)
+				b3Index = 3;
+			std::cout << b3Index << std::endl;
+		}
+		ButtonWidth = ImGui::GetItemRectSize().x;
+
+		pos += ButtonWidth + Spacing;
+		ImGui::SameLine(ImGui::GetWindowWidth() - pos);
+		if (ImGui::ArrowButton("UArr4", ImGuiDir_Up))
+		{
+			b4Index--;
+			
+			if (b4Index < 0)
+				b4Index = 3;
+			std::cout << b4Index << std::endl;
+		}
+		ButtonWidth = ImGui::GetItemRectSize().x;
+
+
+		ImGui::NewLine();
+		pos = ButtonWidth + Spacing;
+		ImGui::SameLine(ImGui::GetWindowWidth() - pos);
+		switch (b1Index) 
+		{
+		case 0:
+			ImGui::Image((void*)Img1, ImVec2(120, 120));
+			break;
+		case 1:
+			ImGui::Image((void*)Img2, ImVec2(120, 120));
+			break;
+		case 2:
+			ImGui::Image((void*)Img3, ImVec2(120, 120));
+			break;
+		case 3:
+			ImGui::Image((void*)Img4, ImVec2(120, 120));
+			break;
+		}
+		ButtonWidth = ImGui::GetItemRectSize().x;
+
+		pos += ButtonWidth + Spacing;
+		ImGui::SameLine(ImGui::GetWindowWidth() - pos);
+		switch (b2Index)
+		{
+		case 0:
+			ImGui::Image((void*)Img1, ImVec2(120, 120));
+			break;
+		case 1:
+			ImGui::Image((void*)Img2, ImVec2(120, 120));
+			break;
+		case 2:
+			ImGui::Image((void*)Img3, ImVec2(120, 120));
+			break;
+		case 3:
+			ImGui::Image((void*)Img4, ImVec2(120, 120));
+			break;
+		}
+		ButtonWidth = ImGui::GetItemRectSize().x;
+
+		pos += ButtonWidth + Spacing;
+		ImGui::SameLine(ImGui::GetWindowWidth() - pos);
+		switch (b3Index)
+		{
+		case 0:
+			ImGui::Image((void*)Img1, ImVec2(120, 120));
+			break;
+		case 1:
+			ImGui::Image((void*)Img2, ImVec2(120, 120));
+			break;
+		case 2:
+			ImGui::Image((void*)Img3, ImVec2(120, 120));
+			break;
+		case 3:
+			ImGui::Image((void*)Img4, ImVec2(120, 120));
+			break;
+		}
+		ButtonWidth = ImGui::GetItemRectSize().x;
+
+		pos += ButtonWidth + Spacing;
+		ImGui::SameLine(ImGui::GetWindowWidth() - pos);
+		switch (b4Index)
+		{
+		case 0:
+			ImGui::Image((void*)Img1, ImVec2(120, 120));
+			break;
+		case 1:
+			ImGui::Image((void*)Img2, ImVec2(120, 120));
+			break;
+		case 2:
+			ImGui::Image((void*)Img3, ImVec2(120, 120));
+			break;
+		case 3:
+			ImGui::Image((void*)Img4, ImVec2(120, 120));
+			break;
+		}
+		ButtonWidth = ImGui::GetItemRectSize().x;
+
+
+		pos = ButtonWidth + Spacing;
+		ImGui::NewLine();
+		ImGui::SameLine(ImGui::GetWindowWidth() - pos);
+		if (ImGui::ArrowButton("DArr1", ImGuiDir_Down))
+		{
+			b1Index++;
+			
+			if (b1Index > 3)
+				b1Index = 0;
+			std::cout << b1Index << std::endl;
+
+		}
+		ButtonWidth = ImGui::GetItemRectSize().x;
+
+
+		pos += ButtonWidth + Spacing;
+		ImGui::SameLine(ImGui::GetWindowWidth() - pos);
+		if (ImGui::ArrowButton("DArr2", ImGuiDir_Down))
+		{
+			b2Index++;
+			
+			if (b2Index > 3)
+				b2Index = 0;
+			std::cout << b2Index << std::endl;
+		}
+		ButtonWidth = ImGui::GetItemRectSize().x;
+
+		pos += ButtonWidth + Spacing;
+		ImGui::SameLine(ImGui::GetWindowWidth() - pos);
+		if (ImGui::ArrowButton("DArr3", ImGuiDir_Down))
+		{
+			b3Index++;
+			
+			if (b3Index > 3)
+				b3Index = 0;
+			std::cout << b3Index << std::endl;
+		}
+		ButtonWidth = ImGui::GetItemRectSize().x;
+
+		pos += ButtonWidth + Spacing;
+		ImGui::SameLine(ImGui::GetWindowWidth() - pos);
+		if (ImGui::ArrowButton("DArr4", ImGuiDir_Down))
+		{
+			b4Index++;
+			
+			if (b4Index > 3)
+				b4Index = 0;
+			std::cout << b4Index << std::endl;
+		}
+		ButtonWidth = ImGui::GetItemRectSize().x;
+
+		ImGui::NewLine();
+		pos = 240.0f + Spacing;
+		ImGui::SameLine(ImGui::GetWindowWidth() - pos);
+		if (ImGui::Button(" ", ImVec2(240.0f, 120.0f))) 
+		{
+			if (Events::TestCode(b4Index, b3Index, b2Index, b1Index)) 
 			{
-				wrong = true;
-				ImGui::Checkbox("Incorrect", &wrong);
-				std::cout << "Error: Wrong Code" << std::endl;
-					
-			}
+				if (REngine::Instance()->FindObjectWithTag("DOOR") != nullptr) 
+				{
+					GameObject* a = REngine::Instance()->FindObjectWithTag("DOOR");
+					glm::vec3 pos = a->GetKinematics()->m_Transform.GetPos();
+					a->GetKinematics()->m_Transform.Translate(glm::vec3(pos.x, pos.y + 0.5f, pos.z));
+				}
+			};
 		}
 	}
 	ImGui::EndPopup();

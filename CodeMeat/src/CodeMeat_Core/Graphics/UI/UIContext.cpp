@@ -35,7 +35,7 @@ void UIContext::Draw()
 	{
 		begin();
 		UIStyle->UIStyling(BgColor, TxtColor);
-		ImGui::Begin("Test", NULL);
+		ImGui::Begin("Test", NULL, ImGuiWindowFlags_NoMove | ImGuiWindowFlags_NoCollapse | ImGuiWindowFlags_NoTitleBar);
 		uiElem();
 		UIStyle->CleanStyling();
 		ImGui::End();

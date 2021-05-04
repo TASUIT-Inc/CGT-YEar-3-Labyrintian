@@ -14,9 +14,6 @@ void MeshCollider::GenerateMeshData(Model* model, Transform& transform)
 				p3 = glm::vec3(M.vertices[M.indices[i + j + 2]].m_Pos) * transform.GetScalar();
 
 				meshdata.push_back(Triangle{ p1,p2,p3 });
-				std::cout << "X Pos: " << p1.x << "Y pos: " << p1.y << "Z Pos: " << p1.z << std::endl;
-				std::cout << "X Pos: " << p2.x << "Y pos: " << p2.y << "Z Pos: " << p2.z << std::endl;
-				std::cout << "X Pos: " << p3.x << "Y pos: " << p3.y << "Z Pos: " << p3.z << std::endl;
 			}
 		}
 	}

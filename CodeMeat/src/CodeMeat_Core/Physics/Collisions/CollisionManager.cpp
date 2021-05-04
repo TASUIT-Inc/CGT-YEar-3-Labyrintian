@@ -2,18 +2,34 @@
 
 CollisionData* CollisionManager::CheckCollisions(Camera* Obj1, GameObject* Obj2) {
 	CollisionData* Data = nullptr;
-
-	if (dynamic_cast<MeshCollider*>(Obj2->GetCollider()) != nullptr) 
-	{
-		PlayerToMeshCollider(Obj1, Obj2, &Data);
-		return Data;
+	if (Obj1->m_Ray == nullptr) {
+		if (dynamic_cast<MeshCollider*>(Obj2->GetCollider()) != nullptr)
+		{
+			PlayerToMeshCollider(Obj1, Obj2, &Data);
+			return Data;
+		}
+		if (dynamic_cast<BoundingBox*>(Obj2->GetCollider()) != nullptr)
+		{
+			PlayerToBoundingBox(Obj1, Obj2, &Data);
+			return Data;
+		}
 	}
-	if (dynamic_cast<BoundingBox*>(Obj2->GetCollider()) != nullptr) 
+	else 
 	{
-		PlayerToBoundingBox(Obj1, Obj2, &Data);
-		return Data;
+		if (dynamic_cast<BoundingBox*>(Obj2->GetCollider()) != nullptr)
+		{
+			if (RayToBoundingBox(Obj1, Obj2, &Data)) 
+			{
+				std::cout << "Here" << std::endl;
+				Obj1->m_Ray = nullptr;
+				glfwSetCursorPosCallback(REngine::Instance()->GetWindow(), nullptr);
+				glfwSetInputMode(REngine::Instance()->GetWindow(), GLFW_CURSOR, GLFW_CURSOR_NORMAL);
+				REngine::Instance()->GetContext()->SetUIContext(&UIElements::PuzzleTest);
+			}
+			Obj1->m_Ray = nullptr;
+			return Data;
+		}
 	}
-	
 	return Data;
 }
 
@@ -29,6 +45,34 @@ bool CollisionManager::PlayerToBoundingBox(Camera* camera, GameObject* object, C
 		return true;
 	}
 	return true;
+}
+
+bool CollisionManager::RayToBoundingBox(Camera* camera, GameObject* object, CollisionData** Data)
+{
+	Ray* ray = camera->m_Ray;
+	BoundingBox* bb2 = dynamic_cast<BoundingBox*>(object->GetCollider());
+	float t1, t2, t3, t4, t5, t6;
+
+	t1 = ((bb2->m_Pos - bb2->m_Extents).x - ray->m_Pos.x) / ray->m_Normal.x;
+	t2 = ((bb2->m_Pos + bb2->m_Extents).x - ray->m_Pos.x) / ray->m_Normal.x;
+
+	t3 = ((bb2->m_Pos - bb2->m_Extents).y - ray->m_Pos.y) / ray->m_Normal.y;
+	t4 = ((bb2->m_Pos + bb2->m_Extents).y - ray->m_Pos.y) / ray->m_Normal.y;
+
+	t5 = ((bb2->m_Pos - bb2->m_Extents).z - ray->m_Pos.z) / ray->m_Normal.z;
+	t6 = ((bb2->m_Pos + bb2->m_Extents).z - ray->m_Pos.z) / ray->m_Normal.z;
+
+	float Tmin = max(max(min(t1,t2), min(t3,t4)), min(t5,t6));
+	float Tmax = min(min(max(t1, t2), max(t3, t4)), max(t5, t6));
+
+	if (Tmax < 0)
+		return false;
+
+	if (Tmin > Tmax)
+		return false;
+
+	if (Tmin < 0)
+		return true;
 }
 
 bool CollisionManager::PlayerToMeshCollider(Camera* camera, GameObject* object, CollisionData** Data) 

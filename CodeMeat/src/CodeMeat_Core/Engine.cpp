@@ -70,33 +70,69 @@ void Engine::Clean() {
 void Engine::LoadLevel1() 
 {
 	Renderer* R = REngine::Instance();
-	Model* Chairmodel = new Model("Chair/Chair.fbx");
-	Model* CeilingLight = new Model("Light/Light.fbx");
+	LoaderParams* cube =  new LoaderParams(PCUBE);
+	Model* Door = new Model("Door/Door.obj");
 	//Begining room layout
 	GameObject* floor = new GameObject(glm::vec3(0.0f, 0.5f, 0.0f), glm::vec3(1.0f, 1.0f, 1.0f));
 	floor->AttachModel(new Model("Labyrinth/Roof.obj"));
 
+	GameObject* Puzzle = new GameObject(glm::vec3(-2.8f, 0.15f, -12.7f), glm::vec3(1.0f));
+	Puzzle->AttachModel(new Model("Puzle/Puzzle Board.obj"));
+	Puzzle->AttachBoundingBox(Puzzle->GetKinematics()->m_Transform.GetPos() + glm::vec3(1.0f, 0.0f, -4.5f), glm::vec3(0.2f, 1.0f, 0.1f));
+	Puzzle->SetTag("PUZZLE");
+
+	GameObject* hint1 = new GameObject(glm::vec3(-9.7f, 0.1f, -0.8f), glm::vec3(1.0f));
+	hint1->AttachLoaderParams(cube);
+	hint1->AttachTexture("5.png");
+
+	GameObject* hint2 = new GameObject(glm::vec3(4.32, 0.2f, -2.3f), glm::vec3(1.0f));
+	hint2->AttachLoaderParams(cube);
+	hint2->AttachTexture("2.png");
+
+	GameObject* hint3 = new GameObject(glm::vec3(11.3, 0.2f, -9.4f), glm::vec3(1.0f));
+	hint3->AttachLoaderParams(cube);
+	hint3->AttachTexture("5.png");
+
+	GameObject* hint4 = new GameObject(glm::vec3(4.35, 0.2f, -16.4f), glm::vec3(1.0f));
+	hint4->AttachLoaderParams(cube);
+
+	hint4->AttachTexture("9.png");
+
+	GameObject* door = new GameObject(glm::vec3(-13.5f,0.0f,-35.0f), glm::vec3(0.2f));
+	door->AttachModel(Door);
+	door->AttachBoundingBox(door->GetKinematics()->m_Transform.GetPos(), glm::vec3(0.1f, 1.0f, 1.0f));
+	door->SetTag("DOOR");
 	
-	Light* RoomLight = new Light(glm::vec3(0.0f, 0.5f, 0.0f), glm::vec3(1.0f), 0.8, 0.8);
-	Light* SkyLight = new Light(glm::vec3(1.0f), glm::vec3(1.0f, -1.0f, 0.0f));
 
+	
+	Light* RoomLight1 = new Light(glm::vec3(0.0f, 0.5f, 0.0f), glm::vec3(1.0f), 0.8, 0.8);
+	Light* RoomLight2 = new Light(glm::vec3(-6.5f, 0.5f, 0.0f), glm::vec3(1.0f), 0.8, 0.8);
+	Light* RoomLight3 = new Light(glm::vec3(6.6f, 0.5f, 0.0f), glm::vec3(1.0f), 0.8, 0.8);
+	Light* RoomLight4 = new Light(glm::vec3(7.1f, 0.5f, -7.0f), glm::vec3(1.0f), 0.8, 0.8);
+	Light* RoomLight5 = new Light(glm::vec3(0.3f, 0.5f, -7.0f), glm::vec3(1.0f), 0.8, 0.8);
+	Light* RoomLight6 = new Light(glm::vec3(-6.7f, 0.5f, -7.0f), glm::vec3(1.0f), 0.8, 0.8);
+	Light* RoomLight7 = new Light(glm::vec3(13.5f, 0.5f, -7.0f), glm::vec3(1.0f), 0.8, 0.8);
+	Light* RoomLight8 = new Light(glm::vec3(6.6f, 0.5f, -14.15f), glm::vec3(1.0f), 0.8, 0.8);
+	Light* RoomLight9 = new Light(glm::vec3(-0.2f, 0.5f, -14.0f), glm::vec3(1.0f), 0.8, 0.8);
+	Light* RoomLight10 = new Light(glm::vec3(6.9f, 0.5f, -21.0f), glm::vec3(1.0f), 0.8, 0.8);
+	
+	
 	R->Submit(floor);
-	/*R->Submit(DoorWayTop);
-	R->Submit(DoorWayRight);
-	R->Submit(DoorWayleft);
-	R->Submit(LeftWall);
-	R->Submit(RightWall);
-	R->Submit(BackWall);
-	R->Submit(Celing);
-	R->Submit(Chair);
-	R->Submit(light);
-	R->Submit(CorridorRightWall);
-	R->Submit(Maze_LeftWall);*/
+	R->Submit(Puzzle);
+	R->Submit(hint1);
+	R->Submit(hint2);
+	R->Submit(hint3);
+	R->Submit(hint4);
+	R->Submit(door);
 
-	R->Submit(RoomLight);
-	R->Submit(SkyLight);
-
-
-
+	R->Submit(RoomLight1);
+	R->Submit(RoomLight2);
+	R->Submit(RoomLight3);
+	R->Submit(RoomLight4);
+	R->Submit(RoomLight5);
+	R->Submit(RoomLight6);
+	R->Submit(RoomLight7);
+	R->Submit(RoomLight8);
+	R->Submit(RoomLight9);
 
 }
