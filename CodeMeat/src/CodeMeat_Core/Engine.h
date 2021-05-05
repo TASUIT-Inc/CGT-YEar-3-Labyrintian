@@ -27,6 +27,7 @@ public:
 	void Clean();
 
 	bool GetState() { return EngineState; }
+	void SetState() { EngineState = false; }
 
 	static Engine* Instance() {
 		if (m_Instance == 0) {

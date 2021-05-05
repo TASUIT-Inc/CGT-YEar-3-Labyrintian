@@ -2,26 +2,28 @@
 
 void UIElements::PauseMenu()
 {
+	ImGui::SetWindowFontScale(1.0f);
+	ImGui::OpenPopup("Pause Menu");
 	
-	ImGui::Text("This is normal text.");
-	if (ImGui::Button("Resume", ImVec2(120, 120)))
-	{
-		static AudioSource speaker;
-		//Do nothing
-		speaker.Play(SE_LOAD("Error.wav"));
-		std::cout << "Resume";
+	while (ImGui::BeginPopup("Pause Menu")) {
+		if (ImGui::Button("Resume", ImVec2(120, 120)))
+		{
+			static AudioSource speaker;
+			//Do nothing
+			speaker.Play(SE_LOAD("Error.wav"));
+			std::cout << "Resume";
+		}
+		if (ImGui::Button("Options", ImVec2(120, 120)))
+		{
+			std::cout << "Options";
+			//Do nothing
+		}
+		if (ImGui::Button("Exit", ImVec2(120, 120)))
+		{
+			Engine::Instance()->SetState();
+		}
 	}
-	if (ImGui::Button("Options", ImVec2(120, 120)))
-	{
-		std::cout << "Options";
-		//Do nothing
-	}
-	if (ImGui::Button("Exit", ImVec2(120, 120)))
-	{
-		//Do nothing
-		std::cout << "Exit";
-	}
-	
+	ImGui::EndPopup();
 }
 
 void UIElements::PuzzleTest()

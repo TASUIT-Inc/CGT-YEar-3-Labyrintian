@@ -2,8 +2,6 @@
 #include "al.h"
 #include "alc.h"
 
-
-
 Renderer* Renderer::m_Instance = 0;
 Physics* Physics::m_Instance = 0;
 
@@ -25,18 +23,15 @@ bool Engine::init() {
 	}
 
 	AudioDevice::init();
-	//ALCdevice* bob;
 
-	//uint32_t snd1 = AudioBuffer::get()->addAudioFX("Error.wav");
-	//AudioSource speaker;
 	myMusic = new MusicBuffer("PauseMenu.wav");
-
-	//myMusic->Play();
+	AudioDevice::get()->SetGain(0.5f);
+	
 	//speaker.Play(snd1);
 	//room instances
 		//room 1
 	LoadLevel1();
-
+	myMusic->Play();
 
 	return EngineState;
 }
@@ -58,8 +53,6 @@ void Engine::Update() {
 
 void Engine::Draw() {
 	REngine::Instance()->Draw();
-	
-	
 }
 
 void Engine::Clean() {
