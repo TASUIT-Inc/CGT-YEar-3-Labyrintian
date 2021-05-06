@@ -147,5 +147,18 @@ void Engine::LoadLevel1()
 	R->Submit(RoomLight7);
 	R->Submit(RoomLight8);
 	R->Submit(RoomLight9);
+	
+	std::cout << "Hello, and welcome to Labarytin, The goal of you the player" << std::endl; 
+	std::cout << "Is to locate all puzzle hints, exit door and puzzle hidden throught the map" << std::endl;
+	std::cout << "In order to escape you need to input the correct series of numbers to unlock the door" << std::endl;
+	std::cout << "Once you input the correct code and test it, if you are correct then a sound will play" << std::endl;
+	std::cout << "Once you hear this sound you can exit the map and close the game" << std::endl;
+	std::cout << "The Controls for the game are as follows:" << std::endl;
+	std::cout << "Movement - W,S,A,D control fowards, backwards, left and right movement respectivly" << std::endl;
+	std::cout << "The Mouse is used to look around the enviroment" << std::endl;
+	std::cout << "I - This key brings up the puzzle UI, you can release this key to hid the UI" << std::endl;
+	std::cout << "Esc - This key brings up the main menu here you can exit the game, again release this key to close the main menu" << std::endl;
+	std::cout << "Have fun, and most importantly enjoy our small tech demo!" << std::endl;
+
 
 }

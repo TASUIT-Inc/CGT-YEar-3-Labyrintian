@@ -60,9 +60,7 @@ void UIElements::PuzzleTest()
 			b1Index--;
 			
 			if (b1Index < 0)
-				b1Index = 3;
-			std::cout << b1Index << std::endl;
-				
+				b1Index = 3;				
 		}
 		ButtonWidth = ImGui::GetItemRectSize().x;
 
@@ -76,7 +74,6 @@ void UIElements::PuzzleTest()
 			
 			if (b2Index < 0)
 				b2Index = 3;
-			std::cout << b2Index << std::endl;
 		}
 		ButtonWidth = ImGui::GetItemRectSize().x;
 
@@ -89,7 +86,6 @@ void UIElements::PuzzleTest()
 			
 			if (b3Index < 0)
 				b3Index = 3;
-			std::cout << b3Index << std::endl;
 		}
 		ButtonWidth = ImGui::GetItemRectSize().x;
 
@@ -102,7 +98,6 @@ void UIElements::PuzzleTest()
 			
 			if (b4Index < 0)
 				b4Index = 3;
-			std::cout << b4Index << std::endl;
 		}
 		ButtonWidth = ImGui::GetItemRectSize().x;
 
@@ -195,7 +190,6 @@ void UIElements::PuzzleTest()
 			
 			if (b1Index > 3)
 				b1Index = 0;
-			std::cout << b1Index << std::endl;
 
 		}
 		ButtonWidth = ImGui::GetItemRectSize().x;
@@ -210,7 +204,6 @@ void UIElements::PuzzleTest()
 			
 			if (b2Index > 3)
 				b2Index = 0;
-			std::cout << b2Index << std::endl;
 		}
 		ButtonWidth = ImGui::GetItemRectSize().x;
 
@@ -223,7 +216,6 @@ void UIElements::PuzzleTest()
 			
 			if (b3Index > 3)
 				b3Index = 0;
-			std::cout << b3Index << std::endl;
 		}
 		ButtonWidth = ImGui::GetItemRectSize().x;
 
@@ -236,7 +228,6 @@ void UIElements::PuzzleTest()
 			
 			if (b4Index > 3)
 				b4Index = 0;
-			std::cout << b4Index << std::endl;
 		}
 		ButtonWidth = ImGui::GetItemRectSize().x;
 
