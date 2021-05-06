@@ -128,7 +128,7 @@ bool CollisionManager::AABBToMeshTriangle(BoundingBox* box, Triangle& face) //Yo
 	// The Triangle class is a struct that is created in MeshCollider.Cpp that can be used to see how the MeshCollider is generated
 	//The Issue seems to be that either i have wrongly implemented the SAT tests OR ther is something that i have missed in researching SAT.
 
-	assert(2 == 1); // added an assert to Point you to where general collision detection occurs
+	//assert(2 == 1); // added an assert to Point you to where general collision detection occurs
 	if (SAT_Test_3Point(AxisE1_F1, box, face.p1, face.p2, face.p3) && SAT_Test_3Point(AxisE2_F1, box, face.p1, face.p2, face.p3) && SAT_Test_3Point(AxisE3_F1, box, face.p1, face.p2, face.p3) &&
 		SAT_Test_3Point(AxisE1_F2, box, face.p1, face.p2, face.p3) && SAT_Test_3Point(AxisE2_F2, box, face.p1, face.p2, face.p3) && SAT_Test_3Point(AxisE3_F2, box, face.p1, face.p2, face.p3) &&
 		SAT_Test_3Point(AxisE1_F3, box, face.p1, face.p2, face.p3) && SAT_Test_3Point(AxisE2_F3, box, face.p1, face.p2, face.p3) && SAT_Test_3Point(AxisE3_F3, box, face.p1, face.p2, face.p3)) //test all 9 axis for overlaps 

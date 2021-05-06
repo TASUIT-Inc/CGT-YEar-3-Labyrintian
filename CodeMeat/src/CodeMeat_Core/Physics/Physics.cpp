@@ -14,7 +14,7 @@ void Physics::Update(Camera* camera, std::vector<GameObject*> &Objs,float dt)
 	{
 		(*i)->Update();
 	}
-	GetCollisionData(camera, Objs);
+	//GetCollisionData(camera, Objs);
 	/*while (!m_CollisionData.empty()) 
 	{
 		std::unique_ptr<CollisionData>& data = m_CollisionData.back();

@@ -117,25 +117,24 @@ void Renderer::Input(float dt)
 	if (glfwGetKey(m_Window, GLFW_KEY_D) == GLFW_PRESS)
 		m_Camera->ProcessKeyboard(RIGHT, dt);
 	if (glfwGetKey(m_Window, GLFW_KEY_ESCAPE) == GLFW_PRESS) {
+		m_KeyPressed = true;
 		glfwSetCursorPosCallback(m_Window, nullptr);
 		glfwSetInputMode(m_Window, GLFW_CURSOR, GLFW_CURSOR_NORMAL);
 		m_UiContext->SetUIContext(&UIElements::PauseMenu);
-		if (glfwGetKey(m_Window, GLFW_KEY_ESCAPE) == GLFW_RELEASE) {
-			glfwSetCursorPosCallback(m_Window, mouse_callback);
-			glfwSetInputMode(m_Window, GLFW_CURSOR, GLFW_CURSOR_DISABLED);
-			m_UiContext->SetUIContext(nullptr);
-		}
 	}
 	if (glfwGetKey(m_Window, GLFW_KEY_I) == GLFW_PRESS) {
+		m_KeyPressed = true;
 		glfwSetCursorPosCallback(m_Window, nullptr);
 		glfwSetInputMode(m_Window, GLFW_CURSOR, GLFW_CURSOR_NORMAL);
 		m_UiContext->SetUIContext(&UIElements::PuzzleTest);
-		if (glfwGetKey(m_Window, GLFW_KEY_I) == GLFW_RELEASE) {
-			glfwSetCursorPosCallback(m_Window, mouse_callback);
-			glfwSetInputMode(m_Window, GLFW_CURSOR, GLFW_CURSOR_DISABLED);
-			m_UiContext->SetUIContext(nullptr);
-		}
+		
 	} 
+	if (glfwGetKey(m_Window, GLFW_KEY_I) == GLFW_RELEASE && glfwGetKey(m_Window, GLFW_KEY_ESCAPE) == GLFW_RELEASE && m_KeyPressed == true) {
+		m_KeyPressed = false;
+		glfwSetCursorPosCallback(m_Window, mouse_callback);
+		glfwSetInputMode(m_Window, GLFW_CURSOR, GLFW_CURSOR_DISABLED);
+		m_UiContext->SetUIContext(nullptr);
+	}
 	if (glfwGetKey(m_Window, GLFW_KEY_E) == GLFW_PRESS) 
 	{
 		m_Camera->m_Ray = new Ray(m_Camera->GetPos(), m_Camera->Front);

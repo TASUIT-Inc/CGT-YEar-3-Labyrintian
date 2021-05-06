@@ -63,6 +63,7 @@ private:
 	Camera* m_Camera = new Camera(glm::vec3(0.0f, 0.5f, 0.0f));
 	UIContext* m_UiContext;
 
+	bool m_KeyPressed = false;
 
 	std::vector<GameObject*> m_Objects;
 	std::vector<Shader*> m_Shaders;
