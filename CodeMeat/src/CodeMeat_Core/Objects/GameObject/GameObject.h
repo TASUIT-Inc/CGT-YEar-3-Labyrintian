@@ -28,12 +28,14 @@ public:
 	void Draw(Shader *shader);
 	void Update() { }
 
-	void AttachModel(Model* model) { m_Model = model; m_Params = nullptr; GenerateColliders(); }
+	void AttachModel(Model* model) { m_Model = model; m_Params = nullptr;  }
 	void AttachBoundingBox(glm::vec3 const& pos, glm::vec3 const& extents) { m_AABB = new BoundingBox(pos, extents); m_MeshCollider = nullptr; }
 	void AttachLoaderParams(LoaderParams* NewParams) { m_Params = NewParams; m_Model = nullptr; }
 	void AttachTexture(const char* TexturePath) { m_Texture = loadTexture(TexturePath); }
 	void AttachShader(Shader* shader) { m_Shader = shader; }
 	static unsigned int loadTexture(char const* path);
+
+	void GenerateColliders();
 
 	Collider* GetCollider() 
 	{ 
@@ -56,7 +58,7 @@ public:
 protected:
 
 	
-	void GenerateColliders();
+	
 
 	glm::mat4 m_ModelMatrix;
 	

@@ -63,11 +63,18 @@ void Engine::Clean() {
 void Engine::LoadLevel1() 
 {
 	Renderer* R = REngine::Instance();
+	
 	LoaderParams* cube =  new LoaderParams(PCUBE);
+
+	Model* Chair = new Model("Chair/Chair.obj");
 	Model* Door = new Model("Door/Door.obj");
-	//Begining room layout
+	Model* CLight = new Model("Light/CLight.obj");
+	Model* Vase = new Model("Vase/Vase.obj");
+
+
 	GameObject* floor = new GameObject(glm::vec3(0.0f, 0.5f, 0.0f), glm::vec3(1.0f, 1.0f, 1.0f));
 	floor->AttachModel(new Model("Labyrinth/Roof.obj"));
+	floor->GenerateColliders();
 
 	GameObject* Puzzle = new GameObject(glm::vec3(-2.8f, 0.15f, -12.7f), glm::vec3(1.0f));
 	Puzzle->AttachModel(new Model("Puzle/Puzzle Board.obj"));
@@ -95,6 +102,15 @@ void Engine::LoadLevel1()
 	door->AttachModel(Door);
 	door->AttachBoundingBox(door->GetKinematics()->m_Transform.GetPos(), glm::vec3(0.1f, 1.0f, 1.0f));
 	door->SetTag("DOOR");
+
+	GameObject* chair1 = new GameObject(glm::vec3(-11.0f, -0.9f, -12.0f), glm::vec3(0.2f));
+	chair1->AttachModel(Chair);
+
+	GameObject* light1 = new GameObject(glm::vec3(0.0f, 7.0f, 0.0f), glm::vec3(0.2f));
+	light1->AttachModel(CLight);
+
+	GameObject* vase1 = new GameObject(glm::vec3(-2.25f, -0.02f, -2.25f), glm::vec3(1.0f));
+	vase1->AttachModel(Vase);
 	
 
 	
@@ -117,6 +133,10 @@ void Engine::LoadLevel1()
 	R->Submit(hint3);
 	R->Submit(hint4);
 	R->Submit(door);
+	R->Submit(chair1);
+	R->Submit(light1);
+	R->Submit(vase1);
+
 
 	R->Submit(RoomLight1);
 	R->Submit(RoomLight2);
