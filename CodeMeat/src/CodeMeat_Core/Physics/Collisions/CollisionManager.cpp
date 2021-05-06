@@ -90,7 +90,7 @@ bool CollisionManager::PlayerToMeshCollider(Camera* camera, GameObject* object, 
 	return true;
 }
 
-bool CollisionManager::AABBToMeshTriangle(BoundingBox* box, Triangle& face) 
+bool CollisionManager::AABBToMeshTriangle(BoundingBox* box, Triangle& face) //You can use this Triangle variable to either peek or goto the definition of both the Triangle and the MeshCollider
 {
 	glm::vec3 tp1, tp2, tp3; //points of triangle relative to the position of the BB
 
@@ -122,11 +122,13 @@ bool CollisionManager::AABBToMeshTriangle(BoundingBox* box, Triangle& face)
 	AxisE2_F3 = glm::cross(BoxFNZ, edge2);// z axis seperation axis
 	AxisE3_F3 = glm::cross(BoxFNZ, edge3);
 
-	//Link to Websitet hat helped me gain an understanding of the logic and structural flow, https://gdbooks.gitbooks.io/3dcollisions/content/Chapter4/aabb-triangle.html 
+	//Link to Website that helped me gain an understanding of the logic and structural flow, https://gdbooks.gitbooks.io/3dcollisions/content/Chapter4/aabb-triangle.html 
 
+	//When walking into any wall of the map, this test is supposed to return true as there should be no axis that seperates the camera's AABB and the triangle but the tests never return true
+	// The Triangle class is a struct that is created in MeshCollider.Cpp that can be used to see how the MeshCollider is generated
 	//The Issue seems to be that either i have wrongly implemented the SAT tests OR ther is something that i have missed in researching SAT.
 
-	//assert(2 == 1); // added an assert to Point you to where general collision detection occurs
+	assert(2 == 1); // added an assert to Point you to where general collision detection occurs
 	if (SAT_Test_3Point(AxisE1_F1, box, face.p1, face.p2, face.p3) && SAT_Test_3Point(AxisE2_F1, box, face.p1, face.p2, face.p3) && SAT_Test_3Point(AxisE3_F1, box, face.p1, face.p2, face.p3) &&
 		SAT_Test_3Point(AxisE1_F2, box, face.p1, face.p2, face.p3) && SAT_Test_3Point(AxisE2_F2, box, face.p1, face.p2, face.p3) && SAT_Test_3Point(AxisE3_F2, box, face.p1, face.p2, face.p3) &&
 		SAT_Test_3Point(AxisE1_F3, box, face.p1, face.p2, face.p3) && SAT_Test_3Point(AxisE2_F3, box, face.p1, face.p2, face.p3) && SAT_Test_3Point(AxisE3_F3, box, face.p1, face.p2, face.p3)) //test all 9 axis for overlaps 
