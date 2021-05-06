@@ -44,6 +44,7 @@ void UIElements::PuzzleTest()
 	static int b4Index = 0;
 
 	static bool input = false;
+	static AudioSource sfx;
 	
 	ImGui::OpenPopup("Puzzle");
 
@@ -55,6 +56,7 @@ void UIElements::PuzzleTest()
 		ImGui::SameLine(ImGui::GetWindowWidth() - pos);
 		if (ImGui::ArrowButton("UArr1", ImGuiDir_Up))
 		{
+			sfx.Play(SE_LOAD("Blip_Select.wav"));
 			b1Index--;
 			
 			if (b1Index < 0)
@@ -69,6 +71,7 @@ void UIElements::PuzzleTest()
 		ImGui::SameLine(ImGui::GetWindowWidth() - pos);
 		if (ImGui::ArrowButton("UArr2", ImGuiDir_Up))
 		{
+			sfx.Play(SE_LOAD("Blip_Select.wav"));
 			b2Index--;
 			
 			if (b2Index < 0)
@@ -81,6 +84,7 @@ void UIElements::PuzzleTest()
 		ImGui::SameLine(ImGui::GetWindowWidth() - pos);
 		if (ImGui::ArrowButton("UArr3", ImGuiDir_Up))
 		{
+			sfx.Play(SE_LOAD("Blip_Select.wav"));
 			b3Index--;
 			
 			if (b3Index < 0)
@@ -93,6 +97,7 @@ void UIElements::PuzzleTest()
 		ImGui::SameLine(ImGui::GetWindowWidth() - pos);
 		if (ImGui::ArrowButton("UArr4", ImGuiDir_Up))
 		{
+			sfx.Play(SE_LOAD("Blip_Select.wav"));
 			b4Index--;
 			
 			if (b4Index < 0)
@@ -185,6 +190,7 @@ void UIElements::PuzzleTest()
 		ImGui::SameLine(ImGui::GetWindowWidth() - pos);
 		if (ImGui::ArrowButton("DArr1", ImGuiDir_Down))
 		{
+			sfx.Play(SE_LOAD("Blip_Select.wav"));
 			b1Index++;
 			
 			if (b1Index > 3)
@@ -199,6 +205,7 @@ void UIElements::PuzzleTest()
 		ImGui::SameLine(ImGui::GetWindowWidth() - pos);
 		if (ImGui::ArrowButton("DArr2", ImGuiDir_Down))
 		{
+			sfx.Play(SE_LOAD("Blip_Select.wav"));
 			b2Index++;
 			
 			if (b2Index > 3)
@@ -211,6 +218,7 @@ void UIElements::PuzzleTest()
 		ImGui::SameLine(ImGui::GetWindowWidth() - pos);
 		if (ImGui::ArrowButton("DArr3", ImGuiDir_Down))
 		{
+			sfx.Play(SE_LOAD("Blip_Select.wav"));
 			b3Index++;
 			
 			if (b3Index > 3)
@@ -223,6 +231,7 @@ void UIElements::PuzzleTest()
 		ImGui::SameLine(ImGui::GetWindowWidth() - pos);
 		if (ImGui::ArrowButton("DArr4", ImGuiDir_Down))
 		{
+			sfx.Play(SE_LOAD("Blip_Select.wav"));
 			b4Index++;
 			
 			if (b4Index > 3)
@@ -234,12 +243,13 @@ void UIElements::PuzzleTest()
 		ImGui::NewLine();
 		pos = 240.0f + Spacing;
 		ImGui::SameLine(ImGui::GetWindowWidth() - pos);
-		if (ImGui::Button(" ", ImVec2(240.0f, 120.0f))) 
+		if (ImGui::Button("Enter", ImVec2(240.0f, 120.0f))) 
 		{
 			if (Events::TestCode(b4Index, b3Index, b2Index, b1Index)) 
 			{
 				if (REngine::Instance()->FindObjectWithTag("DOOR") != nullptr) 
 				{
+					sfx.Play(SE_LOAD("Error.wav"));
 					GameObject* a = REngine::Instance()->FindObjectWithTag("DOOR");
 					glm::vec3 pos = a->GetKinematics()->m_Transform.GetPos();
 					a->GetKinematics()->m_Transform.Translate(glm::vec3(pos.x, pos.y + 0.5f, pos.z));
