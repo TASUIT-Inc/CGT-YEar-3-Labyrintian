@@ -6,7 +6,7 @@
 #include "CodeMeat_Core/Graphics/Shaders/Shader.h"
 #include "CodeMeat_Core/Deps/Commons.h"
 
-class Collider {
+class Collider {	//base class for all colliders
 protected:
 	Collider(){}
 	virtual ~Collider() {}

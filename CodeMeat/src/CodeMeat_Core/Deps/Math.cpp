@@ -6,7 +6,7 @@ const glm::vec3 Math::Up = glm::vec3(0, 1, 0);
 
 const glm::vec3 Math::Down = glm::vec3(0, -1, 0);
 
-const glm::vec3 Math::Left = glm::vec3(0, 0, 1);
+const glm::vec3 Math::Left = glm::vec3(0, 0, 1);		//Vectors used to define world directions
 
 const glm::vec3 Math::Right = glm::vec3(0, 0, -1);
 
@@ -17,17 +17,17 @@ const glm::vec3 Math::Backwards = glm::vec3(-1, 0, 0);
 
 float Math::DistanceToPoint(const glm::vec3& P1, const glm::vec3& P2) 
 {
-	return glm::distance(P1, P2);
+	return glm::distance(P1, P2);	//get the distance between two points
 }
 
 float Math::DistanceToPlane(const glm::vec3& Point, const glm::vec3& Normal, float Direction) 
 {
-	return abs(glm::dot(Point, Normal) - Direction);
+	return abs(glm::dot(Point, Normal) - Direction); // get the distance between a point and a plane
 }
 
 float Math::Clamp(float val) 
 {
-	return glm::max(glm::min(val, 1.0f), 0.0f);
+	return glm::max(glm::min(val, 1.0f), 0.0f); // clamp the value between 0 and 1
 }
 
 //glm::vec3 Math::ProjectPointOnAABB(const glm::vec3& Point, const BoundingBox* const aabb) 

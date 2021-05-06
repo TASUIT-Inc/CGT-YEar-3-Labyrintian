@@ -10,17 +10,17 @@ GameObject::GameObject(glm::vec3 pos, glm::vec3 extents) : Object()
 
 void GameObject::Draw(Shader *shader) {
 	
-	glm::mat4 modelmatrix = m_Kinematic->m_Transform.LocalToWorld();
+	glm::mat4 modelmatrix = m_Kinematic->m_Transform.LocalToWorld();	//set model matrix to the Objects transform matrix
 
 	if (m_Model != nullptr) {
 		shader->Use();
-		shader->SetModel(modelmatrix);
+		shader->SetModel(modelmatrix);		//set shader specific variables then draw the model
 		shader->SetMat4("Model", modelmatrix);
 		m_Model->Draw(shader);
 	}
 	else if(m_Params != nullptr) {
 		shader->Use();
-		shader->SetModel(modelmatrix);
+		shader->SetModel(modelmatrix);		//set shader specific variables then draw the LoaderParams
 		shader->SetMat4("Model", modelmatrix);
 		m_Params->Draw(m_Texture);
 		
@@ -28,7 +28,7 @@ void GameObject::Draw(Shader *shader) {
 }
 
 
-unsigned int GameObject::loadTexture(char const* path)
+unsigned int GameObject::loadTexture(char const* path)		//Load Texture from file
 {
 	unsigned int textureID;
 	glGenTextures(1, &textureID);
@@ -79,7 +79,7 @@ unsigned int GameObject::loadTexture(char const* path)
 void GameObject::GenerateColliders() 
 {
 
-		m_MeshCollider = new MeshCollider(m_Model, m_Kinematic->m_Transform);
+		m_MeshCollider = new MeshCollider(m_Model, m_Kinematic->m_Transform);	//Create new Mesh Collider Object
 }
 
 GameObject::~GameObject() 
@@ -93,7 +93,7 @@ GameObject::~GameObject()
 	{
 		delete m_Params;
 	}
-	else if (m_Shader != nullptr) 
+	else if (m_Shader != nullptr)	//if a variable exists delete it
 	{
 		delete m_Shader;
 	}

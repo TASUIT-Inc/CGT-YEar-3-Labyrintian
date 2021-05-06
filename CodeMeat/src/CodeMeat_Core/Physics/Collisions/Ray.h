@@ -1,7 +1,7 @@
 #pragma once
 #include "Collider.h"
 
-class Ray : public Collider {
+class Ray : public Collider {	//experimental ray class defined by a pos and a direction
 public:
 	Ray(glm::vec3 const& pos, glm::vec3 const& Direction) : Collider()
 	{

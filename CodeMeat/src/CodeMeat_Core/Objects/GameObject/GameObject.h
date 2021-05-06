@@ -28,6 +28,7 @@ public:
 	void Draw(Shader *shader);
 	void Update() { }
 
+	//Component Attachers
 	void AttachModel(Model* model) { m_Model = model; m_Params = nullptr;  }
 	void AttachBoundingBox(glm::vec3 const& pos, glm::vec3 const& extents) { m_AABB = new BoundingBox(pos, extents); m_MeshCollider = nullptr; }
 	void AttachLoaderParams(LoaderParams* NewParams) { m_Params = NewParams; m_Model = nullptr; }
@@ -37,6 +38,7 @@ public:
 
 	void GenerateColliders();
 
+	//Getters
 	Collider* GetCollider() 
 	{ 
 		if (m_AABB != nullptr) 
@@ -57,9 +59,6 @@ public:
 	virtual ~GameObject();
 protected:
 
-	
-	
-
 	glm::mat4 m_ModelMatrix;
 	
 	unsigned int m_Texture;
@@ -68,7 +67,7 @@ protected:
 	Model* m_Model = nullptr;
 	LoaderParams* m_Params = nullptr;
 	Shader* m_Shader = nullptr;
-	Kinematics* m_Kinematic;
+	Kinematics* m_Kinematic;		//Object Specific components
 	BoundingBox* m_AABB = nullptr;
 	MeshCollider* m_MeshCollider = nullptr;
 

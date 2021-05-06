@@ -2,8 +2,8 @@
 
 CollisionData* CollisionManager::CheckCollisions(Camera* Obj1, GameObject* Obj2) {
 	CollisionData* Data = nullptr;
-	if (Obj1->m_Ray == nullptr) {
-		if (dynamic_cast<MeshCollider*>(Obj2->GetCollider()) != nullptr)
+	if (Obj1->m_Ray == nullptr) {	//if not shooting a ray
+		if (dynamic_cast<MeshCollider*>(Obj2->GetCollider()) != nullptr)	// since the players Collider is always an AABB we only need to check if the Objects is a meshCollider ort a Bounding Box
 		{
 			PlayerToMeshCollider(Obj1, Obj2, &Data);
 			return Data;
@@ -16,7 +16,7 @@ CollisionData* CollisionManager::CheckCollisions(Camera* Obj1, GameObject* Obj2)
 	}
 	else 
 	{
-		if (dynamic_cast<BoundingBox*>(Obj2->GetCollider()) != nullptr)
+		if (dynamic_cast<BoundingBox*>(Obj2->GetCollider()) != nullptr)	//if shooting a ray see iof the ray collides with any object NOTE: once collisions start working this will disable the players collisions for a brief moment
 		{
 			if (RayToBoundingBox(Obj1, Obj2, &Data)) 
 			{

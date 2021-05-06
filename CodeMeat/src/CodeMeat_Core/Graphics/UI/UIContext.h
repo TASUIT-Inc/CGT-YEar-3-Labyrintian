@@ -18,13 +18,13 @@ public:
 
 	bool init(GLFWwindow* window);
 	void begin();
-	void SetUIContext(void(*Newfunction)() = nullptr) { uiElem = Newfunction; }
-	void* GetUIElem() const { return uiElem; }
+	void SetUIContext(void(*Newfunction)() = nullptr) { uiElem = Newfunction; }	//Set uiElem veriable to functor pointer
+	void* GetUIElem() const { return uiElem; }	//getts the current attached UI element
 
 	void Draw();
 private:
-	void(*uiElem)() = nullptr;
+	void(*uiElem)() = nullptr;		//Pointer to Specified Function that is used to create UI elements
 	UIElements* UIStyle;
-	ImColor BgColor;
+	ImColor BgColor;				//ImGui Specific formating variables
 	ImColor TxtColor;
 };

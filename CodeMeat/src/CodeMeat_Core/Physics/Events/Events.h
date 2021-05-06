@@ -1,7 +1,6 @@
 #pragma once
 #include <iostream>
 #include <string>
-#include "CodeMeat_Core/Objects/GameObject/GameObject.h"
 class Events
 {
 public:
@@ -9,7 +8,4 @@ public:
 	Events() {}
 	~Events() {};
 
-private:
-
-	
 };

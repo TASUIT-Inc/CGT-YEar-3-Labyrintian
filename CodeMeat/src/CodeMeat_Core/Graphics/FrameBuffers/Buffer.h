@@ -3,7 +3,7 @@
 #include "CodeMeat_Core/Deps/Commons.h"
 #include "CodeMeat_Core/Deps/Output.h"
 
-class Buffer
+class Buffer //A base class used to define Different Buffers
 {
 private:
 	virtual void Bind() = 0;

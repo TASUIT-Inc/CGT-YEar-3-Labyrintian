@@ -11,7 +11,7 @@ int main()
 			Engine::Instance()->Update();
 			Engine::Instance()->Draw();
 		}
-		//Engine::Clean();
+		Engine::Instance()->Clean();
 		glfwTerminate();
 	}
 

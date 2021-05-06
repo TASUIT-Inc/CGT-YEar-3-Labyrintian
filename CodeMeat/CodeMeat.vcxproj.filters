@@ -115,9 +115,6 @@
     <ClInclude Include="src\CodeMeat_Core\Objects\LoaderParams.h">
       <Filter>CodeMeat_Core\Objects</Filter>
     </ClInclude>
-    <ClInclude Include="src\CodeMeat_Core\Objects\Player.h">
-      <Filter>CodeMeat_Core\Objects</Filter>
-    </ClInclude>
     <ClInclude Include="src\CodeMeat_Core\Deps\Math.h">
       <Filter>CodeMeat_Core\Deps</Filter>
     </ClInclude>
@@ -129,9 +126,6 @@
     </ClInclude>
     <ClInclude Include="src\CodeMeat_Core\Deps\Commons.h">
       <Filter>CodeMeat_Core\Deps</Filter>
-    </ClInclude>
-    <ClInclude Include="src\CodeMeat_Core\Physics\Input.h">
-      <Filter>CodeMeat_Core\Physics</Filter>
     </ClInclude>
     <ClInclude Include="src\CodeMeat_Core\Graphics\UI\imconfig.h">
       <Filter>CodeMeat_Core\Graphics\UI</Filter>
@@ -225,12 +219,6 @@
     <ClCompile Include="src\CodeMeat_Core\Deps\stb_image.cpp">
       <Filter>CodeMeat_Core\Deps</Filter>
     </ClCompile>
-    <ClCompile Include="src\CodeMeat_Core\Graphics\Camera\Camera.cpp">
-      <Filter>CodeMeat_Core\Graphics\Camera</Filter>
-    </ClCompile>
-    <ClCompile Include="src\CodeMeat_Core\Graphics\FrameBuffers\Buffer.cpp">
-      <Filter>CodeMeat_Core\Graphics\FrameBuffers</Filter>
-    </ClCompile>
     <ClCompile Include="src\CodeMeat_Core\Graphics\Ligths\Light.cpp">
       <Filter>CodeMeat_Core\Graphics\Lights</Filter>
     </ClCompile>
@@ -253,9 +241,6 @@
       <Filter>CodeMeat_Core\Objects\Models</Filter>
     </ClCompile>
     <ClCompile Include="src\CodeMeat_Core\Objects\LoaderParams.cpp">
-      <Filter>CodeMeat_Core\Objects</Filter>
-    </ClCompile>
-    <ClCompile Include="src\CodeMeat_Core\Objects\Player.cpp">
       <Filter>CodeMeat_Core\Objects</Filter>
     </ClCompile>
     <ClCompile Include="..\Deps\glad\src\glad.c">
@@ -293,9 +278,6 @@
     </ClCompile>
     <ClCompile Include="src\CodeMeat_Core\Graphics\UI\UIElements.cpp">
       <Filter>CodeMeat_Core\Graphics\UI</Filter>
-    </ClCompile>
-    <ClCompile Include="src\CodeMeat_Core\Physics\Collisions\Collider.cpp">
-      <Filter>CodeMeat_Core\Physics\Collisions</Filter>
     </ClCompile>
     <ClCompile Include="src\CodeMeat_Core\Physics\Collisions\Contacts.cpp">
       <Filter>CodeMeat_Core\Physics\Collisions</Filter>
@@ -338,9 +320,6 @@
     </ClCompile>
     <ClCompile Include="src\CodeMeat_Core\Physics\Events\Events.cpp">
       <Filter>CodeMeat_Core\Physics\Events</Filter>
-    </ClCompile>
-    <ClCompile Include="src\CodeMeat_Core\Physics\Collisions\Ray.cpp">
-      <Filter>CodeMeat_Core\Physics\Collisions</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

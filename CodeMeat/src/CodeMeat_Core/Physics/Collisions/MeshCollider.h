@@ -3,7 +3,7 @@
 #include "CodeMeat_Core/Objects/Models/Model.h"
 
 
-struct Triangle 
+struct Triangle			//Triangle primative
 {
 	glm::vec3 p1,p2,p3;
 };
@@ -21,7 +21,7 @@ public:
 	
 
 private:
-	std::vector<Triangle> meshdata;
+	std::vector<Triangle> meshdata;	//triangle vector for use in collision tests
 	
 };
 

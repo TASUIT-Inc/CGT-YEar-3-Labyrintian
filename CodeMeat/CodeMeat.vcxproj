@@ -52,7 +52,6 @@
     <ClInclude Include="src\CodeMeat_Core\Objects\LoaderParams.h" />
     <ClInclude Include="src\CodeMeat_Core\Objects\Models\Mesh.h" />
     <ClInclude Include="src\CodeMeat_Core\Objects\Models\Model.h" />
-    <ClInclude Include="src\CodeMeat_Core\Objects\Player.h" />
     <ClInclude Include="src\CodeMeat_Core\Physics\Collisions\BoundingBox.h" />
     <ClInclude Include="src\CodeMeat_Core\Physics\Collisions\Collider.h" />
     <ClInclude Include="src\CodeMeat_Core\Physics\Collisions\CollisionData.h" />
@@ -62,7 +61,6 @@
     <ClInclude Include="src\CodeMeat_Core\Physics\Collisions\MeshCollider.h" />
     <ClInclude Include="src\CodeMeat_Core\Physics\Collisions\Ray.h" />
     <ClInclude Include="src\CodeMeat_Core\Physics\Events\Events.h" />
-    <ClInclude Include="src\CodeMeat_Core\Physics\Input.h" />
     <ClInclude Include="src\CodeMeat_Core\Physics\Newtonians\EulerSolver.h" />
     <ClInclude Include="src\CodeMeat_Core\Physics\Newtonians\Kinematics.h" />
     <ClInclude Include="src\CodeMeat_Core\Physics\Newtonians\Solver.h" />
@@ -74,8 +72,6 @@
     <ClCompile Include="src\CodeMeat_Core\Deps\Math.cpp" />
     <ClCompile Include="src\CodeMeat_Core\Deps\stb_image.cpp" />
     <ClCompile Include="src\CodeMeat_Core\Engine.cpp" />
-    <ClCompile Include="src\CodeMeat_Core\Graphics\Camera\Camera.cpp" />
-    <ClCompile Include="src\CodeMeat_Core\Graphics\FrameBuffers\Buffer.cpp" />
     <ClCompile Include="src\CodeMeat_Core\Graphics\FrameBuffers\GBuffer.cpp" />
     <ClCompile Include="src\CodeMeat_Core\Graphics\Ligths\Light.cpp" />
     <ClCompile Include="src\CodeMeat_Core\Graphics\Renderer.cpp" />
@@ -97,14 +93,11 @@
     <ClCompile Include="src\CodeMeat_Core\Objects\GameObject\GameObject.cpp" />
     <ClCompile Include="src\CodeMeat_Core\Objects\LoaderParams.cpp" />
     <ClCompile Include="src\CodeMeat_Core\Objects\Models\Mesh.cpp" />
-    <ClCompile Include="src\CodeMeat_Core\Objects\Player.cpp" />
     <ClCompile Include="src\CodeMeat_Core\Physics\Collisions\BoundingBox.cpp" />
-    <ClCompile Include="src\CodeMeat_Core\Physics\Collisions\Collider.cpp" />
     <ClCompile Include="src\CodeMeat_Core\Physics\Collisions\CollisionManager.cpp" />
     <ClCompile Include="src\CodeMeat_Core\Physics\Collisions\Contacts.cpp" />
     <ClCompile Include="src\CodeMeat_Core\Physics\Collisions\ContactSolver.cpp" />
     <ClCompile Include="src\CodeMeat_Core\Physics\Collisions\MeshCollider.cpp" />
-    <ClCompile Include="src\CodeMeat_Core\Physics\Collisions\Ray.cpp" />
     <ClCompile Include="src\CodeMeat_Core\Physics\Events\Events.cpp" />
     <ClCompile Include="src\CodeMeat_Core\Physics\Newtonians\EulerSolver.cpp" />
     <ClCompile Include="src\CodeMeat_Core\Physics\Newtonians\Solver.cpp" />

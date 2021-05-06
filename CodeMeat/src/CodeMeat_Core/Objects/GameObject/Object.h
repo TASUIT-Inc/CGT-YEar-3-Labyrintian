@@ -3,7 +3,7 @@
 
 class Shader;
 
-class Object {
+class Object {	//base class for all objects
 private:
 
 	virtual void Draw(Shader *shader) = 0;

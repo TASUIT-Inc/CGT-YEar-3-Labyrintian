@@ -41,7 +41,7 @@ void GBuffer::Init() {
 		std::cout << "Framebuffer not complete!" << std::endl;
 	glBindFramebuffer(GL_FRAMEBUFFER, 0);
 
-	float quadVertices[] = {
+	float quadVertices[] = {	//Create a quad that a snapshot of the current scene is drawn onto at the end of the draw call
 		// positions        // texture Coords
 		-1.0f,  1.0f, 0.0f, 0.0f, 1.0f,
 		-1.0f, -1.0f, 0.0f, 0.0f, 0.0f,
@@ -61,7 +61,7 @@ void GBuffer::Init() {
 
 	m_LPassShader.Use();
 	m_LPassShader.SetInt("m_GPos", 0);
-	m_LPassShader.SetInt("m_GNormal", 1);
+	m_LPassShader.SetInt("m_GNormal", 1);	//Set Shader Specific values
 	m_LPassShader.SetInt("m_AlbedoSpec", 2);
 }
 
@@ -70,11 +70,11 @@ void GBuffer::FirstPass(Camera* camera, std::vector<GameObject*> *ObjectQueue) {
 		glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 		glm::mat4 m_Projection = glm::perspective(glm::radians(camera->Zoom), (float)SCR_WIDTH / (float)SCR_HEIGHT, 0.001f, 1000.0f);
 		glm::mat4 m_View = camera->GetViewMatrix();
-		m_GPassShader.Use();
+		m_GPassShader.Use();									//Calculate camera specific matrices and send them to the Specified shader
 		m_GPassShader.SetMat4("Projection", m_Projection);
 		m_GPassShader.SetMat4("View", m_View);
 		for (int i = 0; i < ObjectQueue->size(); i++) {
-			ObjectQueue->operator[](i)->Draw(&m_GPassShader);
+			ObjectQueue->operator[](i)->Draw(&m_GPassShader);		//Draw call for game Objects
 		}
 	glBindFramebuffer(GL_FRAMEBUFFER, 0);
 }
@@ -92,21 +92,21 @@ void GBuffer::SecondPass(Camera* camera, std::vector<Light*> *Lights) {
 
 	m_LPassShader.SetInt("NR_LIGHTS", Lights->size());
 	m_LPassShader.SetInt("ArrSize", Lights->size());
-	for (int i = 0; i < Lights->size() ; i++)
+	for (int i = 0; i < Lights->size() ; i++)					//for each light get the lights type, directional, point or cone, then set type specific variables in the GBuffer shader
 	{
 		m_LPassShader.SetInt("lights[" + std::to_string(i) + "].Type", Lights->operator[](i)->GetType());
 		switch (Lights->operator[](i)->GetType()) {
-		case 0:
+		case 0:	//Directional Lights
 			m_LPassShader.SetVec3("lights[" + std::to_string(i) + "].Direction", Lights->operator[](i)->GetDir());
 			m_LPassShader.SetVec3("lights[" + std::to_string(i) + "].Color", Lights->operator[](i)->GetColour());
 			break;
-		case 1:
+		case 1:	//Point Lights
 			m_LPassShader.SetVec3("lights[" + std::to_string(i) + "].Position", Lights->operator[](i)->GetPos());
 			m_LPassShader.SetVec3("lights[" + std::to_string(i) + "].Color", Lights->operator[](i)->GetColour());
 			m_LPassShader.SetFloat("lights[" + std::to_string(i) + "].Quadratic", Lights->operator[](i)->GetQuadratic());
 			m_LPassShader.SetFloat("lights[" + std::to_string(i) + "].Linear", Lights->operator[](i)->GetLinear());
 			break;
-		case 2:
+		case 2:	//Cone Ligths
 			m_LPassShader.SetVec3("lights[" + std::to_string(i) + "].Position", Lights->operator[](i)->GetPos());
 			m_LPassShader.SetVec3("lights[" + std::to_string(i) + "].Color", Lights->operator[](i)->GetColour());
 			m_LPassShader.SetVec3("lights[" + std::to_string(i) + "].Direction", Lights->operator[](i)->GetDir());
@@ -132,6 +132,6 @@ void GBuffer::Bind() {
 void GBuffer::RenderQuad()
 {
 	glBindVertexArray(m_VAO);
-	glDrawArrays(GL_TRIANGLE_STRIP, 0, 4);
+	glDrawArrays(GL_TRIANGLE_STRIP, 0, 4);	//Finally render the screenQuad and Apply the Loaded Texture of the Scene
 	glBindVertexArray(0);
 }

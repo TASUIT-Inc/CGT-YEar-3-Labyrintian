@@ -10,13 +10,10 @@
 class UIElements
 {
 public:
-	static void PauseMenu();
+	static void PauseMenu(); // definitions for Ui elements
 	static void PuzzleTest();
 	static void UIStyling(ImColor col, ImColor col2);
 	static void CleanStyling();
 	UIElements() {}
 	~UIElements() {};
-
-private:
-	
 };

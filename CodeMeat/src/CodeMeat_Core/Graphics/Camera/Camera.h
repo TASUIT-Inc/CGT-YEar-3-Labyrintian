@@ -9,19 +9,6 @@
 #include "CodeMeat_Core/Objects/GameObject/GameObject.h"
 
 
-/*
-
-Name: Brodie Frail
-
-Student ID: B00369676
-
-I declare that the following code was produced by Brodie Frail and Daryyl Cully as a group assignment for the Real Time graphics module and that this is our own work.
-
-I am aware of the penalties incurred by submitting in full or in part work that is not our own and that was developed by third parties that are not appropriately acknowledged.
-
-*/
-
-
 // Defines several possible options for camera movement. Used as abstraction to stay away from window-system specific input methods
 enum Camera_Movement {
 	FORWARD,
@@ -64,7 +51,7 @@ public:
 
 		m_Kinematics = new Kinematics(10.0f, position);
 		m_Kinematics->m_Transform.Scale(glm::vec3(1.0f));
-		glm::vec3 pos = m_Kinematics->m_Transform.GetPos();
+		glm::vec3 pos = m_Kinematics->m_Transform.GetPos();	//create both a collider and Kinematic component and Set nessecary values
 		glm::vec3 extents = glm::vec3(1.0f);
 		m_Collider = new BoundingBox(pos, extents);
 		WorldUp = up;
@@ -78,7 +65,7 @@ public:
 	{
 		m_Kinematics = new Kinematics(10.0f, glm::vec3(posX, posY, posZ));
 		m_Kinematics->m_Transform.Scale(glm::vec3(1.0f));
-		m_Collider = new BoundingBox(glm::vec3(posX, posY, posZ), glm::vec3(1.0f));
+		m_Collider = new BoundingBox(glm::vec3(posX, posY, posZ), glm::vec3(1.0f));//create both a collider and Kinematic component and Set nessecary values
 		WorldUp = glm::vec3(upX, upY, upZ);
 		Yaw = yaw;
 		Pitch = pitch;
@@ -149,7 +136,7 @@ public:
 	Ray* m_Ray = nullptr;
 
 private:
-	
+	//Update the camera's position as well as the colliders center
 	void Update(float dt) 
 	{
 		glm::vec3 newPos = m_Kinematics->m_Vel * dt;

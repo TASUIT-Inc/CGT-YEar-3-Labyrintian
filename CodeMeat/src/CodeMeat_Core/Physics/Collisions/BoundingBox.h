@@ -1,9 +1,9 @@
 #pragma once
 #include "Collider.h"
 
-class BoundingBox : public Collider {
+class BoundingBox : public Collider {	
 public:
-	BoundingBox(glm::vec3 pos, glm::vec3 extents) : Collider()
+	BoundingBox(glm::vec3 pos, glm::vec3 extents) : Collider() // constructor for bounding box, BB's are expressed with center + extents
 	{
 		m_Pos = pos;
 		m_Extents = extents;

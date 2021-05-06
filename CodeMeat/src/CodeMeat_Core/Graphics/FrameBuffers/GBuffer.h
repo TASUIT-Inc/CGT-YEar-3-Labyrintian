@@ -16,11 +16,11 @@ public:
 	}
 
 	void FirstPass(Camera* camera, std::vector<GameObject*> *ObjectQueue);
-	void SecondPass(Camera* camera, std::vector<Light*> *LightQueue);
+	void SecondPass(Camera* camera, std::vector<Light*> *LightQueue);		//Shader Passes for Draw calls
 	void RenderQuad();
 	void Bind();
 private:
-	unsigned int m_Gbuffer, m_AlbedoSpec, m_GPos, m_GNormal, m_RBODepth;
+	unsigned int m_Gbuffer, m_AlbedoSpec, m_GPos, m_GNormal, m_RBODepth;	//GBuffer specific variables
 
 	unsigned int m_Attachments[3] = { GL_COLOR_ATTACHMENT0, GL_COLOR_ATTACHMENT1, GL_COLOR_ATTACHMENT2 };
 

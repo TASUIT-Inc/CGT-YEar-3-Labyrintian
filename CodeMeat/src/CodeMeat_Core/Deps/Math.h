@@ -18,13 +18,13 @@ public:
 	static const glm::vec3 Up;
 	static const glm::vec3 Down;
 	static const glm::vec3 Left;
-	static const glm::vec3 Right;
+	static const glm::vec3 Right;	//World Direction variables
 	static const glm::vec3 Foward;
 	static const glm::vec3 Backwards;
 
 	static float DistanceToPoint(const glm::vec3& P1, const glm::vec3& P2);
 	static float DistanceToPlane(const glm::vec3& Point, const glm::vec3& Normal, float Direction);
-	static float Clamp(float val);
+	static float Clamp(float val);																//Public Functions 
 	static glm::vec3 ProjectPointOnAABB(const glm::vec3& Point, const BoundingBox* const aabb);
 	static glm::vec3 GetAABBFaceNormal(const glm::vec3& Point, const BoundingBox* const aabb);
 	/*static glm::vec3 ProjectPointOnPlane(const glm::vec3& Point, const Plane& plane, float c);
