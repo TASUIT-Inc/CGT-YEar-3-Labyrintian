@@ -7,7 +7,7 @@ Physics* Physics::m_Instance = 0;
 
 
 bool Engine::init() {
-	if (Renderer::Instance()->Init()) {
+	if (Renderer::Instance()->Init()) { //initialise both the renderer and physics components of the engine
 		EngineState = true;
 		if (Physics::Instance()->Init()) {
 			EngineState = true;
@@ -22,23 +22,21 @@ bool Engine::init() {
 		std::cout << "Renderer Init Failed!" << std::endl;
 	}
 
-	AudioDevice::init();
+	AudioDevice::init(); // initialise the audio manager
 
-	myMusic = new MusicBuffer("PauseMenu.wav");
-	AudioDevice::get()->SetGain(0.5f);
+	myMusic = new MusicBuffer("PauseMenu.wav"); // Load sound file into the audio buffer
+	AudioDevice::get()->SetGain(0.5f); // set volume to 50%
 	
-	//speaker.Play(snd1);
-	//room instances
-		//room 1
-	LoadLevel1();
-	myMusic->Play();
+
+	LoadLevel1(); // Load all gameObjects needed for the first level
+	myMusic->Play(); // Tell the Audiomanager to play the sound file loaded in the audio buffer
 
 	return EngineState;
 }
 
 void Engine::Update() {
 	float l_CF = glfwGetTime();
-	m_DT = l_CF - m_LT;
+	m_DT = l_CF - m_LT;		//timer for time inbetween update cycles
 	m_LT = l_CF;
 
 	
@@ -46,17 +44,18 @@ void Engine::Update() {
 	{
 		myMusic->UpdateBufferStream();
 	}
-	REngine::Instance()->Input(m_DT);
-	PEngine::Instance()->Update(REngine::Instance()->GetCamera() ,REngine::Instance()->GetObjectListRef(), m_DT);
+	REngine::Instance()->Input(m_DT); // check for user input
+	PEngine::Instance()->Update(REngine::Instance()->GetCamera() ,REngine::Instance()->GetObjectListRef(), m_DT); // physics update call
 }
 
 
 void Engine::Draw() {
-	REngine::Instance()->Draw();
+	REngine::Instance()->Draw(); // render call
 }
 
 void Engine::Clean() {
-
+	REngine::Instance()->Clean();
+	PEngine::Instance()->Clean();
 }
 
 

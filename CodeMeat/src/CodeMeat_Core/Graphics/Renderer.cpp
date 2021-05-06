@@ -86,6 +86,16 @@ void Renderer::Submit(Shader* shader)
 	m_Shaders.push_back(shader);
 }
 
+void Renderer::Clean() 
+{
+	for (auto* G : m_Objects) 
+	{
+		G->~GameObject();
+	}
+	
+	delete m_Window, m_Camera, m_UiContext, m_GBuffer;
+}
+
 
 void Renderer::Draw() {
 	glClearColor(1.0f, 1.0f, 1.0f, 1.0f);

@@ -25,6 +25,7 @@ class Renderer
 public:
 	bool Init();
 	void Draw();
+	void Clean();
 
 	void ComputeShaders();
 

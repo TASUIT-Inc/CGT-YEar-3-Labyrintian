@@ -13,6 +13,7 @@ public:
 
 	bool Init();
 	void Update(Camera* camera, std::vector<GameObject*> &Objs, float dt);
+	void Clean() { delete m_Solver, m_Resolver; }
 	void GetCollisionData(Camera* camera, std::vector<GameObject*> &Objs);
 
 	static Physics* Instance() {
